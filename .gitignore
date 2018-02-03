@@ -1,2 +1,7 @@
-# Uneditable files
+# General
 *.lock
+*.cache
+
+#IDE files
+.vs/
+
