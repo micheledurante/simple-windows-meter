@@ -1,6 +1,6 @@
 ﻿namespace NiceMeter
 {
-    partial class Form1
+    partial class Window
     {
         /// <summary>
         /// Required designer variable.

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace NiceMeter
 {
-    static class Program
+    static class NiceMeter
     {
         /// <summary>
         /// The main entry point for the application.
@@ -16,7 +16,7 @@ namespace NiceMeter
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new Window());
         }
     }
 }
