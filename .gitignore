@@ -1,0 +1,16 @@
+# General
+*.lock
+*.cache
+
+#IDE files
+.vs/
+
+# VS project
+bin/
+Debug/
+
+# Paket for Visual Studio
+paket-files/
+.paket/
+Paket.Restore.targets
+Paket.targets
