@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiceMeter", "WindowsFormsApp1\NiceMeter.csproj", "{0F76CBDC-7E66-42CE-97EB-73EEF652801B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiceMeter", "NiceMeter\NiceMeter.csproj", "{0F76CBDC-7E66-42CE-97EB-73EEF652801B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
