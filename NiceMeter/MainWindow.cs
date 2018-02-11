@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.IO;
 using System.Windows.Forms;
 using OpenHardwareMonitor.Hardware;
 
@@ -10,6 +11,8 @@ namespace NiceMeter
     {
         Computer myComputer;
         Timer Timer = new Timer { Enabled = true, Interval = 1000 };
+        // That's our custom TextWriter class
+        TextWriter Writer = null;
 
         void TimerTick(object sender, EventArgs e)
         {
@@ -26,7 +29,7 @@ namespace NiceMeter
                     {
                         if (sensor.SensorType == SensorType.Temperature)
                         {
-                            Trace.WriteLine(String.Format("{0} Temperature = {1}", sensor.Name, sensor.Value.HasValue ? sensor.Value.Value.ToString() : "no value"));
+                            Console.WriteLine(String.Format("{0} Temperature = {1}", sensor.Name, sensor.Value.HasValue ? sensor.Value.Value.ToString() : "no value"));
                         }
                     }
                 }
@@ -45,6 +48,20 @@ namespace NiceMeter
 
             myComputer = new Computer(settings) { CPUEnabled = true };
             myComputer.Open();
+
+            InitializeComponent();
+        }
+
+        private void txtConsole_TextChanged(object sender, EventArgs e)
+        {
+        }
+
+        private void MainWindow_Load(object sender, EventArgs e)
+        {
+            // Instantiate the writer
+            Writer = new StreamWriter(txtConsole);
+            // Redirect the out Console stream
+            Console.SetOut(Writer);
         }
     }
 }
