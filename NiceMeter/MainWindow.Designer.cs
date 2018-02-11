@@ -28,27 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtConsole = new System.Windows.Forms.TextBox();
+            this.TextArea = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
-            // txtConsole
+            // TextArea
             // 
-            this.txtConsole.Location = new System.Drawing.Point(1, 12);
-            this.txtConsole.Multiline = true;
-            this.txtConsole.Name = "txtConsole";
-            this.txtConsole.Size = new System.Drawing.Size(283, 237);
-            this.txtConsole.TabIndex = 0;
-            this.txtConsole.TextChanged += new System.EventHandler(this.txtConsole_TextChanged);
+            this.TextArea.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.TextArea.Location = new System.Drawing.Point(13, 15);
+            this.TextArea.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.TextArea.Multiline = true;
+            this.TextArea.Name = "TextArea";
+            this.TextArea.Size = new System.Drawing.Size(304, 292);
+            this.TextArea.TabIndex = 0;
+            this.TextArea.TextChanged += new System.EventHandler(this.TextArea_TextChanged);
             // 
             // MainWindow
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
+            this.ClientSize = new System.Drawing.Size(332, 321);
             this.ControlBox = false;
-            this.Controls.Add(this.txtConsole);
+            this.Controls.Add(this.TextArea);
+            this.Font = new System.Drawing.Font("Arial", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
+            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
             this.Name = "MainWindow";
-            this.Text = "Form1";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
+            this.Text = "NiceMeter";
             this.Load += new System.EventHandler(this.MainWindow_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -57,7 +63,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txtConsole;
+        private System.Windows.Forms.TextBox TextArea;
     }
 }
 
