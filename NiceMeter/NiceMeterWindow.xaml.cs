@@ -3,26 +3,19 @@ using System.Windows;
 using OpenHardwareMonitor.Hardware;
 using System.Linq;
 using System.Windows.Threading;
+using NiceMeter.Device;
 
 namespace NiceMeter
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for NiceMeterWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class NiceMeterWindow : Window
     {
         /// <summary>
-        /// Defines the computer to measure
+        /// The device to use for measurements
         /// </summary>
-        private Computer Computer = new Computer
-        {
-            MainboardEnabled = true,
-            CPUEnabled = true,
-            RAMEnabled = true,
-            GPUEnabled = true,
-            FanControllerEnabled = true,
-            HDDEnabled = true
-        };
+        private Computer Computer;
 
         /// <summary> 
         /// Event function that returns the current values of the sensors 
@@ -41,19 +34,25 @@ namespace NiceMeter
                 foreach (var Sensor in Hardware.Sensors)
                 {
                     if (Sensor.Value.HasValue)
-                        Console.WriteLine(String.Format("{0} - {1} - {2} = {3}", Hardware.HardwareType, Sensor.Name, Sensor.SensorType, Sensor.Value));
+                        //Console.WriteLine(String.Format("{0} - {1} - {2} = {3}", Hardware.HardwareType, Sensor.Name, Sensor.SensorType, Sensor.Value));
+                        Console.WriteLine(String.Format("{1} {2} = {3}", Hardware.HardwareType, Sensor.Name, Sensor.SensorType, Sensor.Value));
                 }
             }
         }
 
-        public MainWindow()
-        {   
-            //  DispatcherTimer setup
+        /// <summary>
+        /// Start the window
+        /// </summary>
+        public NiceMeterWindow()
+        {
+            // DispatcherTimer setup
             var Dispatcher = new DispatcherTimer();
             Dispatcher.Tick += new EventHandler(Tick);
             Dispatcher.Interval = new TimeSpan(0, 0, 1);
 
-            // Start measuring
+            // Init device. Mainboard and CPUs only
+            var Devices = new DefaultDevices();
+            Computer = Devices.GetSampleComputer();
             Computer.Open();
 
             // Start timed event. Bind data to the UI in the correct thread.

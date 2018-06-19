@@ -1,0 +1,22 @@
+CPU Package Power = 34.63837
+
+CPU Core #1 Load = 42.1875
+CPU Core #2 Load = 39.0625
+CPU Core #3 Load = 38.28125
+CPU Core #4 Load = 39.0625
+
+CPU Core #1 Temperature = 33
+CPU Core #2 Temperature = 29
+CPU Core #3 Temperature = 30
+CPU Core #4 Temperature = 30
+
+CPU Core #1 Clock = 3704.501
+CPU Core #2 Clock = 3804.623
+CPU Core #3 Clock = 3804.623
+CPU Core #4 Clock = 3704.501
+
+# CPU Total Load = 39.64844
+# CPU Package Temperature = 33
+# CPU Cores Power = 26.97217
+# CPU Graphics Power = 0
+# CPU DRAM Power = 1.448608
