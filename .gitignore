@@ -1,13 +1,14 @@
 # General
 *.lock
 *.cache
+*.idlk
 
 #IDE files
-.vs/
+.vs
 
 # VS project
-bin/
-Debug/
+NiceMeter/bin
+NiceMeter/obj
 
 # Paket for Visual Studio
 paket-files/
