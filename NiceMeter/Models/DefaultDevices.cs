@@ -3,7 +3,7 @@
 /// <summary>
 /// Defines an OpenHardwareMonitor Computer with all sensors enabled
 /// </summary>
-namespace NiceMeter.Device
+namespace NiceMeter.Models
 {
     /// <summary>
     /// Defines the device settings to use for measurements

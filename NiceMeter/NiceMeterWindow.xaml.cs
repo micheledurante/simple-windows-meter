@@ -3,7 +3,9 @@ using System.Windows;
 using OpenHardwareMonitor.Hardware;
 using System.Linq;
 using System.Windows.Threading;
-using NiceMeter.Device;
+using NiceMeter.Models;
+using System.Collections.Generic;
+using System.Windows.Data;
 
 namespace NiceMeter
 {
@@ -34,8 +36,9 @@ namespace NiceMeter
                 foreach (var Sensor in Hardware.Sensors)
                 {
                     if (Sensor.Value.HasValue)
-                        //Console.WriteLine(String.Format("{0} - {1} - {2} = {3}", Hardware.HardwareType, Sensor.Name, Sensor.SensorType, Sensor.Value));
-                        Console.WriteLine(String.Format("{1} {2} = {3}", Hardware.HardwareType, Sensor.Name, Sensor.SensorType, Sensor.Value));
+                    {
+                        Console.WriteLine(String.Format("{0} - {1} - {2} = {3}", Hardware.HardwareType, Sensor.Name, Sensor.SensorType, Sensor.Value));
+                    }
                 }
             }
         }
@@ -53,13 +56,34 @@ namespace NiceMeter
             // Init device. Mainboard and CPUs only
             var Devices = new DefaultDevices();
             Computer = Devices.GetSampleComputer();
-            Computer.Open();
 
-            // Start timed event. Bind data to the UI in the correct thread.
+            // Open the computer and start the timed event
+            Computer.Open();
             Dispatcher.Start();
 
             // Init window
             InitializeComponent();
+
+            List<Sensor> items = new List<Sensor>();
+            items.Add(new Sensor() { Name = "ASUS", Value = 42, HardwareType = HardwareType.CPU });
+            items.Add(new Sensor() { Name = "CPU 1", Value = 39, HardwareType = HardwareType.CPU });
+            items.Add(new Sensor() { Name = "CPU 2", Value = 13, HardwareType = HardwareType.Heatmaster });
+            Sensors.ItemsSource = items;
+
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(Sensors.ItemsSource);
+            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Comp");
+            view.GroupDescriptions.Add(groupDescription);
+        }
+
+        public class Sensor
+        {
+            public string Name { get; set; }
+
+            public int Value { get; set; }
+
+            public string Mail { get; set; }
+
+            public HardwareType HardwareType { get; set; }
         }
     }
 }
