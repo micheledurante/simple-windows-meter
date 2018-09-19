@@ -60,11 +60,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ViewModels\Meter.cs" />
     <Page Include="NiceMeterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="ViewModels\Row.cs" />
     <Compile Include="NiceMeter.xaml.cs">
       <DependentUpon>NiceMeter.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -76,9 +76,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ViewModels\Table.cs" />
-    <Compile Include="ViewModels\Tables.cs" />
-    <Compile Include="ViewModels\IViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

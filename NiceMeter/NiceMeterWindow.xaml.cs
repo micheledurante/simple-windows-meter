@@ -6,6 +6,7 @@ using System.Windows.Threading;
 using NiceMeter.Models;
 using System.Collections.Generic;
 using System.Windows.Data;
+using NiceMeter.ViewModels;
 
 namespace NiceMeter
 {
@@ -19,6 +20,11 @@ namespace NiceMeter
         /// </summary>
         private Computer Computer;
 
+        /// <summary>
+        /// List of enabled types for this computer. Used as table headers(?)
+        /// </summary>
+        private List<HardwareType> HardwareList = new List<HardwareType>();
+
         /// <summary> 
         /// Event function that returns the current values of the sensors 
         /// </summary> 
@@ -26,9 +32,6 @@ namespace NiceMeter
         /// <param name="e"></param> 
         private void Tick(object sender, EventArgs e)
         {
-            // Gets a list of enabled hardware strings 
-            var HardwareList = Computer.Hardware.Select(x => x.HardwareType).ToList();
-
             foreach (var Hardware in Computer.Hardware)
             {
                 Hardware.Update();
@@ -58,32 +61,33 @@ namespace NiceMeter
             Computer = Devices.GetSampleComputer();
 
             // Open the computer and start the timed event
+            // The computer contains enabled types and a list of available hardware.
+            // The tick function has to be called to update certain hardwares, e.g. not the mobo.
+            // The Update() function in available for IHardware. There's also GetReport() that returns a string with all kinds of info. See what to do with that.(discard it for now?)
             Computer.Open();
             Dispatcher.Start();
+
+            // Gets the list of enabled types. For headers (?)
+            HardwareList = Computer.Hardware.Select(x => x.HardwareType).ToList();
 
             // Init window
             InitializeComponent();
 
-            List<Sensor> items = new List<Sensor>();
-            items.Add(new Sensor() { Name = "ASUS", Value = 42, HardwareType = HardwareType.CPU });
-            items.Add(new Sensor() { Name = "CPU 1", Value = 39, HardwareType = HardwareType.CPU });
-            items.Add(new Sensor() { Name = "CPU 2", Value = 13, HardwareType = HardwareType.Heatmaster });
-            Sensors.ItemsSource = items;
+            // Need to build a list of tables, with custom formatting.
+            // Pass to the tick function the rows that need updating regularly.
+            // Put ehre an entry point to the program that visualises the rows/tables.
+            var sensors = new List<Meter>
+            {
+                new Meter() { Name = "ASUS", Value = 42, HardwareType = HardwareType.CPU },
+                new Meter() { Name = "CPU 1", Value = 39, HardwareType = HardwareType.CPU },
+                new Meter() { Name = "CPU 2", Value = 13, HardwareType = HardwareType.Heatmaster }
+            };
 
-            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(Sensors.ItemsSource);
-            PropertyGroupDescription groupDescription = new PropertyGroupDescription("Comp");
+            StatMeters.ItemsSource = sensors;
+
+            var view = (CollectionView)CollectionViewSource.GetDefaultView(StatMeters.ItemsSource);
+            var groupDescription = new PropertyGroupDescription("HardwareType");
             view.GroupDescriptions.Add(groupDescription);
-        }
-
-        public class Sensor
-        {
-            public string Name { get; set; }
-
-            public int Value { get; set; }
-
-            public string Mail { get; set; }
-
-            public HardwareType HardwareType { get; set; }
         }
     }
 }
