@@ -14,10 +14,17 @@
         ResizeMode="NoResize">
     <Grid>
         <ListView Name="StatMeters">
+
+            <ListView.Resources>
+                <Style TargetType="GridViewColumnHeader">
+                    <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+            </ListView.Resources>
+
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Name" Width="150" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Header="Value" Width="150" DisplayMemberBinding="{Binding Value}" />
+                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Name}" />
+                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Value, Mode=OneWay}" />
                 </GridView>
             </ListView.View>
 
@@ -25,7 +32,7 @@
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
                         <DataTemplate>
-                            <TextBlock FontWeight="Bold" FontSize="14" Text="{Binding HardwareType}"/>
+                            <TextBlock Focusable="False" Text="{Binding HardwareType}"/>
                         </DataTemplate>
                     </GroupStyle.HeaderTemplate>
                 </GroupStyle>

@@ -1,13 +1,16 @@
 ﻿using OpenHardwareMonitor.Hardware;
+using System.ComponentModel;
 
 namespace NiceMeter.ViewModels
 {
-    class Meter
+    class Meter : INotifyPropertyChanged
     {
         public string Name { get; set; }
 
-        public int Value { get; set; }
+        public string Value { get; set; }
 
         public HardwareType HardwareType { get; set; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
     }
 }
