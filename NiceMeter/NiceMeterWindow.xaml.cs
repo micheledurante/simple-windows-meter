@@ -7,6 +7,7 @@ using NiceMeter.Models;
 using System.Collections.Generic;
 using System.Windows.Data;
 using NiceMeter.ViewModels;
+using System.Collections.ObjectModel;
 
 namespace NiceMeter
 {
@@ -23,7 +24,7 @@ namespace NiceMeter
         /// <summary>
         /// The ViewModel for the ListView.
         /// </summary>
-        private List<Meter> Meters;
+        private ObservableMeters ObservableMeters;
 
         /// <summary> 
         /// Event function that returns the current values of the sensors 
@@ -35,9 +36,13 @@ namespace NiceMeter
             // CPU update
             Computer.Hardware[1].Update();
 
-            for (int i = 0; i < Computer.Hardware[1].Sensors.Length; i++)
+            // Collection update
+            for (var i = 0; i < Computer.Hardware[1].Sensors.Length; i++)
             {
-                Meters[i].Value = string.Format("{0} {1}", Computer.Hardware[1].Sensors[i].SensorType, Computer.Hardware[1].Sensors[i].Value);
+                for (var ii = 1; ii < ObservableMeters.GetMeters().Count -1; ii++)
+                {
+                    ObservableMeters.GetMeters()[ii].Text = string.Format("{0} {1}", Computer.Hardware[1].Sensors[i].SensorType, Computer.Hardware[1].Sensors[i].Value);
+                }
             }
         }
 
@@ -60,19 +65,22 @@ namespace NiceMeter
             InitializeComponent();
             Dispatcher.Start();
 
+            // Init collection
             // Mobo init
-            Meters = new List<Meter>
+            var InitObservableCollection = new ObservableCollection<Meter>
             {
-                new Meter() { Name = Computer.Hardware[0].Name, Value = "", HardwareType = HardwareType.Mainboard }
+                new Meter() { Name = Computer.Hardware[0].Name, Text = "", HardwareType = HardwareType.Mainboard }
             };
 
             // CPU init
             foreach (var Sensor in Computer.Hardware[1].Sensors)
             {
-                Meters.Add(new Meter() { Name = Sensor.Name, Value = string.Format("{0} {1}", Sensor.SensorType, Sensor.Value), HardwareType = HardwareType.CPU });
+                InitObservableCollection.Add(new Meter() { Name = Sensor.Name, Text = string.Format("{0} {1}", Sensor.SensorType, Sensor.Value), HardwareType = HardwareType.CPU });
             }
 
-            StatMeters.ItemsSource = Meters;
+            ObservableMeters = new ObservableMeters(InitObservableCollection);
+
+            StatMeters.ItemsSource = ObservableMeters.GetMeters();
 
             var view = (CollectionView)CollectionViewSource.GetDefaultView(StatMeters.ItemsSource);
             var groupDescription = new PropertyGroupDescription("HardwareType");

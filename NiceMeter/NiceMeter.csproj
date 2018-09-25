@@ -61,6 +61,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="ViewModels\Meter.cs" />
+    <Compile Include="ViewModels\ObservableMeters.cs" />
     <Page Include="NiceMeterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
