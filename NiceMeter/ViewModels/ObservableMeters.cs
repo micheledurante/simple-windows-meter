@@ -21,7 +21,7 @@ namespace NiceMeter.ViewModels
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            var x = 0;
+            // Implement here logic for adding/removing tables to the collection.
         }
 
         public ObservableCollection<Meter> GetMeters()

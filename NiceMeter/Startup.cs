@@ -11,7 +11,11 @@ namespace NiceMeter
     /// <summary>
     /// Interaction logic for App.xaml
     /// </summary>
-    public partial class App : Application
+    public partial class Startup : Application
     {
+        protected void Application_Startup(object sender, StartupEventArgs e)
+        {
+            
+        }
     }
 }

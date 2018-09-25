@@ -60,16 +60,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Meter.cs" />
     <Compile Include="ViewModels\ObservableMeters.cs" />
     <Page Include="NiceMeterWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="NiceMeter.xaml.cs">
-      <DependentUpon>NiceMeter.xaml</DependentUpon>
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="Models\DefaultDevices.cs" />
     <Compile Include="NiceMeterWindow.xaml.cs">
       <DependentUpon>NiceMeterWindow.xaml</DependentUpon>

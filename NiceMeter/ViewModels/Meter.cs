@@ -1,6 +1,5 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System.ComponentModel;
-using System.Runtime.CompilerServices;
 
 namespace NiceMeter.ViewModels
 {
