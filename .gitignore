@@ -9,9 +9,9 @@
 # VS project
 NiceMeter/bin
 NiceMeter/obj
+packages/
 
 # Paket for Visual Studio
 paket-files/
-.paket/
 Paket.Restore.targets
 Paket.targets
