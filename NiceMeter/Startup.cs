@@ -40,7 +40,7 @@ namespace NiceMeter
         }
 
         /// <summary>
-        /// Startup event for the application.
+        /// Startup event of the application
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -52,8 +52,8 @@ namespace NiceMeter
             Dispatcher.Interval = new TimeSpan(0, 0, 1);
 
             // Init device. Mainboard and CPUs only
-            var Devices = new DefaultDevices();
-            Computer = Devices.GetSampleComputer();
+            var Computers = new Computers();
+            Computer = Computers.GetTesting();
             Computer.Open();
 
             // Init collection

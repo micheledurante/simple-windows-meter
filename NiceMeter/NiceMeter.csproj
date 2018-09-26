@@ -67,7 +67,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Compile Include="Models\DefaultDevices.cs" />
+    <Compile Include="Models\Computers.cs" />
     <Compile Include="NiceMeterWindow.xaml.cs">
       <DependentUpon>NiceMeterWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

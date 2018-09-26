@@ -8,13 +8,13 @@ namespace NiceMeter.Models
     /// <summary>
     /// Defines the device settings to use for measurements
     /// </summary>
-    public class DefaultDevices
+    public class Computers
     {
         /// <summary>
         /// Default computer, all hardware is enabled
         /// </summary>
         /// <returns></returns>
-        public Computer GetDefaultComputer()
+        public Computer GetDefault()
         {
             return new Computer
             {
@@ -31,7 +31,7 @@ namespace NiceMeter.Models
         /// A sample computer settings used during development
         /// </summary>
         /// <returns></returns>
-        public Computer GetSampleComputer()
+        public Computer GetTesting()
         {
             return new Computer
             {
