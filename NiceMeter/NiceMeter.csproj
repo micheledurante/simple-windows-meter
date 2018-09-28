@@ -60,7 +60,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EventHandlers\HardwareUpdate.cs" />
+    <Compile Include="Interfaces\IMeter.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CpuMeter.cs" />
+    <Compile Include="ViewModels\MainboardMeter.cs" />
     <Compile Include="ViewModels\Meter.cs" />
     <Compile Include="ViewModels\ObservableMeters.cs" />
     <Page Include="NiceMeterWindow.xaml">

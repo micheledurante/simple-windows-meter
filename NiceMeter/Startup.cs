@@ -1,13 +1,13 @@
 ﻿using System;
 using System.Windows;
 using OpenHardwareMonitor.Hardware;
-using System.Linq;
 using System.Windows.Threading;
 using NiceMeter.Models;
-using System.Collections.Generic;
 using NiceMeter.ViewModels;
 using System.Collections.ObjectModel;
-using System.Windows.Controls;
+using NiceMeter.EventHandlers;
+using System.Collections.Generic;
+using NiceMeter.Interfaces;
 
 namespace NiceMeter
 {
@@ -16,29 +16,6 @@ namespace NiceMeter
     /// </summary>
     public partial class Startup : Application
     {
-        private Computer Computer;
-        private ObservableMeters Meters;
-
-        /// <summary> 
-        /// Event function that returns the current values of the sensors 
-        /// </summary> 
-        /// <param name="sender"></param> 
-        /// <param name="e"></param> 
-        private void Tick(object sender, EventArgs e)
-        {
-            // CPU update
-            Computer.Hardware[1].Update();
-
-            // Collection update
-            for (var i = 0; i < Computer.Hardware[1].Sensors.Length; i++)
-            {
-                for (var ii = 1; ii < Meters.GetMeters().Count - 1; ii++)
-                {
-                    Meters.GetMeters()[ii].Text = string.Format("{0} {1}", Computer.Hardware[1].Sensors[i].SensorType, Computer.Hardware[1].Sensors[i].Value);
-                }
-            }
-        }
-
         /// <summary>
         /// Startup event of the application
         /// </summary>
@@ -46,33 +23,36 @@ namespace NiceMeter
         /// <param name="e"></param>
         private void Application_Startup(object sender, StartupEventArgs e)
         {
-            // DispatcherTimer setup
-            var Dispatcher = new DispatcherTimer();
-            Dispatcher.Tick += new EventHandler(Tick);
-            Dispatcher.Interval = new TimeSpan(0, 0, 1);
-
             // Init device. Mainboard and CPUs only
             var Computers = new Computers();
-            Computer = Computers.GetTesting();
+            var Computer = Computers.GetTesting();
             Computer.Open();
+
+            // possibly other init checks on computer etc.. here
 
             // Init collection
             // Mobo init
-            var InitObservableCollection = new ObservableCollection<Meter>
+            var InitObservableCollection = new ObservableCollection<IMeter>
             {
-                new Meter() { Name = Computer.Hardware[0].Name, Text = "", HardwareType = HardwareType.Mainboard }
+                new MainboardMeter(Computer.Hardware[0].Name).FormatText(Computer.Hardware[0].Sensors),
+                new CpuMeter(Computer.Hardware[1].Name, 4).FormatText(Computer.Hardware[1].Sensors)
             };
 
-            // CPU init
-            foreach (var Sensor in Computer.Hardware[1].Sensors)
-            {
-                InitObservableCollection.Add(new Meter() { Name = Sensor.Name, Text = string.Format("{0} {1}", Sensor.SensorType, Sensor.Value), HardwareType = HardwareType.CPU });
-            }
+            var Meters = new ObservableMeters(InitObservableCollection);
 
-            Meters = new ObservableMeters(InitObservableCollection);
+            // Done with init view models
+            var x = new HardwareUpdate();
+            // DispatcherTimer setup
+            var Dispatcher = new DispatcherTimer();
+            // Closure to pass additional values to the update method when the event is raised
+            Dispatcher.Tick += (s, args) => x.Update(Computer, Meters);
+            Dispatcher.Interval = new TimeSpan(0, 0, 1);
 
-            Dispatcher.Start();
+            // Done with timed events
             NiceMeterWindow niceMeterWindow = new NiceMeterWindow(Meters);
+
+            // Window is ready. Start
+            Dispatcher.Start();
             niceMeterWindow.Show();
         }
     }

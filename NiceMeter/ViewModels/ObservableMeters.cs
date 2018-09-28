@@ -1,13 +1,14 @@
-﻿using System.Collections.ObjectModel;
+﻿using NiceMeter.Interfaces;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 namespace NiceMeter.ViewModels
 {
     public class ObservableMeters
     {
-        private ObservableCollection<Meter> Meters;
+        private ObservableCollection<IMeter> Meters;
 
-        public ObservableMeters(ObservableCollection<Meter> meters)
+        public ObservableMeters(ObservableCollection<IMeter> meters)
         {
             Meters = meters;
             // Wire up the CollectionChanged event.
@@ -19,7 +20,7 @@ namespace NiceMeter.ViewModels
             // Implement here logic for adding/removing tables to the collection.
         }
 
-        public ObservableCollection<Meter> GetMeters()
+        public ObservableCollection<IMeter> GetMeters()
         {
             return Meters;
         }
