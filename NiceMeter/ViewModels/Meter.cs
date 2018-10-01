@@ -5,13 +5,13 @@ using System.ComponentModel;
 
 namespace NiceMeter.ViewModels
 {
-    public abstract class Meter : INotifyPropertyChanged
+    internal abstract class Meter : INotifyPropertyChanged
     {
-        public string Name { get; set;  }
-
         protected IList<ISensor> Sensors { get; set; }
 
         protected HardwareType HardwareType { get; set; }
+
+        public string Name { get; set; }
 
         private string _text;
 

@@ -10,5 +10,7 @@ namespace NiceMeter.Interfaces
     public interface IMeter
     {
         IMeter FormatText(IList<ISensor> sensors);
+
+        IMeter UpdateText(IList<ISensor> sensors);
     }
 }

@@ -31,7 +31,6 @@ namespace NiceMeter
             // possibly other init checks on computer etc.. here
 
             // Init collection
-            // Mobo init
             var InitObservableCollection = new ObservableCollection<IMeter>
             {
                 new MainboardMeter(Computer.Hardware[0].Name).FormatText(Computer.Hardware[0].Sensors),
