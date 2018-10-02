@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 
 namespace NiceMeter.Interfaces
 {
-    public interface IMeter
+    interface ICpuMeter
     {
-        IMeter FormatText(IHardware hardware);
-
-        IMeter FormatValues(IList<ISensor> sensors);
+        IMeter UpdateValues(IList<ISensor> sensors);
     }
 }

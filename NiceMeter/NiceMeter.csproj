@@ -37,6 +37,9 @@
     <ApplicationManifest>NiceMeter.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net\lib\net45-full\log4net.dll</HintPath>
+    </Reference>
     <Reference Include="OpenHardwareMonitorLib">
       <HintPath>..\openhardwaremonitor0.8.0\OpenHardwareMonitorLib.dll</HintPath>
     </Reference>
@@ -61,10 +64,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="EventHandlers\HardwareUpdate.cs" />
+    <Compile Include="Interfaces\ICpuMeter.cs" />
     <Compile Include="Interfaces\IMeter.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CpuCoreMeter.cs" />
     <Compile Include="ViewModels\CpuMeter.cs" />
+    <Compile Include="ViewModels\CpuTotalMeter.cs" />
     <Compile Include="ViewModels\MainboardMeter.cs" />
     <Compile Include="ViewModels\Meter.cs" />
     <Compile Include="ViewModels\ObservableMeters.cs" />
@@ -96,6 +101,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <Content Include="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="ViewModels\ViewModelsUML.cd" />
     <None Include="NiceMeter.manifest">
       <SubType>Designer</SubType>
     </None>

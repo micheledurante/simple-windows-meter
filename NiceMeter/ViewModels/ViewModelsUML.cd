@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="NiceMeter.ViewModels.CpuCoreMeter">
+    <Position X="3" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAABEAAAAAAAA=</HashCode>
+      <FileName>ViewModels\CpuCoreMeter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NiceMeter.ViewModels.CpuMeter">
+    <Position X="4.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAABEAAAAAAAA=</HashCode>
+      <FileName>ViewModels\CpuMeter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NiceMeter.ViewModels.MainboardMeter">
+    <Position X="1.25" Y="4.25" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAA=</HashCode>
+      <FileName>ViewModels\MainboardMeter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NiceMeter.ViewModels.Meter">
+    <Position X="2.5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAABAAAAIAAAAAQAgAAAAAAIAAAACAAAAAA=</HashCode>
+      <FileName>ViewModels\Meter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="NiceMeter.ViewModels.CpuTotalMeter">
+    <Position X="5.75" Y="7" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>ViewModels\CpuTotalMeter.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="NiceMeter.Interfaces.IMeter">
+    <Position X="7.5" Y="2" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABEAAAAAAAA=</HashCode>
+      <FileName>Interfaces\IMeter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="NiceMeter.Interfaces.ICpuMeter">
+    <Position X="7.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Interfaces\ICpuMeter.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Interface Name="System.ComponentModel.INotifyPropertyChanged">
+    <Position X="7.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

@@ -10,27 +10,17 @@ namespace NiceMeter.ViewModels
 {
     class CpuMeter : Meter, IMeter
     {
-        private List<CpuCoreMeter> coreMeters = new List<CpuCoreMeter>();
+        private List<ICpuMeter> coreMeters = new List<ICpuMeter>();
 
-        public CpuMeter(string name, int cores)
+        public IMeter FormatText(IHardware hardware)
         {
-            Name = name;
-            HardwareType = HardwareType.CPU;
+            Name = hardware.Name;
+            return this;
         }
 
-        public IMeter FormatText(IList<ISensor> sensors)
+        public IMeter FormatValues(IList<ISensor> sensors)
         {
-            var cores = sensors.GroupBy(x => x.Identifier).ToList();
-
-            foreach (var core in cores)
-            {
-                coreMeters.Add(new CpuCoreMeter(core.Select(x => x).ToList()));
-            }
-        }
-
-        public IMeter UpdateText(IList<ISensor> sensors)
-        {
-            throw new NotImplementedException();
+            return this;
         }
     }
 }

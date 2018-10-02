@@ -6,19 +6,13 @@ namespace NiceMeter.ViewModels
 {
     class MainboardMeter : Meter, IMeter
     {
-        public MainboardMeter(string name)
+        public IMeter FormatText(IHardware hardware)
         {
-            Name = name;
-            HardwareType = HardwareType.Mainboard;
-        }
-
-        public IMeter FormatText(IList<ISensor> sensors)
-        {
-            // Nothing is required for the mobo
+            Name = hardware.Name;
             return this;
         }
 
-        public IMeter UpdateText(IList<ISensor> sensors)
+        public IMeter FormatValues(IList<ISensor> sensors)
         {
             // Nothing is required for the mobo
             return this;

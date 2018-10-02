@@ -22,7 +22,7 @@
 
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Name, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Name}" />
                     <GridViewColumn Width="140" DisplayMemberBinding="{Binding Text, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" />
                 </GridView>
             </ListView.View>

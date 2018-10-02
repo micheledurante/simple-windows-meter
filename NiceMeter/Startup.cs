@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using NiceMeter.EventHandlers;
 using System.Collections.Generic;
 using NiceMeter.Interfaces;
+using log4net;
 
 namespace NiceMeter
 {
@@ -17,24 +18,34 @@ namespace NiceMeter
     public partial class Startup : Application
     {
         /// <summary>
+        /// Logger instance
+        /// </summary>
+        internal static readonly ILog log = LogManager.GetLogger(typeof(Startup));
+
+        /// <summary>
         /// Startup event of the application
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Application_Startup(object sender, StartupEventArgs e)
         {
+            // Init logger
+            log4net.Config.XmlConfigurator.Configure();
+            log.Info("application started.");
+
             // Init device. Mainboard and CPUs only
             var Computers = new Computers();
             var Computer = Computers.GetTesting();
             Computer.Open();
+            log.Debug(Computer);
 
             // possibly other init checks on computer etc.. here
 
             // Init collection
             var InitObservableCollection = new ObservableCollection<IMeter>
             {
-                new MainboardMeter(Computer.Hardware[0].Name).FormatText(Computer.Hardware[0].Sensors),
-                new CpuMeter(Computer.Hardware[1].Name, 4).FormatText(Computer.Hardware[1].Sensors)
+                new MainboardMeter().FormatText(Computer.Hardware[0]),
+                new CpuMeter().FormatText(Computer.Hardware[1]).FormatValues(Computer.Hardware[1].Sensors)
             };
 
             var Meters = new ObservableMeters(InitObservableCollection);
