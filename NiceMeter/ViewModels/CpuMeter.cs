@@ -1,4 +1,5 @@
-﻿using NiceMeter.Interfaces;
+﻿using log4net;
+using NiceMeter.Interfaces;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;
@@ -10,17 +11,35 @@ namespace NiceMeter.ViewModels
 {
     class CpuMeter : Meter, IMeter
     {
-        private List<ICpuMeter> coreMeters = new List<ICpuMeter>();
+        private IList<ICpuMeter> coreMeters = new List<ICpuMeter>();
+        private ICpuMeter total = null;
+        private int cores = 0;
+        private static readonly ILog log = LogManager.GetLogger(typeof(CpuMeter));
 
-        public IMeter FormatText(IHardware hardware)
+        public CpuMeter(string name)
         {
-            Name = hardware.Name;
-            return this;
+            Name = name;
         }
 
-        public IMeter FormatValues(IList<ISensor> sensors)
+        public IMeter FormatValue(IList<ISensor> sensors)
         {
-            return this;
+            foreach (var sensor in sensors)
+            {
+                log.Debug(string.Format("{0} {1} {2} {3}", sensor.Identifier, sensor.Name, sensor.Value, sensor.SensorType));
+            }
+
+            foreach (var sensor in sensors)
+            {
+                switch (sensor.SensorType)
+                {
+                    case SensorType.Load:
+                        var cpuCoreMeter = new CpuCoreMeter(sensor.Name);
+                        cpuCoreMeter.load(sensor.Value, '%');
+                        coreMeters.Add();
+                }
+            }
+
+            return this;  
         }
     }
 }

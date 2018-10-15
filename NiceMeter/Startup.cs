@@ -4,11 +4,9 @@ using OpenHardwareMonitor.Hardware;
 using System.Windows.Threading;
 using NiceMeter.Models;
 using NiceMeter.ViewModels;
-using System.Collections.ObjectModel;
 using NiceMeter.EventHandlers;
-using System.Collections.Generic;
-using NiceMeter.Interfaces;
 using log4net;
+using NiceMeter.Meter;
 
 namespace NiceMeter
 {
@@ -31,24 +29,18 @@ namespace NiceMeter
         {
             // Init logger
             log4net.Config.XmlConfigurator.Configure();
-            log.Info("application started.");
+            log.Info("application started");
 
             // Init device. Mainboard and CPUs only
             var Computers = new Computers();
             var Computer = Computers.GetTesting();
             Computer.Open();
-            log.Debug(Computer);
 
-            // possibly other init checks on computer etc.. here
+            var Visitor = new HardwareVisitor();
+            Computer.Traverse(Visitor);
+            //log.Debug(Computer.GetReport());
 
-            // Init collection
-            var InitObservableCollection = new ObservableCollection<IMeter>
-            {
-                new MainboardMeter().FormatText(Computer.Hardware[0]),
-                new CpuMeter().FormatText(Computer.Hardware[1]).FormatValues(Computer.Hardware[1].Sensors)
-            };
-
-            var Meters = new ObservableMeters(InitObservableCollection);
+            var Meters = new ObservableMeters(Visitor.GetCollection());
 
             // Done with init view models
             var x = new HardwareUpdate();

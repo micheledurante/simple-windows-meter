@@ -66,10 +66,11 @@
     <Compile Include="EventHandlers\HardwareUpdate.cs" />
     <Compile Include="Interfaces\ICpuMeter.cs" />
     <Compile Include="Interfaces\IMeter.cs" />
+    <Compile Include="Meter\HardwareVisitor.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Structs\Unit.cs" />
     <Compile Include="ViewModels\CpuCoreMeter.cs" />
     <Compile Include="ViewModels\CpuMeter.cs" />
-    <Compile Include="ViewModels\CpuTotalMeter.cs" />
     <Compile Include="ViewModels\MainboardMeter.cs" />
     <Compile Include="ViewModels\Meter.cs" />
     <Compile Include="ViewModels\ObservableMeters.cs" />

@@ -9,6 +9,6 @@ namespace NiceMeter.Interfaces
 {
     interface ICpuMeter
     {
-        IMeter UpdateValues(IList<ISensor> sensors);
+        IMeter UpdateValue(float value);
     }
 }

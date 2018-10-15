@@ -9,8 +9,6 @@ namespace NiceMeter.ViewModels
     {
         protected IList<ISensor> Sensors { get; set; }
 
-        protected HardwareType HardwareType { get; set; }
-
         public string Name { get; set; }
 
         private string _text;
