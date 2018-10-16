@@ -1,5 +1,4 @@
 ﻿using NiceMeter.Interfaces;
-using NiceMeter.Structs;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.Generic;

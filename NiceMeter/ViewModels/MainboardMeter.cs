@@ -11,7 +11,7 @@ namespace NiceMeter.ViewModels
             Name = name;
         }
 
-        public IMeter FormatValue(IList<ISensor> sensors)
+        public IMeter FormatValues(IList<ISensor> sensors)
         {
             // Nothing is required for the mobo
             return this;

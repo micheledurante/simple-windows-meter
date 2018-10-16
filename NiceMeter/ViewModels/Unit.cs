@@ -4,14 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NiceMeter.Structs
+namespace NiceMeter.ViewModels
 {
-    public struct Unit
+    public class Unit
     {
-        public float value;
+        public string value;
         public string measurementUnit;
 
-        public Unit(float value, string measurementUnit)
+        public Unit(string value, string measurementUnit)
         {
             this.value = value;
             this.measurementUnit = measurementUnit;

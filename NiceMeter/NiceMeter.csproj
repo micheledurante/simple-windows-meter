@@ -68,7 +68,7 @@
     <Compile Include="Interfaces\IMeter.cs" />
     <Compile Include="Meter\HardwareVisitor.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="Structs\Unit.cs" />
+    <Compile Include="ViewModels\Unit.cs" />
     <Compile Include="ViewModels\CpuCoreMeter.cs" />
     <Compile Include="ViewModels\CpuMeter.cs" />
     <Compile Include="ViewModels\MainboardMeter.cs" />

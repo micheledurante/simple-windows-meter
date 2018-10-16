@@ -9,6 +9,6 @@ namespace NiceMeter.Interfaces
 {
     public interface IMeter
     {
-        IMeter FormatValue(IList<ISensor> sensors);
+        IMeter FormatValues(IList<ISensor> sensors);
     }
 }

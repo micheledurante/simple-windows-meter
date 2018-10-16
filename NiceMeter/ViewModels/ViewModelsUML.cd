@@ -11,7 +11,7 @@
   <Class Name="NiceMeter.ViewModels.CpuMeter">
     <Position X="4.25" Y="4.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAQAACAAABAAAAAAAAEEAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAACAAABAAAAAAAAEEAAAAAAAA=</HashCode>
       <FileName>ViewModels\CpuMeter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />

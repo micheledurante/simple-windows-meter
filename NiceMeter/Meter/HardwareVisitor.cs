@@ -24,11 +24,11 @@ namespace NiceMeter.Meter
             switch (hardware.HardwareType)
             {
                 case HardwareType.Mainboard:
-                    collection.Add(new Dictionary<int, IMeter> { { (int)HardwareType.Mainboard, new MainboardMeter(hardware.Name).FormatValue(hardware.Sensors) } });
+                    collection.Add(new Dictionary<int, IMeter> { { (int)HardwareType.Mainboard, new MainboardMeter(hardware.Name).FormatValues(hardware.Sensors) } });
                     break;
 
                 case HardwareType.CPU:
-                    collection.Add(new Dictionary<int, IMeter> { { (int)HardwareType.CPU, new CpuMeter(hardware.Name).FormatValue(hardware.Sensors) } });
+                    collection.Add(new Dictionary<int, IMeter> { { (int)HardwareType.CPU, new CpuMeter(hardware.Name).FormatValues(hardware.Sensors) } });
                     break;
             }
         }

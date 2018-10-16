@@ -12,8 +12,6 @@ namespace NiceMeter.ViewModels
     class CpuMeter : Meter, IMeter
     {
         private IList<ICpuMeter> coreMeters = new List<ICpuMeter>();
-        private ICpuMeter total = null;
-        private int cores = 0;
         private static readonly ILog log = LogManager.GetLogger(typeof(CpuMeter));
 
         public CpuMeter(string name)
@@ -21,25 +19,24 @@ namespace NiceMeter.ViewModels
             Name = name;
         }
 
-        public IMeter FormatValue(IList<ISensor> sensors)
+        public IMeter FormatValues(IList<ISensor> sensors)
         {
-            foreach (var sensor in sensors)
+            // Select CPU cores only
+            var cpuSensors = sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).ToList();
+
+            foreach (var cpuSensor in cpuSensors)
             {
-                log.Debug(string.Format("{0} {1} {2} {3}", sensor.Identifier, sensor.Name, sensor.Value, sensor.SensorType));
+                coreMeters.Add(new CpuCoreMeter(cpuSensor.Name) {
+
+                    load = new Unit(string.Format("{0:N2}", cpuSensor.Value), "%"),
+
+                    freq = new Unit(string.Format("{0}{1:N2}", "@", cpuSensor.Value), "MHz"),
+
+                    temp = new Unit(string.Format("{0:N2}", cpuSensor.Value), "°C")
+                });
             }
 
-            foreach (var sensor in sensors)
-            {
-                switch (sensor.SensorType)
-                {
-                    case SensorType.Load:
-                        var cpuCoreMeter = new CpuCoreMeter(sensor.Name);
-                        cpuCoreMeter.load(sensor.Value, '%');
-                        coreMeters.Add();
-                }
-            }
-
-            return this;  
+            return this;
         }
     }
 }
