@@ -21,18 +21,26 @@ namespace NiceMeter.ViewModels
 
         public IMeter FormatValues(IList<ISensor> sensors)
         {
-            // Select CPU cores only
-            var cpuSensors = sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).ToList();
+            // Create CPUs list
+            var cores = sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).Select(x => new { x.Name }).ToList();
 
-            foreach (var cpuSensor in cpuSensors)
+            foreach (var core in cores)
             {
-                coreMeters.Add(new CpuCoreMeter(cpuSensor.Name) {
+                coreMeters.Add(new CpuCoreMeter(core.Name) {
 
-                    load = new Unit(string.Format("{0:N2}", cpuSensor.Value), "%"),
+                    load = new Unit(string.Format(
+                        "{0:N2}",
+                        sensors.Where(
+                                x => x.Name == core.Name && x.SensorType == SensorType.Load
+                            ).Select(
+                                x => new { x.Value }
+                            ).ToString()
+                            ), "%"
+                        ),
 
-                    freq = new Unit(string.Format("{0}{1:N2}", "@", cpuSensor.Value), "MHz"),
+                    freq = new Unit(string.Format("{0}{1:N2}", "@", sensors.Where(x => x.Name == core.Name && x.SensorType == SensorType.Clock).Select(x => new { x.Value }).ToString()), "MHz"),
 
-                    temp = new Unit(string.Format("{0:N2}", cpuSensor.Value), "°C")
+                    temp = new Unit(string.Format("{0:N2}", sensors.Where(x => x.Name == core.Name && x.SensorType == SensorType.Temperature).Select(x => new { x.Value }).ToString()), "°C")
                 });
             }
 
