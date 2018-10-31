@@ -7,8 +7,6 @@ namespace NiceMeter.ViewModels
 {
     internal abstract class Meter : INotifyPropertyChanged
     {
-        protected IList<ISensor> Sensors { get; set; }
-
         public string Name { get; set; }
 
         private string _text;

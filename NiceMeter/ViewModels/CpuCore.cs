@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace NiceMeter.ViewModels
 {
-    class CpuCoreMeter : CpuMeter, ICpuMeter
+    class CpuCore: CpuMeter, ICpuCore
     {
-        public Unit load { get; set; }
-        public Unit temp { get; set; }
-        public Unit freq { get; set; }
+        public Unit Load { get; set; }
 
-        public CpuCoreMeter(string name) : base(name)
+        public Unit Temp { get; set; }
+
+        public Unit Freq { get; set; }
+
+        public CpuCore(string name): base(name)
         {
             Name = name;
         }

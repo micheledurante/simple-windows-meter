@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NiceMeter.Interfaces
 {
-    interface ICpuMeter
+    interface ICpuCore
     {
         IMeter UpdateValue(float value);
     }

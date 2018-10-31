@@ -11,7 +11,8 @@ namespace NiceMeter.ViewModels
 {
     class CpuMeter : Meter, IMeter
     {
-        private IList<ICpuMeter> coreMeters = new List<ICpuMeter>();
+        private IList<ICpuCore> meters = new List<ICpuCore>();
+        private IList<string> cores = new List<string>();
         private static readonly ILog log = LogManager.GetLogger(typeof(CpuMeter));
 
         public CpuMeter(string name)
@@ -19,28 +20,20 @@ namespace NiceMeter.ViewModels
             Name = name;
         }
 
-        public IMeter FormatValues(IList<ISensor> sensors)
+        public IMeter FormatSensors(IList<ISensor> sensors)
         {
-            // Create CPUs list
-            var cores = sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).Select(x => new { x.Name }).ToList();
+            // Filter CPU names
+            cores = sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).Select(x => x.Name).ToList();
 
             foreach (var core in cores)
             {
-                coreMeters.Add(new CpuCoreMeter(core.Name) {
+                meters.Add(new CpuCore(core)
+                { 
+                    Load = new Unit(string.Format("{0}", sensors.Where(x => x.Name == core && x.SensorType == SensorType.Load).First().Value), "%"),
 
-                    load = new Unit(string.Format(
-                        "{0:N2}",
-                        sensors.Where(
-                                x => x.Name == core.Name && x.SensorType == SensorType.Load
-                            ).Select(
-                                x => new { x.Value }
-                            ).ToString()
-                            ), "%"
-                        ),
+                    Freq = new Unit(string.Format("{0:N2}", sensors.Where(x => x.Name == core && x.SensorType == SensorType.Clock).First().Value / 1000), "GHz"),
 
-                    freq = new Unit(string.Format("{0}{1:N2}", "@", sensors.Where(x => x.Name == core.Name && x.SensorType == SensorType.Clock).Select(x => new { x.Value }).ToString()), "MHz"),
-
-                    temp = new Unit(string.Format("{0:N2}", sensors.Where(x => x.Name == core.Name && x.SensorType == SensorType.Temperature).Select(x => new { x.Value }).ToString()), "°C")
+                    Temp = new Unit(string.Format("{0:N0}", sensors.Where(x => x.Name == core && x.SensorType == SensorType.Temperature).First().Value), "°C")
                 });
             }
 
