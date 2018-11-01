@@ -1,5 +1,4 @@
 ﻿using NiceMeter.Interfaces;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
@@ -7,9 +6,9 @@ namespace NiceMeter.ViewModels
 {
     public class ObservableMeters
     {
-        private ObservableCollection<IDictionary<int, IMeter>> meters;
+        private readonly ObservableCollection<IMeter> meters;
 
-        public ObservableMeters(ObservableCollection<IDictionary<int, IMeter>> meters)
+        public ObservableMeters(ObservableCollection<IMeter> meters)
         {
             this.meters = meters;
             // Wire up the CollectionChanged event.
@@ -21,7 +20,7 @@ namespace NiceMeter.ViewModels
             // Implement here logic for adding/removing tables to the collection.
         }
 
-        public ObservableCollection<IDictionary<int, IMeter>> GetMeters()
+        public ObservableCollection<IMeter> GetMeters()
         {
             return meters;
         }

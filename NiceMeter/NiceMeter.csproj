@@ -66,6 +66,7 @@
     <Compile Include="EventHandlers\HardwareUpdate.cs" />
     <Compile Include="Interfaces\ICpuCore.cs" />
     <Compile Include="Interfaces\IMeter.cs" />
+    <Compile Include="Interfaces\IVisitorObservable.cs" />
     <Compile Include="Meter\HardwareVisitor.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\Unit.cs" />

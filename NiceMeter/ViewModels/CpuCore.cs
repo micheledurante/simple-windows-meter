@@ -21,14 +21,10 @@ namespace NiceMeter.ViewModels
             Name = name;
         }
 
-        public IMeter FormatValues(float sensor)
+        public new IMeter GetDisplayValue()
         {
-            throw new NotImplementedException();
-        }
-
-        public IMeter UpdateValue(float sensor)
-        {
-            throw new NotImplementedException();
+            Text = string.Format("{0}, {1}, {2}", Load.ToString(), Temp.ToString(), Freq.ToString());
+            return this;
         }
     }
 }

@@ -16,5 +16,10 @@ namespace NiceMeter.ViewModels
             // Nothing is required for the mobo
             return this;
         }
+
+        public IMeter GetDisplayValue()
+        {
+            return this;
+        }
     }
 }

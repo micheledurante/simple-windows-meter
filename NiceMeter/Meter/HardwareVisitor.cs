@@ -2,14 +2,13 @@
 using NiceMeter.ViewModels;
 using OpenHardwareMonitor.Hardware;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace NiceMeter.Meter
 {
-    class HardwareVisitor : IVisitor
+    class HardwareVisitor : IVisitor, IVisitorObservable
     {
-        private ObservableCollection<IDictionary<int, IMeter>> collection = new ObservableCollection<IDictionary<int, IMeter>>();
+        private ObservableCollection<IMeter> collection = new ObservableCollection<IMeter>();
 
         public void VisitComputer(IComputer computer)
         {
@@ -21,11 +20,11 @@ namespace NiceMeter.Meter
             switch (hardware.HardwareType)
             {
                 case HardwareType.Mainboard:
-                    collection.Add(new Dictionary<int, IMeter> { { (int)HardwareType.Mainboard, new MainboardMeter(hardware.Name).FormatSensors(hardware.Sensors) } });
+                    collection.Add(new MainboardMeter(hardware.Name).FormatSensors(null));
                     break;
 
                 case HardwareType.CPU:
-                    collection.Add(new Dictionary<int, IMeter> { { (int)HardwareType.CPU, new CpuMeter(hardware.Name).FormatSensors(hardware.Sensors) } });
+                    collection.Add(new CpuMeter(hardware.Name).FormatSensors(hardware.Sensors));
                     break;
             }
         }
@@ -40,8 +39,18 @@ namespace NiceMeter.Meter
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<IDictionary<int, IMeter>> GetCollection()
+        public ObservableCollection<IMeter> UpdateCollection()
         {
+            throw new NotImplementedException();
+        }
+
+        public ObservableCollection<IMeter> GetDisplayValue()
+        {
+            foreach (var item in collection)
+            {
+                item.GetDisplayValue();
+            }
+
             return collection;
         }
     }

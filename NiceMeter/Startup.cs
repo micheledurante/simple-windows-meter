@@ -38,9 +38,8 @@ namespace NiceMeter
 
             var Visitor = new HardwareVisitor();
             Computer.Traverse(Visitor);
-            //log.Debug(Computer.GetReport());
 
-            var Meters = new ObservableMeters(Visitor.GetCollection());
+            var Meters = new ObservableMeters(Visitor.GetDisplayValue());
 
             // Done with init view models
             var x = new HardwareUpdate();

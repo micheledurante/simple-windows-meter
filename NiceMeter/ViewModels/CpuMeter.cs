@@ -1,11 +1,8 @@
 ﻿using log4net;
 using NiceMeter.Interfaces;
 using OpenHardwareMonitor.Hardware;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NiceMeter.ViewModels
 {
@@ -13,6 +10,7 @@ namespace NiceMeter.ViewModels
     {
         private IList<ICpuCore> meters = new List<ICpuCore>();
         private IList<string> cores = new List<string>();
+        private Unit power = null;
         private static readonly ILog log = LogManager.GetLogger(typeof(CpuMeter));
 
         public CpuMeter(string name)
@@ -35,6 +33,20 @@ namespace NiceMeter.ViewModels
 
                     Temp = new Unit(string.Format("{0:N0}", sensors.Where(x => x.Name == core && x.SensorType == SensorType.Temperature).First().Value), "°C")
                 });
+            }
+
+            power = new Unit(string.Format("{0:N0}", sensors.Where(x => x.SensorType == SensorType.Power && x.Name.Contains("CPU Package")).First().Value), "W");
+
+            return this;
+        }
+
+        public IMeter GetDisplayValue()
+        {
+            Text = power.ToString();
+
+            foreach (var meter in meters)
+            {
+                meter.GetDisplayValue();
             }
 
             return this;

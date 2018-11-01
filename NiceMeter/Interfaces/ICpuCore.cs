@@ -9,6 +9,6 @@ namespace NiceMeter.Interfaces
 {
     interface ICpuCore
     {
-        IMeter UpdateValue(float value);
+        IMeter GetDisplayValue();
     }
 }
