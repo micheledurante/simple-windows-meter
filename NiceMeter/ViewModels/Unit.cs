@@ -8,18 +8,20 @@ namespace NiceMeter.ViewModels
 {
     public class Unit
     {
-        public string value;
+        public float? value;
         public string measurementUnit;
+        public string format;
 
-        public Unit(string value, string measurementUnit)
+        public Unit(float? value, string measurementUnit, string format)
         {
             this.value = value;
             this.measurementUnit = measurementUnit;
+            this.format = format;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}{1}", value, measurementUnit);
+            return string.Format("{0}{1}", string.Format(format, value), measurementUnit);
         }
     }
 }

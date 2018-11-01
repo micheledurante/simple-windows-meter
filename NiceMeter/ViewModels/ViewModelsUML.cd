@@ -1,53 +1,46 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="NiceMeter.ViewModels.CpuCore">
-    <Position X="4.25" Y="7.25" Width="1.75" />
+  <Class Name="NiceMeter.ViewModels.CoreMeter">
+    <Position X="5.5" Y="4.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>IAAAgAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAgAAAAAA=</HashCode>
-      <FileName>ViewModels\CpuCore.cs</FileName>
+      <HashCode>IAAAgAAgAAAAAAAAAAAAAAIAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <FileName>ViewModels\CoreMeter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="NiceMeter.ViewModels.CpuMeter">
-    <Position X="4.25" Y="4.25" Width="1.75" />
+    <Position X="3" Y="4.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAQAACAIAAAEAAAAAAAAAAIAAAAA=</HashCode>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CpuMeter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Class Name="NiceMeter.ViewModels.MainboardMeter">
-    <Position X="1.25" Y="4.25" Width="1.75" />
+    <Position X="0.5" Y="4.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\MainboardMeter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
-  <Class Name="NiceMeter.ViewModels.Meter">
-    <Position X="2.5" Y="0.5" Width="2" />
+  <Class Name="NiceMeter.ViewModels.AbstractMeter">
+    <Position X="2.75" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAIAAAAAQAgAAAAAAIAAAACAAAAAA=</HashCode>
-      <FileName>ViewModels\Meter.cs</FileName>
+      <HashCode>AAAAAAAAAAABAAAAIAAAAAQAgAAAAAAIAAAACAAAAAA=</HashCode>
+      <FileName>ViewModels\AbstractMeter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="NiceMeter.Interfaces.IMeter">
-    <Position X="7.25" Y="2" Width="1.5" />
+    <Position X="7.75" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IMeter.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="NiceMeter.Interfaces.ICpuCore">
-    <Position X="7.25" Y="3.75" Width="1.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Interfaces\ICpuCore.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
   <Interface Name="System.ComponentModel.INotifyPropertyChanged">
-    <Position X="7.25" Y="0.5" Width="1.5" />
+    <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier />
   </Interface>
   <Font Name="Segoe UI" Size="9" />

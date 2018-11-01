@@ -3,7 +3,6 @@ using NiceMeter.ViewModels;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.ObjectModel;
-using System.Linq;
 
 namespace NiceMeter.Meter
 {
@@ -21,20 +20,11 @@ namespace NiceMeter.Meter
             switch (hardware.HardwareType)
             {
                 case HardwareType.Mainboard:
-                    collection.Add(new MainboardMeter(hardware.Name).FilterSensors(null));
+                    collection.Add(new MainboardMeter(hardware.Name).FormatSensors(null));
                     break;
 
                 case HardwareType.CPU:
-                    collection.Add(new CpuMeter(hardware.Name).FilterSensors(hardware.Sensors));
-
-                    // Get the core(s)
-                    var cores = hardware.Sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).Select(x => x.Name).ToList();
-
-                    foreach (var core in cores)
-                    {
-                        collection.Add(new CoreMeter(core).FilterSensors(hardware.Sensors));
-                    }
-
+                    collection.Add(new CpuMeter(hardware.Name).FormatSensors(hardware.Sensors));
                     break;
             }
         }

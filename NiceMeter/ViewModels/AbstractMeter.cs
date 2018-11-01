@@ -1,23 +1,19 @@
-﻿using NiceMeter.Interfaces;
-using OpenHardwareMonitor.Hardware;
-using System.Collections.Generic;
+﻿using OpenHardwareMonitor.Hardware;
 using System.ComponentModel;
 
 namespace NiceMeter.ViewModels
 {
-    internal abstract class Meter : INotifyPropertyChanged
+    internal abstract class AbstractMeter : INotifyPropertyChanged
     {
         public string Name { get; set; }
-
-        private string _text;
-
+        public HardwareType HardwareType { get; set; }
+        private string text;
         public string Text
         {
-            get { return _text; }
+            get { return text; }
 
-            set { _text = value; OnPropertyChanged(); }
+            set { text = value; OnPropertyChanged(); }
         }
-
         public event PropertyChangedEventHandler PropertyChanged;
 
         /// <summary>

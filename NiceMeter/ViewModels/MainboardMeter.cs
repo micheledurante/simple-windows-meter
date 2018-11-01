@@ -4,14 +4,15 @@ using System.Collections.Generic;
 
 namespace NiceMeter.ViewModels
 {
-    class MainboardMeter : Meter, IMeter
+    class MainboardMeter : AbstractMeter, IMeter
     {
         public MainboardMeter(string name)
         {
             Name = name;
+            HardwareType = HardwareType.Mainboard;
         }
 
-        public IMeter FormatSensors(IList<ISensor> sensors)
+        public IMeter FilterSensors(IList<ISensor> sensors)
         {
             // Nothing is required for the mobo
             return this;
