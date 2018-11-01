@@ -25,10 +25,18 @@ namespace NiceMeter.ViewModels
             return this;
         }
 
-        public IMeter GetDisplayValue()
+        public IMeter GetDisplayMeter()
         {
             Text = string.Format("{0}, {1}, @{2}", load.ToString(), temp.ToString(), freq.ToString());
             return this;
+        }
+
+        public void UpdateMeter(IList<ISensor> sensors)
+        {
+            load.Value = sensors.Where(x => x.Name == Name && x.SensorType == SensorType.Load).First().Value;
+            freq.Value = sensors.Where(x => x.Name == Name && x.SensorType == SensorType.Clock).First().Value / 1000;
+            temp.Value = sensors.Where(x => x.Name == Name && x.SensorType == SensorType.Temperature).First().Value;
+            Text = string.Format("{0}, {1}, @{2}", load.ToString(), temp.ToString(), freq.ToString());
         }
     }
 }

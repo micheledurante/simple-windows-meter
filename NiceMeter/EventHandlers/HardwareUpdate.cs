@@ -1,18 +1,15 @@
-﻿using NiceMeter.ViewModels;
+﻿using NiceMeter.Interfaces;
 using OpenHardwareMonitor.Hardware;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NiceMeter.EventHandlers
 {
     public class HardwareUpdate
     {
-        public void Update(Computer computer, ObservableMeters meters)
+        public void Update(IComputer computer, IVisitorObservable computerVisitor)
         {
-            var x = 0;
+            computer.Hardware[1].Update();
+
+            computerVisitor.UpdateCpu(computer.Hardware[1]);
         }
     }
 }

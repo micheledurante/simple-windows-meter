@@ -23,5 +23,10 @@ namespace NiceMeter.ViewModels
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
         }
+
+        public HardwareType GetHardwareType()
+        {
+            return HardwareType;
+        }
     }
 }

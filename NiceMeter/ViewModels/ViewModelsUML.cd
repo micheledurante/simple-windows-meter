@@ -3,7 +3,7 @@
   <Class Name="NiceMeter.ViewModels.CoreMeter">
     <Position X="5.5" Y="4.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>IAAAgAAgAAAAAAAAAAAAAAIAAAAAAAAAAAAAgAAAAAA=</HashCode>
+      <HashCode>AAAAAiAgAJAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CoreMeter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -11,7 +11,7 @@
   <Class Name="NiceMeter.ViewModels.CpuMeter">
     <Position X="3" Y="4.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAAAAAIAAAEAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAgAgABAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\CpuMeter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -19,7 +19,7 @@
   <Class Name="NiceMeter.ViewModels.MainboardMeter">
     <Position X="0.5" Y="4.25" Width="1.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAgAgABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>ViewModels\MainboardMeter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -27,7 +27,7 @@
   <Class Name="NiceMeter.ViewModels.AbstractMeter">
     <Position X="2.75" Y="0.5" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAABAAAAIAAAAAQAgAAAAAAIAAAACAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAEAABAAAAIAAAAAQAgAAAAAAIAAAACAAAAAA=</HashCode>
       <FileName>ViewModels\AbstractMeter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -35,7 +35,7 @@
   <Interface Name="NiceMeter.Interfaces.IMeter">
     <Position X="7.75" Y="2" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAgAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAgAgEBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Interfaces\IMeter.cs</FileName>
     </TypeIdentifier>
   </Interface>

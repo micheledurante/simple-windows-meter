@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using OpenHardwareMonitor.Hardware;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NiceMeter.Interfaces
 {
-    interface IVisitorObservable
+    public interface IVisitorObservable
     {
-        ObservableCollection<IMeter> UpdateCollection();
+        ObservableCollection<IMeter> GetDisplayMeters();
 
-        ObservableCollection<IMeter> GetDisplayValue();
+        void UpdateCpu(IHardware hardware);        
     }
 }

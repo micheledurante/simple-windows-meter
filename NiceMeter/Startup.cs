@@ -36,21 +36,21 @@ namespace NiceMeter
             var Computer = Computers.GetTesting();
             Computer.Open();
 
-            var Visitor = new HardwareVisitor();
-            Computer.Traverse(Visitor);
+            var ComputerVisitor = new ComputerVisitor();
+            Computer.Traverse(ComputerVisitor);
 
-            var Meters = new ObservableMeters(Visitor.GetDisplayValue());
+            var ObservableMeters = new ObservableMeters(ComputerVisitor.GetDisplayMeters());
 
-            // Done with init view models
-            var x = new HardwareUpdate();
+            // Done with init view models, starting with init events
+            var HardwareUpdate = new HardwareUpdate();
             // DispatcherTimer setup
             var Dispatcher = new DispatcherTimer();
             // Closure to pass additional values to the update method when the event is raised
-            Dispatcher.Tick += (s, args) => x.Update(Computer, Meters);
+            Dispatcher.Tick += (s, args) => HardwareUpdate.Update(Computer, ComputerVisitor);
             Dispatcher.Interval = new TimeSpan(0, 0, 1);
 
             // Done with timed events
-            NiceMeterWindow niceMeterWindow = new NiceMeterWindow(Meters);
+            NiceMeterWindow niceMeterWindow = new NiceMeterWindow(ObservableMeters);
 
             // Window is ready. Start
             Dispatcher.Start();

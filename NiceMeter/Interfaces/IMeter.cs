@@ -11,6 +11,10 @@ namespace NiceMeter.Interfaces
     {
         IMeter FilterSensors(IList<ISensor> sensors);
 
-        IMeter GetDisplayValue();
+        IMeter GetDisplayMeter();
+
+        HardwareType GetHardwareType();
+
+        void UpdateMeter(IList<ISensor> sensors);
     }
 }

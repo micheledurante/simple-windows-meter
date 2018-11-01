@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NiceMeter.ViewModels
+﻿namespace NiceMeter.ViewModels
 {
     public class Unit
     {
-        public float? value;
-        public string measurementUnit;
-        public string format;
+        private float? value;
+        public float? Value
+        {
+            set { this.value = value; }
+        }
+        private readonly string measurementUnit;
+        private readonly string formatSpecifier;
 
-        public Unit(float? value, string measurementUnit, string format)
+        public Unit(float? value, string measurementUnit, string formatSpecifier)
         {
             this.value = value;
             this.measurementUnit = measurementUnit;
-            this.format = format;
+            this.formatSpecifier = formatSpecifier;
         }
 
         public override string ToString()
         {
-            return string.Format("{0}{1}", string.Format(format, value), measurementUnit);
+            return string.Format("{0}{1}", string.Format(formatSpecifier, value), measurementUnit);
         }
     }
 }

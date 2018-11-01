@@ -21,10 +21,16 @@ namespace NiceMeter.ViewModels
             return this;
         }
 
-        public IMeter GetDisplayValue()
+        public IMeter GetDisplayMeter()
         {
             Text = power.ToString();
             return this;
+        }
+
+        public void UpdateMeter(IList<ISensor> sensors)
+        {
+            power.Value = sensors.Where(x => x.SensorType == SensorType.Power && x.Name.Contains("CPU Package")).First().Value;
+            Text = power.ToString();
         }
     }
 }

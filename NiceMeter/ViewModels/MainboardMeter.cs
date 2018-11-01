@@ -14,13 +14,18 @@ namespace NiceMeter.ViewModels
 
         public IMeter FilterSensors(IList<ISensor> sensors)
         {
-            // Nothing is required for the mobo
+            // No sensors for the mobo
             return this;
         }
 
-        public IMeter GetDisplayValue()
+        public IMeter GetDisplayMeter()
         {
             return this;
+        }
+
+        public void UpdateMeter(IList<ISensor> sensors)
+        {
+            // Nothing to update
         }
     }
 }

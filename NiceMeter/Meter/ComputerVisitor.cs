@@ -7,13 +7,13 @@ using System.Linq;
 
 namespace NiceMeter.Meter
 {
-    class HardwareVisitor : IVisitor, IVisitorObservable
+    class ComputerVisitor : IVisitor, IVisitorObservable
     {
-        private ObservableCollection<IMeter> collection = new ObservableCollection<IMeter>();
+        private ObservableCollection<IMeter> meters = new ObservableCollection<IMeter>();
 
         public void VisitComputer(IComputer computer)
         {
-            var x = 0;
+            throw new NotImplementedException();
         }
 
         public void VisitHardware(IHardware hardware)
@@ -21,18 +21,18 @@ namespace NiceMeter.Meter
             switch (hardware.HardwareType)
             {
                 case HardwareType.Mainboard:
-                    collection.Add(new MainboardMeter(hardware.Name).FilterSensors(null));
+                    meters.Add(new MainboardMeter(hardware.Name).FilterSensors(null));
                     break;
 
                 case HardwareType.CPU:
-                    collection.Add(new CpuMeter(hardware.Name).FilterSensors(hardware.Sensors));
+                    meters.Add(new CpuMeter(hardware.Name).FilterSensors(hardware.Sensors));
 
                     // Get the core(s)
                     var cores = hardware.Sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).Select(x => x.Name).ToList();
 
                     foreach (var core in cores)
                     {
-                        collection.Add(new CoreMeter(core).FilterSensors(hardware.Sensors));
+                        meters.Add(new CoreMeter(core).FilterSensors(hardware.Sensors));
                     }
 
                     break;
@@ -49,19 +49,24 @@ namespace NiceMeter.Meter
             throw new NotImplementedException();
         }
 
-        public ObservableCollection<IMeter> UpdateCollection()
+        public void UpdateCpu(IHardware hardware)
         {
-            throw new NotImplementedException();
+            var cpuMeters = meters.Where(x => x.GetHardwareType() == HardwareType.CPU).ToList();
+
+            foreach (var cpuMeter in cpuMeters)
+            {
+                cpuMeter.UpdateMeter(hardware.Sensors);
+            }
         }
 
-        public ObservableCollection<IMeter> GetDisplayValue()
+        public ObservableCollection<IMeter> GetDisplayMeters()
         {
-            foreach (var item in collection)
+            foreach (var meter in meters)
             {
-                item.GetDisplayValue();
+                meter.GetDisplayMeter();
             }
 
-            return collection;
+            return meters;
         }
     }
 }
