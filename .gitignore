@@ -1,16 +1,17 @@
 # General
 *.lock
 *.cache
+*.idlk
 
 #IDE files
-.vs/
+.vs
 
 # VS project
-bin/
-Debug/
+NiceMeter/bin
+NiceMeter/obj
+packages/
 
 # Paket for Visual Studio
 paket-files/
-.paket/
 Paket.Restore.targets
 Paket.targets
