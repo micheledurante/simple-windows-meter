@@ -14,7 +14,7 @@ namespace NiceMeter.Models
         /// Default computer, all hardware is enabled
         /// </summary>
         /// <returns></returns>
-        public Computer GetDefault()
+        public Computer GetAllHardware()
         {
             return new Computer
             {
@@ -28,17 +28,17 @@ namespace NiceMeter.Models
         }
 
         /// <summary>
-        /// A sample computer settings used during development
+        /// The only hardware recognised on my current configuration
         /// </summary>
         /// <returns></returns>
-        public Computer GetTesting()
+        public Computer GetWorkingHardware()
         {
             return new Computer
             {
                 MainboardEnabled = true,
                 CPUEnabled = true,
                 RAMEnabled = false,
-                GPUEnabled = false,
+                GPUEnabled = true,
                 FanControllerEnabled = false,
                 HDDEnabled = false
             };

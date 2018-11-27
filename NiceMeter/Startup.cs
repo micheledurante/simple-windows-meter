@@ -33,7 +33,7 @@ namespace NiceMeter
 
             // Init device. Mainboard and CPUs only
             var Computers = new Computers();
-            var Computer = Computers.GetTesting();
+            var Computer = Computers.GetWorkingHardware();
             Computer.Open();
 
             var ComputerVisitor = new ComputerVisitor();
