@@ -7,16 +7,26 @@
         Title="NiceStatsMeter" 
         Height="250" 
         Width="300"
-        Background="White"
-        AllowsTransparency="False"
+        Background="Transparent"
+        AllowsTransparency="True"
         WindowStyle="None"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        WindowStartupLocation="Manual"
+        Left="1540"
+        Top="60">
     <Grid>
         <ListView Name="StatMeters">
 
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
                     <Setter Property="Visibility" Value="Collapsed" />
+                </Style>
+                <Style TargetType="ListView">
+                    <Setter Property="Background" Value="Transparent" />
+                    <Setter Property="Foreground" Value="White" />
+                </Style>
+                <Style x:Key="Gotham-XLight">
+                    <Setter Property="TextElement.FontFamily" Value="CustomFonts/#Gotham-XLight" />
                 </Style>
             </ListView.Resources>
 

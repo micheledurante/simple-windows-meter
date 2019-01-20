@@ -31,7 +31,7 @@ namespace NiceMeter
             log4net.Config.XmlConfigurator.Configure();
             log.Info("application started");
 
-            // Init device. Mainboard and CPUs only
+            // Init devices
             var Computers = new Computers();
             var Computer = Computers.GetWorkingHardware();
             Computer.Open();
@@ -49,10 +49,10 @@ namespace NiceMeter
             Dispatcher.Tick += (s, args) => HardwareUpdate.Update(Computer, ComputerVisitor);
             Dispatcher.Interval = new TimeSpan(0, 0, 1);
 
-            // Done with timed events
+            // Main window
             NiceMeterWindow niceMeterWindow = new NiceMeterWindow(ObservableMeters);
 
-            // Window is ready. Start
+            // Start
             Dispatcher.Start();
             niceMeterWindow.Show();
         }
