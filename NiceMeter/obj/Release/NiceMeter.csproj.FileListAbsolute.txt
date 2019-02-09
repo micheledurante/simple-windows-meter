@@ -1,13 +1,8 @@
 E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.csprojAssemblyReference.cache
-E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\MainWindow.g.cs
-E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\App.g.cs
 E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter_MarkupCompile.cache
-E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter_MarkupCompile.lref
-E:\git\the-nice-windows-stats-meter\NiceMeter\bin\Release\NiceMeter.exe.config
 E:\git\the-nice-windows-stats-meter\NiceMeter\bin\Release\NiceMeter.exe
 E:\git\the-nice-windows-stats-meter\NiceMeter\bin\Release\NiceMeter.pdb
 E:\git\the-nice-windows-stats-meter\NiceMeter\bin\Release\OpenHardwareMonitorLib.dll
-E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\MainWindow.baml
 E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.g.resources
 E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.Properties.Resources.resources
 E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.csproj.GenerateResource.cache
@@ -33,3 +28,10 @@ C:\Users\win10\Desktop\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMe
 C:\Users\win10\Desktop\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.csproj.CopyComplete
 C:\Users\win10\Desktop\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.exe
 C:\Users\win10\Desktop\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.pdb
+E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeterWindow.baml
+E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeterWindow.g.cs
+E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.g.cs
+E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter_Content.g.cs
+E:\git\the-nice-windows-stats-meter\NiceMeter\bin\Release\log4net.config
+E:\git\the-nice-windows-stats-meter\NiceMeter\bin\Release\log4net.dll
+E:\git\the-nice-windows-stats-meter\NiceMeter\bin\Release\log4net.xml
