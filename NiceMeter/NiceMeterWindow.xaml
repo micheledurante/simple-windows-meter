@@ -12,10 +12,10 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         WindowStartupLocation="Manual"
-        Left="1540"
-        Top="60">
-    <Grid>
-        <ListView Name="StatMeters">
+        Left="1620"
+        Top="0">
+    <Grid IsHitTestVisible="False">
+        <ListView Name="StatMeters" BorderThickness="0">
 
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">
