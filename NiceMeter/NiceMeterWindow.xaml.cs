@@ -16,6 +16,10 @@ namespace NiceMeter
         {
             InitializeComponent();
 
+            // Position the window top-right.
+            Left = SystemParameters.WorkArea.Right - Width;
+            Top = 0;
+
             StatMeters.ItemsSource = Meters.GetMeters();
 
             var view = (CollectionView)CollectionViewSource.GetDefaultView(StatMeters.ItemsSource);

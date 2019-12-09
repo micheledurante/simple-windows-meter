@@ -11,9 +11,7 @@
         AllowsTransparency="True"
         WindowStyle="None"
         ResizeMode="NoResize"
-        WindowStartupLocation="Manual"
-        Left="1620"
-        Top="0">
+        WindowStartupLocation="Manual">
     <Grid IsHitTestVisible="False">
         <ListView Name="StatMeters" BorderThickness="0">
 
