@@ -1,5 +1,4 @@
-﻿using NiceMeter.Interfaces;
-using NiceMeter.ViewModels;
+﻿using NiceMeter.ViewModels;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.ObjectModel;

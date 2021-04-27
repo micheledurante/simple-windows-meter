@@ -1,4 +1,4 @@
-﻿using NiceMeter.Interfaces;
+﻿using NiceMeter.Meter;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 

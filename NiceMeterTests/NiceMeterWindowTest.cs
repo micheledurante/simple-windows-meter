@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter;
-using NiceMeter.Interfaces;
+using NiceMeter.ViewModels;
 
 namespace NiceMeterTests
 {

@@ -7,7 +7,6 @@ using NiceMeter.EventHandlers;
 using log4net;
 using NiceMeter.Meter;
 using OpenHardwareMonitor.Hardware;
-using NiceMeter.Interfaces;
 
 namespace NiceMeter
 {

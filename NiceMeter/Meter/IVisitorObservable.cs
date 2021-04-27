@@ -1,12 +1,12 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System.Collections.ObjectModel;
 
-namespace NiceMeter.Interfaces
+namespace NiceMeter.Meter
 {
     public interface IVisitorObservable
     {
         ObservableCollection<IMeter> GetDisplayMeters();
 
-        void UpdateCpu(IHardware hardware);        
+        void UpdateCpu(IHardware hardware);
     }
 }

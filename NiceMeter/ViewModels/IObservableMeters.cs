@@ -1,6 +1,7 @@
-﻿using System.Collections.ObjectModel;
+﻿using NiceMeter.Meter;
+using System.Collections.ObjectModel;
 
-namespace NiceMeter.Interfaces
+namespace NiceMeter.ViewModels
 {
     public interface IObservableMeters
     {
