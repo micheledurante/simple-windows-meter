@@ -17,7 +17,8 @@ namespace NiceMeter
             InitializeComponent();
 
             // Position the window top-right.
-            Left = SystemParameters.WorkArea.Right - Width;
+            // Left = SystemParameters.WorkArea.Right - Width;
+            Left = 0;
             Top = 0;
 
             StatMeters.ItemsSource = Meters.GetMeters();

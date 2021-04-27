@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using OpenHardwareMonitor.Hardware;
 using System.Windows.Threading;
 using NiceMeter.Models;
 using NiceMeter.ViewModels;
@@ -24,36 +23,59 @@ namespace NiceMeter
         /// Startup event of the application
         /// </summary>
         /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Application_Startup(object sender, StartupEventArgs e)
+        /// <param name="ev"></param>
+        private void Application_Startup(object sender, StartupEventArgs ev)
         {
             // Init logger
             log4net.Config.XmlConfigurator.Configure();
             log.Info("application started");
 
             // Init devices
-            var Computers = new Computers();
-            var Computer = Computers.GetWorkingHardware();
-            Computer.Open();
+            var computers = new Computers();
+            var computer = computers.GetAllHardware();
+            var computerVisitor = new ComputerVisitor();
 
-            var ComputerVisitor = new ComputerVisitor();
-            Computer.Traverse(ComputerVisitor);
+            try
+            {
+                computer.Open();
+                computer.Traverse(computerVisitor);
+            } 
+            catch (Exception e)
+            {
+                log.Error(e.Message);
+            }
 
-            var ObservableMeters = new ObservableMeters(ComputerVisitor.GetDisplayMeters());
+            ObservableMeters observableMeters = null;
+
+            try
+            {
+                observableMeters = new ObservableMeters(computerVisitor.GetDisplayMeters());
+            }
+            catch (Exception e)
+            {
+                log.Error(e.Message);
+            }
 
             // Done with init view models, starting with init events
-            var HardwareUpdate = new HardwareUpdate();
+            var hardwareUpdate = new HardwareUpdate();
             // DispatcherTimer setup
-            var Dispatcher = new DispatcherTimer();
+            var dispatcher = new DispatcherTimer();
             // Closure to pass additional values to the update method when the event is raised
-            Dispatcher.Tick += (s, args) => HardwareUpdate.Update(Computer, ComputerVisitor);
-            Dispatcher.Interval = new TimeSpan(0, 0, 1);
+            dispatcher.Tick += (s, args) => hardwareUpdate.Update(computer, computerVisitor);
+            dispatcher.Interval = new TimeSpan(0, 0, 1);
 
             // Main window
-            NiceMeterWindow niceMeterWindow = new NiceMeterWindow(ObservableMeters);
+            NiceMeterWindow niceMeterWindow = new NiceMeterWindow(observableMeters);
 
-            // Start
-            Dispatcher.Start();
+            try
+            {
+                dispatcher.Start();
+            }
+            catch (Exception e)
+            {
+                log.Error(e.Message);
+            }
+
             niceMeterWindow.Show();
         }
     }

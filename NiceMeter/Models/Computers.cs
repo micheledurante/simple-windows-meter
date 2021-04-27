@@ -36,7 +36,7 @@ namespace NiceMeter.Models
             return new Computer
             {
                 MainboardEnabled = true,
-                CPUEnabled = true,
+                CPUEnabled = false,
                 RAMEnabled = false,
                 GPUEnabled = true,
                 FanControllerEnabled = false,

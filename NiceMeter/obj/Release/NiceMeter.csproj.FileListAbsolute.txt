@@ -33,3 +33,5 @@ E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.csproj.Gener
 E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.csproj.CopyComplete
 E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.exe
 E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.pdb
+E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.csprojAssemblyReference.cache
+E:\git\the-nice-windows-stats-meter\NiceMeter\obj\Release\NiceMeter.csproj.CoreCompileInputs.cache

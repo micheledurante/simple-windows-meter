@@ -8,11 +8,14 @@ namespace NiceMeter.ViewModels
     {
         private readonly ObservableCollection<IMeter> meters;
 
-        public ObservableMeters(ObservableCollection<IMeter> meters)
+        public ObservableMeters(ObservableCollection<IMeter> meters = null)
         {
             this.meters = meters;
             // Wire up the CollectionChanged event.
-            this.meters.CollectionChanged += OnCollectionChanged;
+            if (meters != null)
+            {
+                this.meters.CollectionChanged += OnCollectionChanged;
+            }
         }
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
