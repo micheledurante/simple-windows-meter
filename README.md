@@ -1,6 +1,6 @@
 # The Nice Windows Stats Meter
 
-A nicer Windows stas meter. Based on OpenHardwareMonitorLib v0.8.0, requires Windows admin priviledges to run.
+A nicer Windows stas meter. Based on OpenHardwareMonitorLib v0.9.6, requires Windows admin priviledges to run.
 
 ## Developer Set Up
 
