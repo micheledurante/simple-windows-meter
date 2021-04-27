@@ -6,18 +6,58 @@ using NiceMeter.ViewModels;
 using NiceMeter.EventHandlers;
 using log4net;
 using NiceMeter.Meter;
+using OpenHardwareMonitor.Hardware;
+using NiceMeter.Interfaces;
 
 namespace NiceMeter
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class Startup : Application
     {
+        private static readonly ILog logger = LogManager.GetLogger(typeof(Startup));
+
         /// <summary>
-        /// Logger instance
+        /// Return the computer with the devices to observe
         /// </summary>
-        internal static readonly ILog log = LogManager.GetLogger(typeof(Startup));
+        /// <returns></returns>
+        public Computer GetComputer()
+        {
+            var computers = new Computers();
+            return computers.GetAllHardware();
+        }
+
+        /// <summary>
+        /// Visit the required devices and create the set of meters to observe
+        /// </summary>
+        /// <param name="computer"></param>
+        /// <param name="computerVisitor"></param>
+        /// <returns></returns>
+        public IObservableMeters StartObservableMeters(Computer computer, ComputerVisitor computerVisitor)
+        {
+            IObservableMeters observableMeters = null;
+
+            try
+            {
+                computer.Open();
+                computer.Traverse(computerVisitor);
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message);
+                Environment.Exit(909);
+            }
+
+            try
+            {
+                observableMeters = new ObservableMeters(computerVisitor.GetDisplayMeters());
+            }
+            catch (Exception e)
+            {
+                logger.Error(e.Message);
+                Environment.Exit(909);
+            }
+
+            return observableMeters;
+        }
 
         /// <summary>
         /// Startup event of the application
@@ -28,33 +68,13 @@ namespace NiceMeter
         {
             // Init logger
             log4net.Config.XmlConfigurator.Configure();
-            log.Info("application started");
+            logger.Info("NiceMeter application started");
 
             // Init devices
-            var computers = new Computers();
-            var computer = computers.GetAllHardware();
+            var computer = GetComputer();
             var computerVisitor = new ComputerVisitor();
 
-            try
-            {
-                computer.Open();
-                computer.Traverse(computerVisitor);
-            } 
-            catch (Exception e)
-            {
-                log.Error(e.Message);
-            }
-
-            ObservableMeters observableMeters = null;
-
-            try
-            {
-                observableMeters = new ObservableMeters(computerVisitor.GetDisplayMeters());
-            }
-            catch (Exception e)
-            {
-                log.Error(e.Message);
-            }
+            var observableMeters = StartObservableMeters(computer, computerVisitor);
 
             // Done with init view models, starting with init events
             var hardwareUpdate = new HardwareUpdate();
@@ -64,8 +84,9 @@ namespace NiceMeter
             dispatcher.Tick += (s, args) => hardwareUpdate.Update(computer, computerVisitor);
             dispatcher.Interval = new TimeSpan(0, 0, 1);
 
-            // Main window
-            NiceMeterWindow niceMeterWindow = new NiceMeterWindow(observableMeters);
+            // NiceMeter window
+            NiceMeterWindow niceMeterWindow = new NiceMeterWindow(observableMeters, SystemParameters.WorkArea.Right);
+            niceMeterWindow.CreateView();
 
             try
             {
@@ -73,7 +94,7 @@ namespace NiceMeter
             }
             catch (Exception e)
             {
-                log.Error(e.Message);
+                logger.Error(e.Message);
             }
 
             niceMeterWindow.Show();

@@ -28,10 +28,10 @@ namespace NiceMeter.Models
         }
 
         /// <summary>
-        /// The only hardware recognised on my current configuration
+        /// The only hardware for testing
         /// </summary>
         /// <returns></returns>
-        public Computer GetWorkingHardware()
+        public Computer GetTestingHardware()
         {
             return new Computer
             {

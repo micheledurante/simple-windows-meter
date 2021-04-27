@@ -4,16 +4,9 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="NiceStatsMeter" 
-        Height="250" 
-        Width="300"
-        Background="Transparent"
-        AllowsTransparency="True"
-        WindowStyle="None"
-        ResizeMode="NoResize"
-        WindowStartupLocation="Manual">
+        Background="Transparent">
     <Grid IsHitTestVisible="False">
-        <ListView Name="StatMeters" BorderThickness="0">
+        <ListView Name="statMeters" BorderThickness="0">
 
             <ListView.Resources>
                 <Style TargetType="GridViewColumnHeader">

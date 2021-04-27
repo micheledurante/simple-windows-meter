@@ -9,6 +9,8 @@
 # VS project
 NiceMeter/bin
 NiceMeter/obj
+NiceMeterTests/bin
+NiceMeterTests/obj
 packages/
 
 # Paket for Visual Studio

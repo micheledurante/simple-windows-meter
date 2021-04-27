@@ -84,6 +84,7 @@
     </ApplicationDefinition>
     <Compile Include="EventHandlers\HardwareUpdate.cs" />
     <Compile Include="Interfaces\IMeter.cs" />
+    <Compile Include="Interfaces\IObservableMeters.cs" />
     <Compile Include="Interfaces\IVisitorObservable.cs" />
     <Compile Include="Meter\ComputerVisitor.cs" />
     <Compile Include="Startup.cs" />

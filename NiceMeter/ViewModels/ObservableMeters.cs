@@ -4,7 +4,10 @@ using System.Collections.Specialized;
 
 namespace NiceMeter.ViewModels
 {
-    public class ObservableMeters
+    /// <summary>
+    /// Represent the collection of meters observed for changes every tick cycle.
+    /// </summary>
+    public class ObservableMeters : IObservableMeters
     {
         private readonly ObservableCollection<IMeter> meters;
 

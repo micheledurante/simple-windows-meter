@@ -7,7 +7,10 @@ using System.Linq;
 
 namespace NiceMeter.Meter
 {
-    class ComputerVisitor : IVisitor, IVisitorObservable
+    /// <summary>
+    /// Update meters with the values read from the visited computer
+    /// </summary>
+    public class ComputerVisitor : IVisitor, IVisitorObservable
     {
         private ObservableCollection<IMeter> meters = new ObservableCollection<IMeter>();
 
