@@ -6,7 +6,6 @@ using NiceMeter.ViewModels;
 using NiceMeter.EventHandlers;
 using log4net;
 using NiceMeter.Meter;
-using OpenHardwareMonitor.Hardware;
 
 namespace NiceMeter
 {
@@ -30,7 +29,7 @@ namespace NiceMeter
         /// <param name="computer"></param>
         /// <param name="computerVisitor"></param>
         /// <returns></returns>
-        public IObservableMeters StartObservableMeters(Computer computer, ComputerVisitor computerVisitor)
+        public IObservableMeters StartObservableMeters(IComputer computer, IVisitorObservable computerVisitor)
         {
             IObservableMeters observableMeters = null;
 
@@ -42,7 +41,7 @@ namespace NiceMeter
             catch (Exception e)
             {
                 logger.Error(e.Message);
-                Environment.Exit(909);
+                //Environment.Exit(909);
             }
 
             try
@@ -52,7 +51,7 @@ namespace NiceMeter
             catch (Exception e)
             {
                 logger.Error(e.Message);
-                Environment.Exit(909);
+                //Environment.Exit(909);
             }
 
             return observableMeters;

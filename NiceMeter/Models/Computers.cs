@@ -1,6 +1,4 @@
-﻿using OpenHardwareMonitor.Hardware;
-
-/// <summary>
+﻿/// <summary>
 /// Defines an OpenHardwareMonitor Computer with all sensors enabled
 /// </summary>
 namespace NiceMeter.Models

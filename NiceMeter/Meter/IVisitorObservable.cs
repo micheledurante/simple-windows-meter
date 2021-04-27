@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 
 namespace NiceMeter.Meter
 {
-    public interface IVisitorObservable
+    public interface IVisitorObservable : IVisitor
     {
         ObservableCollection<IMeter> GetDisplayMeters();
 

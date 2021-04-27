@@ -13,6 +13,7 @@ namespace NiceMeterTests
         {
             var observableMetersMock = new Mock<IObservableMeters>();
             double workAreaRight = 123;
+
             var window = new NiceMeterWindow(observableMetersMock.Object, workAreaRight);
 
             Assert.AreEqual(NiceMeterWindow.height, window.Height);
