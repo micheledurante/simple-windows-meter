@@ -11,6 +11,9 @@ namespace NiceMeter
 {
     public partial class Startup : Application
     {
+        public const int TimerHours = 0;
+        public const int TimerMinutes = 0;
+        public const int TimerSeconds = 1;
         private static readonly ILog logger = LogManager.GetLogger(typeof(Startup));
 
         /// <summary>
@@ -28,7 +31,7 @@ namespace NiceMeter
         /// <param name="computer"></param>
         /// <param name="computerVisitor"></param>
         /// <returns></returns>
-        public IObservableMeters StartObservableMeters(IComputer computer, IVisitorObservable computerVisitor)
+        public IObservableMeters CreateObservableMeters(IComputer computer, IVisitorObservable computerVisitor)
         {
             IObservableMeters observableMeters = null;
 
@@ -57,6 +60,29 @@ namespace NiceMeter
         }
 
         /// <summary>
+        /// Create the timespan for the default interval
+        /// </summary>
+        /// <returns></returns>
+        public TimeSpan CreateTimeSpan()
+        {
+            return new TimeSpan(TimerHours, TimerMinutes, TimerSeconds);
+        }
+
+        /// <summary>
+        /// Create the timer for periodically visiting the computer's devices
+        /// </summary>
+        /// <param name="computer"></param>
+        /// <param name="computerVisitor"></param>
+        /// <returns></returns>
+        public DispatcherTimer CreateTimer(IComputer computer, IVisitorObservable computerVisitor, DispatcherTimer timer)
+        {
+            // Closure to pass additional values to the update method when the event is raised
+            timer.Tick += (s, args) => new HardwareUpdate().Update(computer, computerVisitor);
+            timer.Interval = CreateTimeSpan();
+            return timer;
+        }
+
+        /// <summary>
         /// Startup event of the application
         /// </summary>
         /// <param name="sender"></param>
@@ -67,33 +93,23 @@ namespace NiceMeter
             log4net.Config.XmlConfigurator.Configure();
             logger.Info("NiceMeter application started");
 
-            // Init devices
+            // Init the computer and its devices
             var computer = GetComputer(new Computers());
             var computerVisitor = new ComputerVisitor();
 
-            var observableMeters = StartObservableMeters(computer, computerVisitor);
-
-            // Done with init view models, starting with init events
-            var hardwareUpdate = new HardwareUpdate();
-            // DispatcherTimer setup
-            var dispatcher = new DispatcherTimer();
-            // Closure to pass additional values to the update method when the event is raised
-            dispatcher.Tick += (s, args) => hardwareUpdate.Update(computer, computerVisitor);
-            dispatcher.Interval = new TimeSpan(0, 0, 1);
-
-            // NiceMeter window
-            NiceMeterWindow niceMeterWindow = new NiceMeterWindow(observableMeters, SystemParameters.WorkArea.Right);
-            niceMeterWindow.CreateView();
-
             try
             {
-                dispatcher.Start();
+                // Init timer and events
+                CreateTimer(computer, computerVisitor, new DispatcherTimer()).Start();
             }
             catch (Exception e)
             {
                 logger.Error(e.Message);
             }
 
+            // NiceMeter window
+            var niceMeterWindow = new NiceMeterWindow(CreateObservableMeters(computer, computerVisitor), SystemParameters.WorkArea.Right);
+            niceMeterWindow.CreateView();
             niceMeterWindow.Show();
         }
     }

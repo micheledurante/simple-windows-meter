@@ -129,6 +129,7 @@
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="app.config" />
     <None Include="NiceMeter.manifest">
       <SubType>Designer</SubType>
     </None>

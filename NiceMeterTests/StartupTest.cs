@@ -4,6 +4,8 @@ using NiceMeter;
 using NiceMeter.Meter;
 using NiceMeter.Models;
 using NiceMeter.ViewModels;
+using System;
+using System.Windows.Threading;
 
 namespace NiceMeterTests
 {
@@ -34,17 +36,38 @@ namespace NiceMeterTests
         }
 
         [TestMethod]
-        public void StartObservableMeters_ValidComputer_WillOpenComputerAndCreateMeters()
+        public void CreateObservableMeters_ValidComputer_WillOpenComputerAndCreateMeters()
         {
             var computerMock = new Mock<IComputer>();
             var computerVisitorMock = new Mock<IVisitorObservable>();
 
-            var observableMeters = startup.StartObservableMeters(computerMock.Object, computerVisitorMock.Object);
+            var observableMeters = startup.CreateObservableMeters(computerMock.Object, computerVisitorMock.Object);
 
             computerMock.Verify(x => x.Open(), Times.Once);
             computerMock.Verify(x => x.Traverse(computerVisitorMock.Object), Times.Once);
             computerVisitorMock.Verify(x => x.GetDisplayMeters(), Times.Once);
             Assert.IsInstanceOfType(observableMeters, typeof(IObservableMeters));
+        }
+
+        [TestMethod]
+        public void CreateTimeSpan_DefaultInterval_ShouldBeCreatedWithDefaultTimes()
+        {
+            var interval = startup.CreateTimeSpan();
+            Assert.IsInstanceOfType(interval, typeof(TimeSpan));
+            Assert.AreEqual(Startup.TimerHours, interval.Hours);
+            Assert.AreEqual(Startup.TimerMinutes, interval.Minutes);
+            Assert.AreEqual(Startup.TimerSeconds, interval.Seconds);
+        }
+
+        [TestMethod]
+        public void CreateTimer_DefaultTimer_ShouldBeCreatedWithDefaultValues()
+        {
+            var timerMock = new Mock<DispatcherTimer>();
+            var computerMock = new Mock<IComputer>();
+            var computerVisitorMock = new Mock<IVisitorObservable>();
+
+            startup.CreateTimer(computerMock.Object, computerVisitorMock.Object, timerMock.Object);
+            Assert.IsInstanceOfType(timerMock.Object.Interval, typeof(TimeSpan));
         }
     }
 }
