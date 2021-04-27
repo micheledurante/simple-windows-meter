@@ -36,7 +36,7 @@ namespace NiceMeter
         /// <summary>
         /// Set the visual properties of the NiceMeter window
         /// </summary>
-        public void SetWindowProperties(double workAreaRight)
+        private void SetWindowProperties(double workAreaRight)
         {
             Height = height;
             Width = workAreaRight;

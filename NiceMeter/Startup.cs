@@ -17,9 +17,8 @@ namespace NiceMeter
         /// Return the computer with the devices to observe
         /// </summary>
         /// <returns></returns>
-        public Computer GetComputer()
+        public Computer GetComputer(Computers computers)
         {
-            var computers = new Computers();
             return computers.GetAllHardware();
         }
 
@@ -69,7 +68,7 @@ namespace NiceMeter
             logger.Info("NiceMeter application started");
 
             // Init devices
-            var computer = GetComputer();
+            var computer = GetComputer(new Computers());
             var computerVisitor = new ComputerVisitor();
 
             var observableMeters = StartObservableMeters(computer, computerVisitor);

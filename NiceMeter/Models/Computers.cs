@@ -1,10 +1,7 @@
-﻿/// <summary>
-/// Defines an OpenHardwareMonitor Computer with all sensors enabled
-/// </summary>
-namespace NiceMeter.Models
+﻿namespace NiceMeter.Models
 {
     /// <summary>
-    /// Defines the device settings to use for measurements
+    /// Define an OpenHardwareMonitor Computer with all sensors enabled
     /// </summary>
     public class Computers
     {
@@ -26,7 +23,7 @@ namespace NiceMeter.Models
         }
 
         /// <summary>
-        /// The only hardware for testing
+        /// Simple hardware only for testing
         /// </summary>
         /// <returns></returns>
         public Computer GetTestingHardware()

@@ -15,7 +15,7 @@ namespace NiceMeterTests
         [ClassInitialize]
         public static void ClassInitialize(TestContext testContext)
         {
-            startup = new Startup();
+            startup = new Startup(); // There can only be one instance of a window class
         }
 
         [ClassCleanup]
@@ -27,15 +27,10 @@ namespace NiceMeterTests
         [TestMethod]
         public void GetComputer_Computer_ShouldReturnTheExpectedComputerAndItsDevices()
         {
-            var computer = startup.GetComputer();
+            var computers = new Mock<Computers>();
 
+            var computer = startup.GetComputer(computers.Object);
             Assert.IsInstanceOfType(computer, typeof(IComputer));
-            Assert.IsTrue(computer.MainboardEnabled);
-            Assert.IsTrue(computer.CPUEnabled);
-            Assert.IsTrue(computer.RAMEnabled);
-            Assert.IsTrue(computer.GPUEnabled);
-            Assert.IsTrue(computer.FanControllerEnabled);
-            Assert.IsTrue(computer.HDDEnabled);
         }
 
         [TestMethod]
