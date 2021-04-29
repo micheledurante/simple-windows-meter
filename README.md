@@ -1,4 +1,4 @@
-# The Nice (Windows) Stats Meter
+# The Nice (Windows) Meter
 
 A nicer Windows stats meter. Based on [OpenHardwareMonitor](https://openhardwaremonitor.org/). Requires Windows admin priviledges to run.
 
