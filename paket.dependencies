@@ -1,3 +1,4 @@
 source https://nuget.org/api/v2
+nuget Autofac 6.2.0
 nuget log4net 2.0.8
 nuget Moq 4.16.1

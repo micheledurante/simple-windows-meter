@@ -3,7 +3,9 @@
 A nicer Windows stats meter. Based on [OpenHardwareMonitor](https://openhardwaremonitor.org/). Requires Windows admin priviledges to run.
 
 ## Setup
-1. Run `.paket/paket.exe install` from the root directory to install the project dependencies
+1. Run `dotnet tool restore` from the root
+1. Run `dotnet paket restore` from the root
+1. Run `dotnet paket install` from the root
 1. Run all tests located in the `NiceMeterTests/` project
 
 ## Errors

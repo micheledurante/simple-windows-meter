@@ -14,7 +14,7 @@ NiceMeterTests/bin
 NiceMeterTests/obj
 packages/
 
-# Paket for Visual Studio
+#Paket dependency manager
+.paket/
 paket-files/
-Paket.Restore.targets
-Paket.targets
+
