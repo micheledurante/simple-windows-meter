@@ -1,7 +1,7 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System.Collections.ObjectModel;
 
-namespace NiceMeter.Meter
+namespace NiceMeter.ViewModels
 {
     public interface IVisitorObservable : IVisitor
     {

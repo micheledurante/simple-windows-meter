@@ -1,9 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter;
-using NiceMeter.Meter;
-using NiceMeter.Models;
 using NiceMeter.ViewModels;
+using NiceMeter.Models;
 using System;
 using System.Windows.Threading;
 

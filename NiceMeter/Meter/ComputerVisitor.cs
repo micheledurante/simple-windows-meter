@@ -1,15 +1,17 @@
 ﻿using NiceMeter.ViewModels;
+using NiceMeter.ViewModels.Cpu;
+using NiceMeter.ViewModels.Mainboard;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace NiceMeter.Meter
+namespace NiceMeter.Meters
 {
     /// <summary>
     /// Update meters with the values read from the visited computer
     /// </summary>
-    public class ComputerVisitor : IVisitor, IVisitorObservable
+    public class ComputerVisitor : IVisitorObservable
     {
         private ObservableCollection<IMeter> meters = new ObservableCollection<IMeter>();
 
@@ -23,18 +25,18 @@ namespace NiceMeter.Meter
             switch (hardware.HardwareType)
             {
                 case HardwareType.Mainboard:
-                    meters.Add(new MainboardMeter(hardware.Name).FilterSensors(null));
+                    meters.Add(new MainboardMeter(hardware.Name).ReadSensors(null));
                     break;
 
                 case HardwareType.CPU:
-                    meters.Add(new CpuMeter(hardware.Name).FilterSensors(hardware.Sensors));
+                    meters.Add(new CpuMeter(hardware.Name).ReadSensors(hardware.Sensors));
 
                     // Get the core(s)
                     var cores = hardware.Sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).Select(x => x.Name).ToList();
 
                     foreach (var core in cores)
                     {
-                        meters.Add(new CoreMeter(core).FilterSensors(hardware.Sensors));
+                        meters.Add(new CoreMeter(core).ReadSensors(hardware.Sensors));
                     }
 
                     break;
@@ -57,7 +59,7 @@ namespace NiceMeter.Meter
 
             foreach (var cpuMeter in cpuMeters)
             {
-                cpuMeter.UpdateMeter(hardware.Sensors);
+                cpuMeter.UpdateMeters(hardware.Sensors);
             }
         }
 
@@ -65,7 +67,7 @@ namespace NiceMeter.Meter
         {
             foreach (var meter in meters)
             {
-                meter.GetDisplayMeter();
+                meter.FormatMeters();
             }
 
             return meters;

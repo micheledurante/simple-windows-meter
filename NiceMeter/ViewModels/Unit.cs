@@ -1,6 +1,12 @@
-﻿namespace NiceMeter.ViewModels
+﻿using NiceMeter.ViewModels.Converters;
+using System.Windows.Controls;
+
+namespace NiceMeter.ViewModels
 {
-    public class Unit
+    /// <summary>
+    /// Represent a meter value, define a value, its measurement unit and the instance of its NiceMeter.ViewModels.Converters
+    /// </summary>
+    public class Unit : IUnit
     {
         private float? value;
         public float? Value
@@ -8,18 +14,21 @@
             set { this.value = value; }
         }
         private readonly string measurementUnit;
-        private readonly string formatSpecifier;
+        private readonly string numberFormat;
+        private readonly IUnitConverter unitConverter;
 
-        public Unit(float? value, string measurementUnit, string formatSpecifier)
+        public Unit(float? value, string measurementUnit, string numberFormat, IUnitConverter unitConverter = null)
         {
             this.value = value;
             this.measurementUnit = measurementUnit;
-            this.formatSpecifier = formatSpecifier;
+            this.numberFormat = numberFormat;
+            this.unitConverter = unitConverter ?? new SimpleUnitConverter();
         }
 
-        public override string ToString()
+        /// <inheritdoc/>
+        public TextBlock Convert()
         {
-            return string.Format("{0}{1}", string.Format(formatSpecifier, value), measurementUnit);
+            return unitConverter.Convert(value, measurementUnit, numberFormat);
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using NiceMeter.Meter;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 namespace NiceMeter.ViewModels

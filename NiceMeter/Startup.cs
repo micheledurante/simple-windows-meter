@@ -5,7 +5,7 @@ using NiceMeter.Models;
 using NiceMeter.ViewModels;
 using NiceMeter.EventHandlers;
 using log4net;
-using NiceMeter.Meter;
+using NiceMeter.Meters;
 
 namespace NiceMeter
 {
@@ -13,8 +13,9 @@ namespace NiceMeter
     {
         public const int TimerHours = 0;
         public const int TimerMinutes = 0;
-        public const int TimerSeconds = 1;
+        public const int TimerSeconds = 2; // Update meters every 2 seconds
         private static readonly ILog logger = LogManager.GetLogger(typeof(Startup));
+        private IComputer computer;
 
         /// <summary>
         /// Return the computer with the devices to observe
@@ -94,7 +95,7 @@ namespace NiceMeter
             logger.Info("NiceMeter application started");
 
             // Init the computer and its devices
-            var computer = GetComputer(new Computers());
+            computer = GetComputer(new Computers());
             var computerVisitor = new ComputerVisitor();
 
             try
@@ -111,6 +112,17 @@ namespace NiceMeter
             var niceMeterWindow = new NiceMeterWindow(CreateObservableMeters(computer, computerVisitor), SystemParameters.WorkArea.Right);
             niceMeterWindow.CreateView();
             niceMeterWindow.Show();
+        }
+
+        /// <summary>
+        /// Ensure that a shutdown of thew application correctly frees the computer resource
+        /// </summary>
+        /// <param name="exitCode"></param>
+        public new void Shutdown(int exitCode)
+        {
+            computer.Close();
+            
+            base.Shutdown(exitCode);
         }
     }
 }

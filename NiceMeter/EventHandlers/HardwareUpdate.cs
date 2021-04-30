@@ -1,4 +1,4 @@
-﻿using NiceMeter.Meter;
+﻿using NiceMeter.ViewModels;
 using OpenHardwareMonitor.Hardware;
 
 namespace NiceMeter.EventHandlers

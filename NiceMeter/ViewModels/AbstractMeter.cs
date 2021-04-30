@@ -8,6 +8,9 @@ namespace NiceMeter.ViewModels
         public string Name { get; set; }
         public HardwareType HardwareType { get; set; }
         private string text;
+        /// <summary>
+        /// The public property used to display the value of the meters. Must be the final, well-formatted string (e.g. 22°C)
+        /// </summary>
         public string Text
         {
             get { return text; }
