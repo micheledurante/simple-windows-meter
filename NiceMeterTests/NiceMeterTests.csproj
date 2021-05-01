@@ -57,6 +57,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EventHandlers\ComputerUpdateTest.cs" />
     <Compile Include="Models\ComputerTest .cs" />
     <Compile Include="Models\ComputersTest.cs" />
     <Compile Include="NiceMeterWindowTest.cs" />

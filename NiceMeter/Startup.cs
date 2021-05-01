@@ -13,7 +13,7 @@ namespace NiceMeter
     {
         public const int TimerHours = 0;
         public const int TimerMinutes = 0;
-        public const int TimerSeconds = 2; // Update meters every 2 seconds
+        public const int TimerSeconds = 1; // Update meters every 2 seconds
         private static readonly ILog logger = LogManager.GetLogger(typeof(Startup));
         private IComputer computer;
 
@@ -49,7 +49,7 @@ namespace NiceMeter
 
             try
             {
-                observableMeters = new ObservableMeters(computerVisitor.GetDisplayMeters());
+                observableMeters = new ObservableMeters(computerVisitor.ConvertMeters());
             }
             catch (Exception e)
             {
@@ -78,7 +78,7 @@ namespace NiceMeter
         public DispatcherTimer CreateTimer(IComputer computer, IVisitorObservable computerVisitor, DispatcherTimer timer)
         {
             // Closure to pass additional values to the update method when the event is raised
-            timer.Tick += (s, args) => new HardwareUpdate().Update(computer, computerVisitor);
+            timer.Tick += (s, args) => new ComputerUpdate().Update(computer, computerVisitor);
             timer.Interval = CreateTimeSpan();
             return timer;
         }

@@ -53,8 +53,23 @@ namespace NiceMeter.Meters
             throw new NotImplementedException();
         }
 
+        /// <inheritdoc/>
+        public void UpdateMainboard(IHardware hardware)
+        {
+            if (hardware == null)
+            {
+                return;
+            }
+        }
+
+        /// <inheritdoc/>
         public void UpdateCpu(IHardware hardware)
         {
+            if (hardware == null)
+            {
+                return;
+            }
+
             var cpuMeters = meters.Where(x => x.GetHardwareType() == HardwareType.CPU).ToList();
 
             foreach (var cpuMeter in cpuMeters)
@@ -63,7 +78,7 @@ namespace NiceMeter.Meters
             }
         }
 
-        public ObservableCollection<IMeter> GetDisplayMeters()
+        public ObservableCollection<IMeter> ConvertMeters()
         {
             foreach (var meter in meters)
             {

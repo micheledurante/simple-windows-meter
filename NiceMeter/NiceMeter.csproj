@@ -79,7 +79,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="EventHandlers\HardwareUpdate.cs" />
+    <Compile Include="EventHandlers\ComputerUpdate.cs" />
+    <Compile Include="EventHandlers\IComputerUpdate.cs" />
     <Compile Include="ViewModels\Converters\BaseConverter.cs" />
     <Compile Include="ViewModels\Converters\IUnitConverter.cs" />
     <Compile Include="ViewModels\Converters\SimpleUnitConverter.cs" />
@@ -125,12 +126,19 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="ViewModels\Converters\README.md" />
+    <None Include="ViewModels\Cpu\README.md" />
+    <None Include="ViewModels\Mainboard\README.md" />
+    <None Include="ViewModels\README.md" />
     <Resource Include="ico30597.ico" />
     <Resource Include="ico13.ico" />
     <Content Include="log4net.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <None Include="app.config" />
+    <None Include="EventHandlers\README.md" />
+    <None Include="Meter\README.md" />
+    <None Include="Models\README.md" />
     <None Include="NiceMeter.manifest">
       <SubType>Designer</SubType>
     </None>

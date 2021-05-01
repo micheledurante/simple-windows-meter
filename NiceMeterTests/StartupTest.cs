@@ -44,7 +44,7 @@ namespace NiceMeterTests
 
             computerMock.Verify(x => x.Open(), Times.Once);
             computerMock.Verify(x => x.Traverse(computerVisitorMock.Object), Times.Once);
-            computerVisitorMock.Verify(x => x.GetDisplayMeters(), Times.Once);
+            computerVisitorMock.Verify(x => x.ConvertMeters(), Times.Once);
             Assert.IsInstanceOfType(observableMeters, typeof(IObservableMeters));
         }
 
