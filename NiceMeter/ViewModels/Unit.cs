@@ -1,7 +1,7 @@
-﻿using NiceMeter.ViewModels.Converters;
+﻿using NiceMeter.Visitors.Converters;
 using System.Windows.Controls;
 
-namespace NiceMeter.ViewModels
+namespace NiceMeter.Visitors
 {
     /// <summary>
     /// Represent a meter value, define a value, its measurement unit and the instance of its NiceMeter.ViewModels.Converters

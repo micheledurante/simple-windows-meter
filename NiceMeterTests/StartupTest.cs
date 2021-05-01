@@ -1,8 +1,8 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter;
-using NiceMeter.ViewModels;
 using NiceMeter.Models;
+using NiceMeter.Visitors;
 using System;
 using System.Windows.Threading;
 
@@ -38,13 +38,13 @@ namespace NiceMeterTests
         public void CreateObservableMeters_ValidComputer_WillOpenComputerAndCreateMeters()
         {
             var computerMock = new Mock<IComputer>();
-            var computerVisitorMock = new Mock<IVisitorObservable>();
+            var hardwareVisitorMock = new Mock<IHardwareVisitor>();
 
-            var observableMeters = startup.CreateObservableMeters(computerMock.Object, computerVisitorMock.Object);
+            var observableMeters = startup.CreateObservableMeters(computerMock.Object, hardwareVisitorMock.Object);
 
             computerMock.Verify(x => x.Open(), Times.Once);
-            computerMock.Verify(x => x.Traverse(computerVisitorMock.Object), Times.Once);
-            computerVisitorMock.Verify(x => x.ConvertMeters(), Times.Once);
+            computerMock.Verify(x => x.Traverse(hardwareVisitorMock.Object), Times.Once);
+            hardwareVisitorMock.Verify(x => x.ConvertMeters(), Times.Once);
             Assert.IsInstanceOfType(observableMeters, typeof(IObservableMeters));
         }
 
@@ -63,9 +63,9 @@ namespace NiceMeterTests
         {
             var timerMock = new Mock<DispatcherTimer>();
             var computerMock = new Mock<IComputer>();
-            var computerVisitorMock = new Mock<IVisitorObservable>();
+            var hardwareVisitorMock = new Mock<IHardwareVisitor>();
 
-            startup.CreateTimer(computerMock.Object, computerVisitorMock.Object, timerMock.Object);
+            startup.CreateTimer(computerMock.Object, hardwareVisitorMock.Object, timerMock.Object);
             Assert.IsInstanceOfType(timerMock.Object.Interval, typeof(TimeSpan));
         }
     }

@@ -1,5 +1,5 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NiceMeter.ViewModels.Converters;
+using NiceMeter.Visitors.Converters;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;

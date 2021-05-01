@@ -1,5 +1,5 @@
 ﻿using log4net;
-using NiceMeter.ViewModels;
+using NiceMeter.Visitors;
 using System;
 using System.Windows;
 using System.Windows.Data;

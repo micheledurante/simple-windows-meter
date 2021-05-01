@@ -2,7 +2,7 @@
 using System.Threading;
 using System.Windows.Controls;
 
-namespace NiceMeter.ViewModels.Converters
+namespace NiceMeter.Visitors.Converters
 {
     /// <summary>
     /// The simplest converter to convert a Unit to TextBlock

@@ -1,5 +1,5 @@
 ﻿using NiceMeter.Models;
-using NiceMeter.ViewModels;
+using NiceMeter.Visitors;
 
 namespace NiceMeter.EventHandlers
 {
@@ -8,10 +8,7 @@ namespace NiceMeter.EventHandlers
     /// </summary>
     public class ComputerUpdate : IComputerUpdate
     {
-        /// <summary>
-        /// Update hardware's values based on enabled devices for the given computer
-        /// </summary>
-        /// <param name="computer"></param>
+        /// <inheritdoc/>
         public void UpdateComputerHardware(IComputer computer)
         {
             computer.GetMainboardHardware()?.Update();
@@ -21,24 +18,21 @@ namespace NiceMeter.EventHandlers
             computer.GetRamHardware()?.Update();
         }
 
-        /// <summary>
-        /// Update values in the visitor's meters for the given computer
-        /// </summary>
-        /// <param name="computer"></param>
-        /// <param name="computerVisitor"></param>
-        public void UpdateVistorMeters(IComputer computer, IVisitorObservable computerVisitor)
+        /// <inheritdoc/>
+        public void UpdateMeters(IComputer computer, IHardwareVisitor hardwareVisitor)
         {
-            computerVisitor.UpdateMainboard(computer.GetMainboardHardware());
-
-            computerVisitor.UpdateCpu(computer.GetCpuHardware());
+            hardwareVisitor.UpdateMainboard(computer.GetMainboardHardware());
+            hardwareVisitor.UpdateCpu(computer.GetCpuHardware());
+            hardwareVisitor.UpdateGpu(computer.GetGpuHardware());
+            hardwareVisitor.UpdateHdd(computer.GetHddHardware());
+            hardwareVisitor.UpdateRam(computer.GetRamHardware());
         }
 
         /// <inheritdoc/>
-        public void Update(IComputer computer, IVisitorObservable computerVisitor)
+        public void Update(IComputer computer, IHardwareVisitor hardwareVisitor)
         {
             UpdateComputerHardware(computer);
-
-            UpdateVistorMeters(computer, computerVisitor);
+            UpdateMeters(computer, hardwareVisitor);
         }
     }
 }

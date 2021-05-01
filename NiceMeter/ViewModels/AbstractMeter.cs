@@ -1,7 +1,7 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System.ComponentModel;
 
-namespace NiceMeter.ViewModels
+namespace NiceMeter.Visitors
 {
     internal abstract class AbstractMeter : INotifyPropertyChanged
     {

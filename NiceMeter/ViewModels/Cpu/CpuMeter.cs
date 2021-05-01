@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NiceMeter.ViewModels.Cpu
+namespace NiceMeter.Visitors.Cpu
 {
     class CpuMeter : AbstractMeter, IMeter
     {

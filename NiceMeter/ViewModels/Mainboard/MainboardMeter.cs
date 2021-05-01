@@ -1,7 +1,7 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
 
-namespace NiceMeter.ViewModels.Mainboard
+namespace NiceMeter.Visitors.Mainboard
 {
     /// <summary>
     /// 

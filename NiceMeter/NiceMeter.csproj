@@ -88,8 +88,8 @@
     <Compile Include="Models\Computer.cs" />
     <Compile Include="Models\IComputer.cs" />
     <Compile Include="ViewModels\IObservableMeters.cs" />
-    <Compile Include="Meter\IVisitorObservable.cs" />
-    <Compile Include="Meter\ComputerVisitor.cs" />
+    <Compile Include="Visitors\IHardwareVisitor.cs" />
+    <Compile Include="Visitors\HardwareVisitor.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\IUnit.cs" />
     <Compile Include="ViewModels\Unit.cs" />
@@ -137,7 +137,7 @@
     </Content>
     <None Include="app.config" />
     <None Include="EventHandlers\README.md" />
-    <None Include="Meter\README.md" />
+    <None Include="Visitors\README.md" />
     <None Include="Models\README.md" />
     <None Include="NiceMeter.manifest">
       <SubType>Designer</SubType>

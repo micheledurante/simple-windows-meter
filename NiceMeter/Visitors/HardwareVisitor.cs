@@ -1,17 +1,17 @@
-﻿using NiceMeter.ViewModels;
-using NiceMeter.ViewModels.Cpu;
-using NiceMeter.ViewModels.Mainboard;
+﻿using NiceMeter.Visitors;
+using NiceMeter.Visitors.Cpu;
+using NiceMeter.Visitors.Mainboard;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
 
-namespace NiceMeter.Meters
+namespace NiceMeter.Visitors
 {
     /// <summary>
-    /// Update meters with the values read from the visited computer
+    /// Update meters with the values from the visited computer's hardware (sensors)
     /// </summary>
-    public class ComputerVisitor : IVisitorObservable
+    public class HardwareVisitor : IHardwareVisitor
     {
         private ObservableCollection<IMeter> meters = new ObservableCollection<IMeter>();
 
@@ -75,6 +75,33 @@ namespace NiceMeter.Meters
             foreach (var cpuMeter in cpuMeters)
             {
                 cpuMeter.UpdateMeters(hardware.Sensors);
+            }
+        }
+
+        /// <inheritdoc/>
+        public void UpdateGpu(IHardware hardware)
+        {
+            if (hardware == null)
+            {
+                return;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void UpdateHdd(IHardware hardware)
+        {
+            if (hardware == null)
+            {
+                return;
+            }
+        }
+
+        /// <inheritdoc/>
+        public void UpdateRam(IHardware hardware)
+        {
+            if (hardware == null)
+            {
+                return;
             }
         }
 

@@ -2,10 +2,9 @@
 using System.Windows;
 using System.Windows.Threading;
 using NiceMeter.Models;
-using NiceMeter.ViewModels;
+using NiceMeter.Visitors;
 using NiceMeter.EventHandlers;
 using log4net;
-using NiceMeter.Meters;
 
 namespace NiceMeter
 {
@@ -30,16 +29,16 @@ namespace NiceMeter
         /// Visit the required devices and create the set of meters to observe
         /// </summary>
         /// <param name="computer"></param>
-        /// <param name="computerVisitor"></param>
+        /// <param name="IHardwareVisitor"></param>
         /// <returns></returns>
-        public IObservableMeters CreateObservableMeters(IComputer computer, IVisitorObservable computerVisitor)
+        public IObservableMeters CreateObservableMeters(IComputer computer, IHardwareVisitor IHardwareVisitor)
         {
             IObservableMeters observableMeters = null;
 
             try
             {
                 computer.Open();
-                computer.Traverse(computerVisitor);
+                computer.Traverse(IHardwareVisitor);
             }
             catch (Exception e)
             {
@@ -49,7 +48,7 @@ namespace NiceMeter
 
             try
             {
-                observableMeters = new ObservableMeters(computerVisitor.ConvertMeters());
+                observableMeters = new ObservableMeters(IHardwareVisitor.ConvertMeters());
             }
             catch (Exception e)
             {
@@ -73,12 +72,12 @@ namespace NiceMeter
         /// Create the timer for periodically visiting the computer's devices
         /// </summary>
         /// <param name="computer"></param>
-        /// <param name="computerVisitor"></param>
+        /// <param name="IHardwareVisitor"></param>
         /// <returns></returns>
-        public DispatcherTimer CreateTimer(IComputer computer, IVisitorObservable computerVisitor, DispatcherTimer timer)
+        public DispatcherTimer CreateTimer(IComputer computer, IHardwareVisitor IHardwareVisitor, DispatcherTimer timer)
         {
             // Closure to pass additional values to the update method when the event is raised
-            timer.Tick += (s, args) => new ComputerUpdate().Update(computer, computerVisitor);
+            timer.Tick += (s, args) => new ComputerUpdate().Update(computer, IHardwareVisitor);
             timer.Interval = CreateTimeSpan();
             return timer;
         }
@@ -96,7 +95,7 @@ namespace NiceMeter
 
             // Init the computer and its devices
             computer = GetComputer(new Computers());
-            var computerVisitor = new ComputerVisitor();
+            var computerVisitor = new HardwareVisitor();
 
             try
             {

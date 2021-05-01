@@ -1,7 +1,7 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System.Collections.Generic;
 
-namespace NiceMeter.ViewModels
+namespace NiceMeter.Visitors
 {
     public interface IMeter
     {

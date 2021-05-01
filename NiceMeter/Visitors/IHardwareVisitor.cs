@@ -1,9 +1,9 @@
 ﻿using OpenHardwareMonitor.Hardware;
 using System.Collections.ObjectModel;
 
-namespace NiceMeter.ViewModels
+namespace NiceMeter.Visitors
 {
-    public interface IVisitorObservable : IVisitor
+    public interface IHardwareVisitor : IVisitor
     {
         /// <summary>
         /// Convert the internal meters for displaying in the UI
@@ -22,5 +22,23 @@ namespace NiceMeter.ViewModels
         /// </summary>
         /// <param name="hardware"></param>
         void UpdateCpu(IHardware hardware);
+
+        /// <summary>
+        /// Update GPU meters based on the given hardware's sensor values
+        /// </summary>
+        /// <param name="hardware"></param>
+        void UpdateGpu(IHardware hardware);
+
+        /// <summary>
+        /// Update HDD meters based on the given hardware's sensor values
+        /// </summary>
+        /// <param name="hardware"></param>
+        void UpdateHdd(IHardware hardware);
+
+        /// <summary>
+        /// Update RAM meters based on the given hardware's sensor values
+        /// </summary>
+        /// <param name="hardware"></param>
+        void UpdateRam(IHardware hardware);
     }
 }

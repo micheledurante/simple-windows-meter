@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace NiceMeter.ViewModels
+namespace NiceMeter.Visitors
 {
     public interface IUnit
     {
