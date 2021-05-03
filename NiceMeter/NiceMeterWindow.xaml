@@ -5,38 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Background="Transparent">
-    <Grid IsHitTestVisible="False">
-        <ListView Name="statMeters" BorderThickness="0">
-
-            <ListView.Resources>
-                <Style TargetType="GridViewColumnHeader">
-                    <Setter Property="Visibility" Value="Collapsed" />
-                </Style>
-                <Style TargetType="ListView">
-                    <Setter Property="Background" Value="Transparent" />
-                    <Setter Property="Foreground" Value="White" />
-                </Style>
-                <Style x:Key="Gotham-XLight">
-                    <Setter Property="TextElement.FontFamily" Value="CustomFonts/#Gotham-XLight" />
-                </Style>
-            </ListView.Resources>
-
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Name}" />
-                    <GridViewColumn Width="140" DisplayMemberBinding="{Binding Text, Mode=OneWay, NotifyOnSourceUpdated=True, UpdateSourceTrigger=PropertyChanged}" />
-                </GridView>
-            </ListView.View>
-
-            <ListView.GroupStyle>
-                <GroupStyle>
-                    <GroupStyle.HeaderTemplate>
-                        <DataTemplate>
-                            <TextBlock Focusable="False" Text="{Binding HardwareType}"/>
-                        </DataTemplate>
-                    </GroupStyle.HeaderTemplate>
-                </GroupStyle>
-            </ListView.GroupStyle>
-        </ListView>
-    </Grid>
+    <StackPanel Orientation="Horizontal">
+        <StackPanel x:Name="mainboardPanel" Orientation="Horizontal"></StackPanel>
+        <StackPanel x:Name="cpuPanel" Orientation="Horizontal"></StackPanel>
+    </StackPanel>
 </Window>

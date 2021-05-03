@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using OpenHardwareMonitor.Hardware;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NiceMeter.Models
@@ -6,12 +7,12 @@ namespace NiceMeter.Models
     /// <summary>
     /// Wrap OpenHardwareMonitor's Computer class to implement our IComputer interface adding missing methods from the base classes
     /// </summary>
-    public class Computer : OpenHardwareMonitor.Hardware.Computer, IComputer
+    public class ComputerModel : Computer, IComputerModel
     {
-        public List<OpenHardwareMonitor.Hardware.IHardware> HardwareListCache { get; set; } = new List<OpenHardwareMonitor.Hardware.IHardware>();
+        public List<IHardware> HardwareListCache { get; set; } = new List<IHardware>();
 
         /// <inheritdoc/>
-        public OpenHardwareMonitor.Hardware.IHardware FindHardware(OpenHardwareMonitor.Hardware.HardwareType hardwareType)
+        public IHardware FindHardware(HardwareType hardwareType)
         {
             if (HardwareListCache.Where(x => x.HardwareType == hardwareType).Count() != 0)
             {
@@ -22,39 +23,39 @@ namespace NiceMeter.Models
         }
 
         /// <inheritdoc/>
-        public OpenHardwareMonitor.Hardware.IHardware GetMainboardHardware()
+        public IHardware GetMainboardHardware()
         {
             if (MainboardEnabled)
             {
-                return FindHardware(OpenHardwareMonitor.Hardware.HardwareType.Mainboard);
+                return FindHardware(HardwareType.Mainboard);
             }
 
             return null;
         }
 
         /// <inheritdoc/>
-        public OpenHardwareMonitor.Hardware.IHardware GetCpuHardware()
+        public IHardware GetCpuHardware()
         {
             if (CPUEnabled)
             {
-                return FindHardware(OpenHardwareMonitor.Hardware.HardwareType.CPU);
+                return FindHardware(HardwareType.CPU);
             }
 
             return null;
         }
 
         /// <inheritdoc/>
-        public OpenHardwareMonitor.Hardware.IHardware GetGpuHardware()
+        public IHardware GetGpuHardware()
         {
             if (GPUEnabled)
             {
-                if (HardwareListCache.Where(x => x.HardwareType == OpenHardwareMonitor.Hardware.HardwareType.GpuAti).Count() != 0)
+                if (HardwareListCache.Where(x => x.HardwareType == HardwareType.GpuAti).Count() != 0)
                 {
-                    return FindHardware(OpenHardwareMonitor.Hardware.HardwareType.GpuAti);
+                    return FindHardware(HardwareType.GpuAti);
                 }
                 else
                 {
-                    return FindHardware(OpenHardwareMonitor.Hardware.HardwareType.GpuNvidia);
+                    return FindHardware(HardwareType.GpuNvidia);
                 }
             }
 
@@ -62,22 +63,22 @@ namespace NiceMeter.Models
         }
 
         /// <inheritdoc/>
-        public OpenHardwareMonitor.Hardware.IHardware GetHddHardware()
+        public IHardware GetHddHardware()
         {
             if (HDDEnabled)
             {
-                return FindHardware(OpenHardwareMonitor.Hardware.HardwareType.HDD);
+                return FindHardware(HardwareType.HDD);
             }
 
             return null;
         }
 
         /// <inheritdoc/>
-        public OpenHardwareMonitor.Hardware.IHardware GetRamHardware()
+        public IHardware GetRamHardware()
         {
             if (RAMEnabled)
             {
-                return FindHardware(OpenHardwareMonitor.Hardware.HardwareType.RAM);
+                return FindHardware(HardwareType.RAM);
             }
 
             return null;
@@ -88,7 +89,7 @@ namespace NiceMeter.Models
         {
             base.Open();
             // Cache to avoid creating multiple new lists for each call to Hardware
-            HardwareListCache = new List<OpenHardwareMonitor.Hardware.IHardware>(Hardware);
+            HardwareListCache = new List<IHardware>(Hardware);
         }
 
         /// <inheritdoc/>

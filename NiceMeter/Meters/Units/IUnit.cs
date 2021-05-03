@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace NiceMeter.Visitors
+namespace NiceMeter.Meters.Units
 {
     public interface IUnit
     {
@@ -8,6 +8,8 @@ namespace NiceMeter.Visitors
         /// Use the internal Converter object to convert to a TextBlock object
         /// </summary>
         /// <returns></returns>
-        TextBlock Convert();
+        IUnit Convert();
+
+        TextBlock GetTextBlock();
     }
 }

@@ -3,6 +3,7 @@ using Moq;
 using NiceMeter.Models;
 using NiceMeter.EventHandlers;
 using NiceMeter.Visitors;
+using OpenHardwareMonitor.Hardware;
 
 namespace NiceMeterTests.EventHandlers
 {
@@ -12,18 +13,18 @@ namespace NiceMeterTests.EventHandlers
         [TestMethod]
         public void UpdateComputerHardware_NonNullHardwares_ShouldCallUpdateOnEachHardware()
         {
-            var mainboardHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var mainboardHardwareMock = new Mock<IHardware>();
             mainboardHardwareMock.Setup(x => x.Update());
-            var cpuHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var cpuHardwareMock = new Mock<IHardware>();
             cpuHardwareMock.Setup(x => x.Update());
-            var gpuHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var gpuHardwareMock = new Mock<IHardware>();
             gpuHardwareMock.Setup(x => x.Update());
-            var hddHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var hddHardwareMock = new Mock<IHardware>();
             hddHardwareMock.Setup(x => x.Update());
-            var ramHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var ramHardwareMock = new Mock<IHardware>();
             ramHardwareMock.Setup(x => x.Update());
 
-            var computer = new Mock<IComputer>();
+            var computer = new Mock<IComputerModel>();
             computer.Setup(x => x.GetMainboardHardware()).Returns(mainboardHardwareMock.Object);
             computer.Setup(x => x.GetCpuHardware()).Returns(cpuHardwareMock.Object);
             computer.Setup(x => x.GetGpuHardware()).Returns(gpuHardwareMock.Object);
@@ -48,12 +49,12 @@ namespace NiceMeterTests.EventHandlers
         [TestMethod]
         public void UpdateComputerHardware_NullHardwares_ShouldNotCallUpdate()
         {
-            var computer = new Mock<IComputer>();
-            computer.Setup(x => x.GetMainboardHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
-            computer.Setup(x => x.GetCpuHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
-            computer.Setup(x => x.GetGpuHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
-            computer.Setup(x => x.GetHddHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
-            computer.Setup(x => x.GetRamHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
+            var computer = new Mock<IComputerModel>();
+            computer.Setup(x => x.GetMainboardHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetCpuHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetGpuHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetHddHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetRamHardware()).Returns((IHardware)null);
 
             var computerUpdate = new ComputerUpdate();
             computerUpdate.UpdateComputerHardware(computer.Object);
@@ -68,12 +69,12 @@ namespace NiceMeterTests.EventHandlers
         [TestMethod]
         public void UpdateVistorMeters_NullHardwares_ShouldCallUpdate()
         {
-            var computer = new Mock<IComputer>();
-            computer.Setup(x => x.GetMainboardHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
-            computer.Setup(x => x.GetCpuHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
-            computer.Setup(x => x.GetGpuHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
-            computer.Setup(x => x.GetHddHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
-            computer.Setup(x => x.GetRamHardware()).Returns((OpenHardwareMonitor.Hardware.IHardware)null);
+            var computer = new Mock<IComputerModel>();
+            computer.Setup(x => x.GetMainboardHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetCpuHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetGpuHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetHddHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetRamHardware()).Returns((IHardware)null);
 
             var hardwareVisitor = new Mock<IHardwareVisitor>();
             hardwareVisitor.Setup(x => x.UpdateMainboard(null));
@@ -101,18 +102,18 @@ namespace NiceMeterTests.EventHandlers
         [TestMethod]
         public void UpdateVistorMeters_NonNullHardwares_ShouldCallUpdate()
         {
-            var mainboardHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var mainboardHardwareMock = new Mock<IHardware>();
             mainboardHardwareMock.Setup(x => x.Update());
-            var cpuHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var cpuHardwareMock = new Mock<IHardware>();
             cpuHardwareMock.Setup(x => x.Update());
-            var gpuHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var gpuHardwareMock = new Mock<IHardware>();
             gpuHardwareMock.Setup(x => x.Update());
-            var hddHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var hddHardwareMock = new Mock<IHardware>();
             hddHardwareMock.Setup(x => x.Update());
-            var ramHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
+            var ramHardwareMock = new Mock<IHardware>();
             ramHardwareMock.Setup(x => x.Update());
 
-            var computer = new Mock<IComputer>();
+            var computer = new Mock<IComputerModel>();
             computer.Setup(x => x.GetMainboardHardware()).Returns(mainboardHardwareMock.Object);
             computer.Setup(x => x.GetCpuHardware()).Returns(cpuHardwareMock.Object);
             computer.Setup(x => x.GetGpuHardware()).Returns(gpuHardwareMock.Object);

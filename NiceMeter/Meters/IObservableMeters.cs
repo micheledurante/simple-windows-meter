@@ -1,6 +1,6 @@
 ﻿using System.Collections.ObjectModel;
 
-namespace NiceMeter.Visitors
+namespace NiceMeter.Meters
 {
     public interface IObservableMeters
     {

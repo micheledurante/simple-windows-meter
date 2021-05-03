@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace NiceMeter.Visitors.Converters
+namespace NiceMeter.Meters.Converters
 {
     /// <summary>
     /// Convert a Unit object to a WPF TextBlock for display

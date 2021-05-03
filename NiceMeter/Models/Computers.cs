@@ -9,9 +9,9 @@
         /// Default computer, all hardware is enabled
         /// </summary>
         /// <returns></returns>
-        public Computer GetAllHardware()
+        public ComputerModel GetAllHardware()
         {
-            return new Computer
+            return new ComputerModel
             {
                 MainboardEnabled = true,
                 CPUEnabled = true,
@@ -26,9 +26,9 @@
         /// Simple hardware only for testing
         /// </summary>
         /// <returns></returns>
-        public Computer GetTestingHardware()
+        public ComputerModel GetTestingHardware()
         {
-            return new Computer
+            return new ComputerModel
             {
                 MainboardEnabled = true,
                 CPUEnabled = false,

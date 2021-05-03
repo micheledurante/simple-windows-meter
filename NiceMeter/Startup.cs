@@ -5,6 +5,7 @@ using NiceMeter.Models;
 using NiceMeter.Visitors;
 using NiceMeter.EventHandlers;
 using log4net;
+using NiceMeter.Meters;
 
 namespace NiceMeter
 {
@@ -14,13 +15,13 @@ namespace NiceMeter
         public const int TimerMinutes = 0;
         public const int TimerSeconds = 1; // Update meters every 2 seconds
         private static readonly ILog logger = LogManager.GetLogger(typeof(Startup));
-        private IComputer computer;
+        private IComputerModel computer;
 
         /// <summary>
         /// Return the computer with the devices to observe
         /// </summary>
         /// <returns></returns>
-        public Computer GetComputer(Computers computers)
+        public ComputerModel GetComputer(Computers computers)
         {
             return computers.GetAllHardware();
         }
@@ -31,7 +32,7 @@ namespace NiceMeter
         /// <param name="computer"></param>
         /// <param name="IHardwareVisitor"></param>
         /// <returns></returns>
-        public IObservableMeters CreateObservableMeters(IComputer computer, IHardwareVisitor IHardwareVisitor)
+        public IObservableMeters CreateObservableMeters(IComputerModel computer, IHardwareVisitor IHardwareVisitor)
         {
             IObservableMeters observableMeters = null;
 
@@ -74,7 +75,7 @@ namespace NiceMeter
         /// <param name="computer"></param>
         /// <param name="IHardwareVisitor"></param>
         /// <returns></returns>
-        public DispatcherTimer CreateTimer(IComputer computer, IHardwareVisitor IHardwareVisitor, DispatcherTimer timer)
+        public DispatcherTimer CreateTimer(IComputerModel computer, IHardwareVisitor IHardwareVisitor, DispatcherTimer timer)
         {
             // Closure to pass additional values to the update method when the event is raised
             timer.Tick += (s, args) => new ComputerUpdate().Update(computer, IHardwareVisitor);

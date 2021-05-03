@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter;
+using NiceMeter.Meters;
 using NiceMeter.Models;
 using NiceMeter.Visitors;
 using System;
@@ -31,13 +32,13 @@ namespace NiceMeterTests
             var computers = new Mock<Computers>();
 
             var computer = startup.GetComputer(computers.Object);
-            Assert.IsInstanceOfType(computer, typeof(IComputer));
+            Assert.IsInstanceOfType(computer, typeof(IComputerModel));
         }
 
         [TestMethod]
         public void CreateObservableMeters_ValidComputer_WillOpenComputerAndCreateMeters()
         {
-            var computerMock = new Mock<IComputer>();
+            var computerMock = new Mock<IComputerModel>();
             var hardwareVisitorMock = new Mock<IHardwareVisitor>();
 
             var observableMeters = startup.CreateObservableMeters(computerMock.Object, hardwareVisitorMock.Object);
@@ -62,7 +63,7 @@ namespace NiceMeterTests
         public void CreateTimer_DefaultTimer_ShouldBeCreatedWithDefaultValues()
         {
             var timerMock = new Mock<DispatcherTimer>();
-            var computerMock = new Mock<IComputer>();
+            var computerMock = new Mock<IComputerModel>();
             var hardwareVisitorMock = new Mock<IHardwareVisitor>();
 
             startup.CreateTimer(computerMock.Object, hardwareVisitorMock.Object, timerMock.Object);

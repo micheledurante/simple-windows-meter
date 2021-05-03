@@ -1,9 +1,11 @@
-﻿namespace NiceMeter.Models
+﻿using OpenHardwareMonitor.Hardware;
+
+namespace NiceMeter.Models
 {
     /// <summary>
     /// Wrap OpenHardwareMonitor's IComputer to add missing methods not covered in the base interface
     /// </summary>
-    public interface IComputer : OpenHardwareMonitor.Hardware.IComputer
+    public interface IComputerModel : IComputer
     {
         /// <summary>
         /// Reimplement Open() method missing from OpenHardwareMonitor's IComputer
@@ -25,7 +27,7 @@
         /// </summary>
         /// <param name="hardwareType"></param>
         /// <returns></returns>
-        OpenHardwareMonitor.Hardware.IHardware FindHardware(OpenHardwareMonitor.Hardware.HardwareType hardwareType);
+        IHardware FindHardware(HardwareType hardwareType);
 
         /// <summary>
         /// Return the current computer's Mainboard hardware
@@ -37,24 +39,24 @@
         /// Return the current computer's CPU hardware
         /// </summary>
         /// <returns></returns>
-        OpenHardwareMonitor.Hardware.IHardware GetCpuHardware();
+        IHardware GetCpuHardware();
 
         /// <summary>
         /// Return the current computer's GPU hardware
         /// </summary>
         /// <returns></returns>
-        OpenHardwareMonitor.Hardware.IHardware GetGpuHardware();
+        IHardware GetGpuHardware();
 
         /// <summary>
         /// Return the current computer's HDD hardware
         /// </summary>
         /// <returns></returns>
-        OpenHardwareMonitor.Hardware.IHardware GetHddHardware();
+        IHardware GetHddHardware();
 
         /// <summary>
         /// Return the current computer's RAM hardware
         /// </summary>
         /// <returns></returns>
-        OpenHardwareMonitor.Hardware.IHardware GetRamHardware();
+        IHardware GetRamHardware();
     }
 }

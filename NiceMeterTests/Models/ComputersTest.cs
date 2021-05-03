@@ -12,7 +12,7 @@ namespace NiceMeterTests.Models
             var computers = new Computers();
             var computer = computers.GetTestingHardware();
 
-            Assert.IsInstanceOfType(computer, typeof(IComputer));
+            Assert.IsInstanceOfType(computer, typeof(IComputerModel));
             Assert.IsTrue(computer.MainboardEnabled);
             Assert.IsFalse(computer.CPUEnabled);
             Assert.IsFalse(computer.RAMEnabled);
@@ -27,7 +27,7 @@ namespace NiceMeterTests.Models
             var computers = new Computers();
             var computer = computers.GetAllHardware();
 
-            Assert.IsInstanceOfType(computer, typeof(IComputer));
+            Assert.IsInstanceOfType(computer, typeof(IComputerModel));
             Assert.IsTrue(computer.MainboardEnabled);
             Assert.IsTrue(computer.CPUEnabled);
             Assert.IsTrue(computer.RAMEnabled);

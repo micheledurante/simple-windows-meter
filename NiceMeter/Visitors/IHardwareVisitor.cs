@@ -1,4 +1,5 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using NiceMeter.Meters;
+using OpenHardwareMonitor.Hardware;
 using System.Collections.ObjectModel;
 
 namespace NiceMeter.Visitors

@@ -63,9 +63,9 @@
     <Compile Include="NiceMeterWindowTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupTest.cs" />
-    <Compile Include="ViewModels\Converters\BaseConverterMock.cs" />
-    <Compile Include="ViewModels\Converters\SimpleUnitConverterTest.cs" />
-    <Compile Include="ViewModels\Converters\BaseConverterTest.cs" />
+    <Compile Include="Meters\Converters\BaseConverterMock.cs" />
+    <Compile Include="Meters\Converters\SimpleUnitConverterTest.cs" />
+    <Compile Include="Meters\Converters\BaseConverterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -75,6 +75,9 @@
       <Project>{11d75909-2789-4ebd-acb0-dcb67d53b97c}</Project>
       <Name>NiceMeter</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Meters\Units\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

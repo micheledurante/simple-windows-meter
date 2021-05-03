@@ -3,7 +3,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
 
-namespace NiceMeter.Visitors.Converters
+namespace NiceMeter.Meters.Converters
 {
     public abstract class BaseConverter : IUnitConverter
     {

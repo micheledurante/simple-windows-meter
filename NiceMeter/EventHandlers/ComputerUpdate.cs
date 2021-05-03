@@ -9,7 +9,7 @@ namespace NiceMeter.EventHandlers
     public class ComputerUpdate : IComputerUpdate
     {
         /// <inheritdoc/>
-        public void UpdateComputerHardware(IComputer computer)
+        public void UpdateComputerHardware(IComputerModel computer)
         {
             computer.GetMainboardHardware()?.Update();
             computer.GetCpuHardware()?.Update();
@@ -19,7 +19,7 @@ namespace NiceMeter.EventHandlers
         }
 
         /// <inheritdoc/>
-        public void UpdateMeters(IComputer computer, IHardwareVisitor hardwareVisitor)
+        public void UpdateMeters(IComputerModel computer, IHardwareVisitor hardwareVisitor)
         {
             hardwareVisitor.UpdateMainboard(computer.GetMainboardHardware());
             hardwareVisitor.UpdateCpu(computer.GetCpuHardware());
@@ -29,7 +29,7 @@ namespace NiceMeter.EventHandlers
         }
 
         /// <inheritdoc/>
-        public void Update(IComputer computer, IHardwareVisitor hardwareVisitor)
+        public void Update(IComputerModel computer, IHardwareVisitor hardwareVisitor)
         {
             UpdateComputerHardware(computer);
             UpdateMeters(computer, hardwareVisitor);

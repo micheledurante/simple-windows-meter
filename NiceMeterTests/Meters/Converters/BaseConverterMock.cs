@@ -1,8 +1,8 @@
-﻿using NiceMeter.Visitors.Converters;
+﻿using NiceMeter.Meters.Converters;
 using System.Globalization;
 using System.Windows.Controls;
 
-namespace NiceMeterTests.ViewModels.Converters
+namespace NiceMeterTests.Meters.Converters
 {
     class BaseConverterMock : BaseConverter
     {

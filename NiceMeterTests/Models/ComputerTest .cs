@@ -1,6 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter.Models;
+using OpenHardwareMonitor.Hardware;
 
 namespace NiceMeterTests.Models
 {
@@ -10,22 +11,22 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void Computer_Constructor_TestComputerInheritanceAndProperties()
         {
-            var computer = new Computer();
-            Assert.IsInstanceOfType(computer, typeof(OpenHardwareMonitor.Hardware.Computer));
-            Assert.IsInstanceOfType(computer, typeof(IComputer));
+            var computer = new ComputerModel();
+            Assert.IsInstanceOfType(computer, typeof(Computer));
+            Assert.IsInstanceOfType(computer, typeof(IComputerModel));
             Assert.AreEqual(0, computer.HardwareListCache.Count);
         }
 
         [TestMethod]
         public void FindHardware_NotFound_ShouldReturnFoundHardware()
         {
-            var mainboardHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            mainboardHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.Mainboard);
+            var mainboardHardwareMock = new Mock<IHardware>();
+            mainboardHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.Mainboard);
 
-            var computer = new Computer();
+            var computer = new ComputerModel();
             computer.HardwareListCache.Add(mainboardHardwareMock.Object);
 
-            var mainboardHardware = computer.FindHardware(OpenHardwareMonitor.Hardware.HardwareType.CPU);
+            var mainboardHardware = computer.FindHardware(HardwareType.CPU);
 
             Assert.IsNull(mainboardHardware);
             mainboardHardwareMock.Verify(x => x.HardwareType, Times.Once);
@@ -34,13 +35,13 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void FindHardware_Found_ShouldReturnFoundHardware()
         {
-            var mainboardHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            mainboardHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.Mainboard);
+            var mainboardHardwareMock = new Mock<IHardware>();
+            mainboardHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.Mainboard);
 
-            var computer = new Computer();
+            var computer = new ComputerModel();
             computer.HardwareListCache.Add(mainboardHardwareMock.Object);
 
-            var mainboardHardware = computer.FindHardware(OpenHardwareMonitor.Hardware.HardwareType.Mainboard);
+            var mainboardHardware = computer.FindHardware(HardwareType.Mainboard);
 
             Assert.AreEqual(mainboardHardwareMock.Object, mainboardHardware);
             mainboardHardwareMock.Verify(x => x.HardwareType, Times.Exactly(2));
@@ -51,10 +52,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetMainboardHardware_MainboardIsDisabled_NoHardwareIsReturned()
         {
-            var mainboardHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            mainboardHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.Mainboard);
+            var mainboardHardwareMock = new Mock<IHardware>();
+            mainboardHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.Mainboard);
 
-            var computer = new Computer();
+            var computer = new ComputerModel();
             computer.HardwareListCache.Add(mainboardHardwareMock.Object);
 
             var mainboardHardware = computer.GetMainboardHardware();
@@ -66,10 +67,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetMainboardHardware_MainboardIsEnabled_MainbaordHardwareShouldBeReturned()
         {
-            var mainboardHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            mainboardHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.Mainboard);
+            var mainboardHardwareMock = new Mock<IHardware>();
+            mainboardHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.Mainboard);
 
-            var computer = new Computer { MainboardEnabled = true};
+            var computer = new ComputerModel { MainboardEnabled = true};
             computer.HardwareListCache.Add(mainboardHardwareMock.Object);
 
             var mainboardHardware = computer.GetMainboardHardware();
@@ -83,10 +84,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetCpuHardware_CpuIsDisabled_NoHardwareIsReturned()
         {
-            var cpuHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            cpuHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.CPU);
+            var cpuHardwareMock = new Mock<IHardware>();
+            cpuHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.CPU);
 
-            var computer = new Computer();
+            var computer = new ComputerModel();
             computer.HardwareListCache.Add(cpuHardwareMock.Object);
 
             var cpuHardware = computer.GetCpuHardware();
@@ -98,10 +99,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetCpuHardware_CpuIsEnabled_CpuHardwareShouldBeReturned()
         {
-            var cpuHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            cpuHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.CPU);
+            var cpuHardwareMock = new Mock<IHardware>();
+            cpuHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.CPU);
 
-            var computer = new Computer { CPUEnabled = true };
+            var computer = new ComputerModel { CPUEnabled = true };
             computer.HardwareListCache.Add(cpuHardwareMock.Object);
 
             var cpuHardware = computer.GetCpuHardware();
@@ -115,10 +116,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetGpuHardware_GpuIsDisabled_NoGpuAtiHardwareIsReturned()
         {
-            var gpuAtiHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            gpuAtiHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.GpuAti);
+            var gpuAtiHardwareMock = new Mock<IHardware>();
+            gpuAtiHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.GpuAti);
 
-            var computer = new Computer();
+            var computer = new ComputerModel();
             computer.HardwareListCache.Add(gpuAtiHardwareMock.Object);
 
             var gpuAtiHardware = computer.GetGpuHardware();
@@ -130,10 +131,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetGpuHardware_GpuIsEnabled_GpuAtiHardwareShouldBeReturned()
         {
-            var gpuAtiHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            gpuAtiHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.GpuAti);
+            var gpuAtiHardwareMock = new Mock<IHardware>();
+            gpuAtiHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.GpuAti);
 
-            var computer = new Computer { GPUEnabled = true };
+            var computer = new ComputerModel { GPUEnabled = true };
             computer.HardwareListCache.Add(gpuAtiHardwareMock.Object);
 
             var gpuAtiHardware = computer.GetGpuHardware();
@@ -147,10 +148,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetGpuHardware_GpuIsDisabled_NoGpuNvidiaHardwareIsReturned()
         {
-            var gpuNvidiaHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            gpuNvidiaHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.GpuNvidia);
+            var gpuNvidiaHardwareMock = new Mock<IHardware>();
+            gpuNvidiaHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.GpuNvidia);
 
-            var computer = new Computer();
+            var computer = new ComputerModel();
             computer.HardwareListCache.Add(gpuNvidiaHardwareMock.Object);
 
             var gpuNvidiaHardware = computer.GetGpuHardware();
@@ -162,10 +163,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetGpuHardware_GpuIsEnbaled_GpuNvidiaHardwareShouldBeReturned()
         {
-            var gpuNvidiaHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            gpuNvidiaHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.GpuNvidia);
+            var gpuNvidiaHardwareMock = new Mock<IHardware>();
+            gpuNvidiaHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.GpuNvidia);
 
-            var computer = new Computer { GPUEnabled = true };
+            var computer = new ComputerModel { GPUEnabled = true };
             computer.HardwareListCache.Add(gpuNvidiaHardwareMock.Object);
 
             var gpuNvidiaHardware = computer.GetGpuHardware();
@@ -179,10 +180,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetHddHardware_HddIsDisabled_NoHardwareIsReturned()
         {
-            var hddHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            hddHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.HDD);
+            var hddHardwareMock = new Mock<IHardware>();
+            hddHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.HDD);
 
-            var computer = new Computer();
+            var computer = new ComputerModel();
             computer.HardwareListCache.Add(hddHardwareMock.Object);
 
             var hddHardware = computer.GetHddHardware();
@@ -194,10 +195,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetHddHardware_HddIsEnabled_HddHardwareShouldBeReturned()
         {
-            var hddHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            hddHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.HDD);
+            var hddHardwareMock = new Mock<IHardware>();
+            hddHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.HDD);
 
-            var computer = new Computer { HDDEnabled = true };
+            var computer = new ComputerModel { HDDEnabled = true };
             computer.HardwareListCache.Add(hddHardwareMock.Object);
 
             var hddHardware = computer.GetHddHardware();
@@ -211,10 +212,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetRamHardware_RamIsDisabled_NoHardwareIsReturned()
         {
-            var ramHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            ramHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.RAM);
+            var ramHardwareMock = new Mock<IHardware>();
+            ramHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.RAM);
 
-            var computer = new Computer();
+            var computer = new ComputerModel();
             computer.HardwareListCache.Add(ramHardwareMock.Object);
 
             var ramHardware = computer.GetRamHardware();
@@ -226,10 +227,10 @@ namespace NiceMeterTests.Models
         [TestMethod]
         public void GetRamHardware_RamIsEnabled_RamHardwareShouldBeReturned()
         {
-            var ramHardwareMock = new Mock<OpenHardwareMonitor.Hardware.IHardware>();
-            ramHardwareMock.Setup(x => x.HardwareType).Returns(OpenHardwareMonitor.Hardware.HardwareType.RAM);
+            var ramHardwareMock = new Mock<IHardware>();
+            ramHardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.RAM);
 
-            var computer = new Computer { RAMEnabled = true };
+            var computer = new ComputerModel { RAMEnabled = true };
             computer.HardwareListCache.Add(ramHardwareMock.Object);
 
             var ramHardware = computer.GetRamHardware();

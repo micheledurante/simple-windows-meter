@@ -1,6 +1,6 @@
-﻿using NiceMeter.Visitors;
-using NiceMeter.Visitors.Cpu;
-using NiceMeter.Visitors.Mainboard;
+﻿using NiceMeter.Meters;
+using NiceMeter.Meters.Cpu;
+using NiceMeter.Meters.Mainboard;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.ObjectModel;
@@ -25,18 +25,18 @@ namespace NiceMeter.Visitors
             switch (hardware.HardwareType)
             {
                 case HardwareType.Mainboard:
-                    meters.Add(new MainboardMeter(hardware.Name).ReadSensors(null));
+                    meters.Add(new MainboardMeters(hardware.Name).ReadSensors(hardware));
                     break;
 
                 case HardwareType.CPU:
-                    meters.Add(new CpuMeter(hardware.Name).ReadSensors(hardware.Sensors));
+                    meters.Add(new CpuMeter(hardware.Name).ReadSensors(hardware));
 
                     // Get the core(s)
                     var cores = hardware.Sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).Select(x => x.Name).ToList();
 
                     foreach (var core in cores)
                     {
-                        meters.Add(new CoreMeter(core).ReadSensors(hardware.Sensors));
+                        meters.Add(new CoreMeter(core).ReadSensors(hardware));
                     }
 
                     break;
@@ -60,6 +60,8 @@ namespace NiceMeter.Visitors
             {
                 return;
             }
+
+            meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).First().UpdateMeters(hardware);
         }
 
         /// <inheritdoc/>
@@ -74,7 +76,7 @@ namespace NiceMeter.Visitors
 
             foreach (var cpuMeter in cpuMeters)
             {
-                cpuMeter.UpdateMeters(hardware.Sensors);
+                cpuMeter.UpdateMeters(hardware);
             }
         }
 

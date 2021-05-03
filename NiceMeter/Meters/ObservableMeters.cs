@@ -1,7 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
-namespace NiceMeter.Visitors
+namespace NiceMeter.Meters
 {
     /// <summary>
     /// Represent the collection of meters observed for changes every tick cycle.
