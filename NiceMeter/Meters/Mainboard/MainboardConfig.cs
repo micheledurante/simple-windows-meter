@@ -1,7 +1,7 @@
 ﻿namespace NiceMeter.Meters.Mainboard
 {
     /// <summary>
-    /// Sensors for the Mainboard. This is mapped to OpenHardwareMonitor's internal sensor naming scheme
+    /// Sensors for the Mainboard. This will map to OpenHardwareMonitor's internal sensor naming scheme
     /// </summary>
     public class MainboardConfig
     {

@@ -27,9 +27,9 @@
             return new HardwareConfig
             {
                 MainboardEnabled = true,
-                CPUEnabled = false,
+                CPUEnabled = true,
                 RAMEnabled = false,
-                GPUEnabled = true,
+                GPUEnabled = false,
                 FanControllerEnabled = false,
                 HDDEnabled = false
             };

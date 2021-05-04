@@ -42,7 +42,7 @@ namespace NiceMeterTests.Meters.Units
             CultureInfo.DefaultThreadCurrentCulture = culture;
             CultureInfo.DefaultThreadCurrentUICulture = culture;
 
-            Assert.AreEqual("1,234 V", unit.ToString());
+            Assert.AreEqual("asd: 1,234 V", unit.ToString());
         }
     }
 }

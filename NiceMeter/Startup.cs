@@ -83,12 +83,12 @@ namespace NiceMeter
 
             // Init the computer and its devices
             computer = GetComputer(new Computers());
-            var computerVisitor = new HardwareVisitor();
+            var hardwareVisitor = new HardwareVisitor(HardwareConfig.AllHardwareConfig());
 
             try
             {
                 // Init timer and events
-                CreateTimer(computer, computerVisitor, new DispatcherTimer()).Start();
+                CreateTimer(computer, hardwareVisitor, new DispatcherTimer()).Start();
             }
             catch (Exception e)
             {
@@ -96,7 +96,7 @@ namespace NiceMeter
             }
 
             // NiceMeter window
-            var niceMeterWindow = new NiceMeterWindow(CreateObservableMeters(computer, computerVisitor), SystemParameters.WorkArea.Right);
+            var niceMeterWindow = new NiceMeterWindow(CreateObservableMeters(computer, hardwareVisitor), SystemParameters.WorkArea.Right);
             niceMeterWindow.CreateView();
             niceMeterWindow.Show();
         }

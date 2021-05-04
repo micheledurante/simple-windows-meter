@@ -7,8 +7,8 @@ namespace NiceMeter.Meters.Cpu
 {
     class CpuMeters : AbstractMeter
     {
-        public PercentUnit CpuTotal { get; set; } = new PercentUnit("Cpu Total", 0);
-        public WattUnit CpuPackage { get; set; } = new WattUnit("Cpu Package", 0);
+        public PercentUnit CpuTotal { get; set; } = new PercentUnit("Load", 0);
+        public WattUnit CpuPackage { get; set; } = new WattUnit("Power", 0);
 
         public IDictionary<string, IUnit> Units { get; set; } = new Dictionary<string, IUnit>();
 

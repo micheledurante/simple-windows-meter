@@ -1,6 +1,7 @@
 ﻿using NiceMeter.Meters;
 using NiceMeter.Meters.Cpu;
 using NiceMeter.Meters.Mainboard;
+using NiceMeter.Models;
 using OpenHardwareMonitor.Hardware;
 using System;
 using System.Collections.ObjectModel;
@@ -13,7 +14,13 @@ namespace NiceMeter.Visitors
     /// </summary>
     public class HardwareVisitor : IHardwareVisitor
     {
+        public readonly HardwareConfig hardwareConfig;
         private ObservableCollection<IMeter> Meters { get; set; } = new ObservableCollection<IMeter>();
+
+        public HardwareVisitor(HardwareConfig hardwareConfig)
+        {
+            this.hardwareConfig = hardwareConfig;
+        }
 
         public void VisitComputer(IComputer computer)
         {
@@ -57,54 +64,52 @@ namespace NiceMeter.Visitors
         /// <inheritdoc/>
         public void UpdateMainboard(IHardware hardware)
         {
-            if (hardware == null)
+            if (hardware != null && hardwareConfig.MainboardEnabled)
             {
-                return;
+                Meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).First().UpdateMeters(hardware);
             }
-
-            Meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).First().UpdateMeters(hardware);
         }
 
         /// <inheritdoc/>
         public void UpdateCpu(IHardware hardware)
         {
-            if (hardware == null)
+            if (hardware != null && hardwareConfig.CPUEnabled)
             {
-                return;
-            }
-
-            var cpuMeters = Meters.Where(x => x.GetHardwareType() == HardwareType.CPU).ToList();
-
-            foreach (var cpuMeter in cpuMeters)
-            {
-                cpuMeter.UpdateMeters(hardware);
+                Meters.Where(x => x.GetHardwareType() == HardwareType.CPU).First().UpdateMeters(hardware);
             }
         }
 
         /// <inheritdoc/>
         public void UpdateGpu(IHardware hardware)
         {
-            if (hardware == null)
+            if (hardware != null && hardwareConfig.GPUEnabled)
             {
-                return;
+                //if (Meters.Where(x => x.GetHardwareType() == HardwareType.GpuAti).Count() != 0)
+                //{
+                //    Meters.Where(x => x.GetHardwareType() == HardwareType.GpuAti).First().UpdateMeters(hardware);
+                //}
+                //else
+                //{
+                //    Meters.Where(x => x.GetHardwareType() == HardwareType.GpuNvidia).First().UpdateMeters(hardware);
+                //}
             }
         }
 
         /// <inheritdoc/>
         public void UpdateHdd(IHardware hardware)
         {
-            if (hardware == null)
+            if (hardware != null && hardwareConfig.HDDEnabled)
             {
-                return;
+                //Meters.Where(x => x.GetHardwareType() == HardwareType.HDD).First().UpdateMeters(hardware);
             }
         }
 
         /// <inheritdoc/>
         public void UpdateRam(IHardware hardware)
         {
-            if (hardware == null)
+            if (hardware != null && hardwareConfig.RAMEnabled)
             {
-                return;
+                //Meters.Where(x => x.GetHardwareType() == HardwareType.RAM).First().UpdateMeters(hardware);
             }
         }
     }
