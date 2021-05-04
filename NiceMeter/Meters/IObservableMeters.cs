@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using NiceMeter.Models;
+using System.Collections.ObjectModel;
 
 namespace NiceMeter.Meters
 {
@@ -9,5 +10,11 @@ namespace NiceMeter.Meters
         /// </summary>
         /// <returns></returns>
         ObservableCollection<IMeter> GetMeters();
+
+        /// <summary>
+        /// Get the stored hardware configuration for the computer
+        /// </summary>
+        /// <returns></returns>
+        HardwareConfig GetHardwareConfig();
     }
 }

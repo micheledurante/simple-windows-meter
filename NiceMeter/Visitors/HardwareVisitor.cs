@@ -13,7 +13,7 @@ namespace NiceMeter.Visitors
     /// </summary>
     public class HardwareVisitor : IHardwareVisitor
     {
-        private ObservableCollection<IMeter> meters = new ObservableCollection<IMeter>();
+        private ObservableCollection<IMeter> Meters { get; set; } = new ObservableCollection<IMeter>();
 
         public void VisitComputer(IComputer computer)
         {
@@ -25,20 +25,15 @@ namespace NiceMeter.Visitors
             switch (hardware.HardwareType)
             {
                 case HardwareType.Mainboard:
-                    meters.Add(new MainboardMeters(hardware.Name).ReadSensors(hardware));
+                    var mainboardMeters = new MainboardMeters(hardware.Name, MainboardConfig.GetTestingMainboard());
+                    mainboardMeters.ReadSensors(hardware);
+                    Meters.Add(mainboardMeters);
                     break;
 
                 case HardwareType.CPU:
-                    meters.Add(new CpuMeter(hardware.Name).ReadSensors(hardware));
-
-                    // Get the core(s)
-                    var cores = hardware.Sensors.Where(x => x.SensorType == SensorType.Load && x.Name.Contains("Core")).Select(x => x.Name).ToList();
-
-                    foreach (var core in cores)
-                    {
-                        meters.Add(new CoreMeter(core).ReadSensors(hardware));
-                    }
-
+                    var cpuMeters = new CpuMeters(hardware.Name, CpuConfig.GetTestingCpu());
+                    cpuMeters.ReadSensors(hardware);
+                    Meters.Add(cpuMeters);
                     break;
             }
         }
@@ -54,6 +49,12 @@ namespace NiceMeter.Visitors
         }
 
         /// <inheritdoc/>
+        public ObservableCollection<IMeter> GetMeters()
+        {
+            return Meters;
+        }
+
+        /// <inheritdoc/>
         public void UpdateMainboard(IHardware hardware)
         {
             if (hardware == null)
@@ -61,7 +62,7 @@ namespace NiceMeter.Visitors
                 return;
             }
 
-            meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).First().UpdateMeters(hardware);
+            Meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).First().UpdateMeters(hardware);
         }
 
         /// <inheritdoc/>
@@ -72,7 +73,7 @@ namespace NiceMeter.Visitors
                 return;
             }
 
-            var cpuMeters = meters.Where(x => x.GetHardwareType() == HardwareType.CPU).ToList();
+            var cpuMeters = Meters.Where(x => x.GetHardwareType() == HardwareType.CPU).ToList();
 
             foreach (var cpuMeter in cpuMeters)
             {
@@ -105,16 +106,6 @@ namespace NiceMeter.Visitors
             {
                 return;
             }
-        }
-
-        public ObservableCollection<IMeter> ConvertMeters()
-        {
-            foreach (var meter in meters)
-            {
-                meter.FormatMeters();
-            }
-
-            return meters;
         }
     }
 }

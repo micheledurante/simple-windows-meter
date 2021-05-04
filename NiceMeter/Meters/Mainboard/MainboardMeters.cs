@@ -1,11 +1,12 @@
 ﻿using NiceMeter.Meters.Units;
 using OpenHardwareMonitor.Hardware;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace NiceMeter.Meters.Mainboard
 {
     /// <summary>
-    /// 
+    /// Represent the collection of information for the Mainboard
     /// </summary>
     class MainboardMeters : AbstractMeter
     {
@@ -17,27 +18,59 @@ namespace NiceMeter.Meters.Mainboard
         public RpmUnit CpuFan { get; set; } = new RpmUnit("CPU Fan", 0);
         public RpmUnit WPump { get; set; } = new RpmUnit("W_PUMP", 0);
 
-        public MainboardMeters(string name)
+        public IDictionary<string, IUnit> Units { get; set; } = new Dictionary<string, IUnit>();
+
+        public MainboardMeters(string name, MainboardConfig config) : base(name, HardwareType.Mainboard)
         {
-            Name = name;
-            HardwareType = HardwareType.Mainboard;
+            if (config.CpuVCore)
+            {
+                Units.Add("CpuVCore", CpuVCore);
+            }
+
+            if (config.CpuSoc)
+            {
+                Units.Add("CpuSoc", CpuSoc);
+            }
+
+            if (config.DRam)
+            {
+                Units.Add("DRam", DRam);
+            }
+
+            if (config.Vrm)
+            {
+                Units.Add("Vrm", Vrm);
+            }
+
+            if (config.TSensor)
+            {
+                Units.Add("TSensor", TSensor);
+            }
+
+            if (config.CpuFan)
+            {
+                Units.Add("CpuFan", CpuFan);
+            }
+
+            if (config.WPump)
+            {
+                Units.Add("WPump", WPump);
+            }
         }
 
-        public override IMeter ReadSensors(IHardware hardware)
+        public override void ReadSensors(IHardware hardware)
         {
-            CpuFan.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == "Fan Control #2").First().Value;
-            return this;
-        }
-
-        public override IMeter FormatMeters()
-        {
-            return this;
+            if (Units.ContainsKey("CpuFan"))
+            {
+                CpuFan.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == "Fan Control #2").First().Value;
+            }
         }
 
         public override void UpdateMeters(IHardware hardware)
         {
-            CpuFan.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == "Fan Control #2").First().Value;
-            Text = string.Format("{0}", CpuFan.Convert().GetTextBlock().Text);
+            ReadSensors(hardware);
+
+            Text = string.Format("{0}", CpuFan.ToString());
         }
     }
 }

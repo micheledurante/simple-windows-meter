@@ -5,7 +5,10 @@ using System.Windows.Controls;
 
 namespace NiceMeter.Meters.Converters
 {
-    public abstract class BaseConverter : IUnitConverter
+    /// <summary>
+    /// The simplest converter to convert a Unit to TextBlock
+    /// </summary>
+    public class TextBlockConverter : IUnitConverter
     {
         public const TextAlignment TAlignment = TextAlignment.Left;
         public const VerticalAlignment VAlignment = VerticalAlignment.Center;
@@ -22,9 +25,8 @@ namespace NiceMeter.Meters.Converters
         /// The internal, default instance of a TextBlock
         /// </summary>
         protected TextBlock textBlock;
-        public abstract TextBlock Convert(float? value, string measurementUnit, string numberFormat, CultureInfo culture = null);
 
-        public BaseConverter()
+        public TextBlockConverter()
         {
             textBlock = new TextBlock
             {
@@ -54,6 +56,14 @@ namespace NiceMeter.Meters.Converters
         public string FormatFloatValue(float? value, string numberFormat, CultureInfo culture = null)
         {
             return string.Format(culture ?? Thread.CurrentThread.CurrentCulture, numberFormat, value);
+        }
+
+
+        /// <inheritdoc/>
+        public TextBlock Convert(float? value, string measurementUnit, string numberFormat, CultureInfo culture = null)
+        {
+            textBlock.Text = string.Format("{0} {1}", FormatFloatValue(value, numberFormat, culture), measurementUnit);
+            return textBlock;
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.ObjectModel;
+﻿using NiceMeter.Models;
+using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 
 namespace NiceMeter.Meters
@@ -8,10 +9,12 @@ namespace NiceMeter.Meters
     /// </summary>
     public class ObservableMeters : IObservableMeters
     {
+        public readonly HardwareConfig hardwareConfig;
         private readonly ObservableCollection<IMeter> meters;
 
-        public ObservableMeters(ObservableCollection<IMeter> meters = null)
+        public ObservableMeters(HardwareConfig hardwareConfig, ObservableCollection<IMeter> meters = null)
         {
+            this.hardwareConfig = hardwareConfig;
             this.meters = meters;
             // Wire up the CollectionChanged event.
             if (meters != null)
@@ -28,6 +31,11 @@ namespace NiceMeter.Meters
         public ObservableCollection<IMeter> GetMeters()
         {
             return meters;
+        }
+
+        public HardwareConfig GetHardwareConfig()
+        {
+            return hardwareConfig;
         }
     }
 }

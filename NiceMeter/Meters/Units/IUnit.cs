@@ -1,15 +1,11 @@
-﻿using System.Windows.Controls;
+﻿using System.Globalization;
 
 namespace NiceMeter.Meters.Units
 {
     public interface IUnit
     {
-        /// <summary>
-        /// Use the internal Converter object to convert to a TextBlock object
-        /// </summary>
-        /// <returns></returns>
-        IUnit Convert();
+        string FormatFloatValue(float? value, string numberFormat, CultureInfo culture = null);
 
-        TextBlock GetTextBlock();
+        string ToString();
     }
 }

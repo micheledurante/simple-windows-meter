@@ -1,5 +1,5 @@
-﻿using NiceMeter.Meters.Converters;
-using System.Windows.Controls;
+﻿using System.Globalization;
+using System.Threading;
 
 namespace NiceMeter.Meters.Units
 {
@@ -16,30 +16,33 @@ namespace NiceMeter.Meters.Units
         /// What this value should be called
         /// </summary>
         public readonly string Label;
-        public TextBlock TextBlock { get; set; }
         protected readonly string measurementUnit;
         protected readonly string numberFormat;
-        protected readonly IUnitConverter unitConverter;
 
-        public Unit(string Label, float? Value, string measurementUnit, string numberFormat, IUnitConverter unitConverter = null)
+        public Unit(string Label, float? Value, string measurementUnit, string numberFormat)
         {
             this.Label = Label;
             this.Value = Value;
             this.measurementUnit = measurementUnit;
             this.numberFormat = numberFormat;
-            this.unitConverter = unitConverter ?? new SimpleUnitConverter();
         }
 
-        /// <inheritdoc/>
-        public IUnit Convert()
+        /// <summary>
+        /// Format the given float value according to the given number format and culture
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="numberFormat"></param>
+        /// <param name="culture"></param>
+        /// <returns></returns>
+        public string FormatFloatValue(float? value, string numberFormat, CultureInfo culture = null)
         {
-            TextBlock = unitConverter.Convert(Value, measurementUnit, numberFormat);
-            return this;
+            return string.Format(culture ?? Thread.CurrentThread.CurrentCulture, numberFormat, value);
         }
 
-        public TextBlock GetTextBlock()
+
+        public override string ToString()
         {
-            return TextBlock;
+            return string.Format("{0} {1}", FormatFloatValue(Value, numberFormat), measurementUnit);
         }
     }
 }

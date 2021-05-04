@@ -7,10 +7,10 @@ namespace NiceMeter.Visitors
     public interface IHardwareVisitor : IVisitor
     {
         /// <summary>
-        /// Convert the internal meters for displaying in the UI
+        /// Return the internal list of observed meters
         /// </summary>
         /// <returns></returns>
-        ObservableCollection<IMeter> ConvertMeters();
+        ObservableCollection<IMeter> GetMeters();
 
         /// <summary>
         /// Update Mainboard meters based on the given hardware's sensor values

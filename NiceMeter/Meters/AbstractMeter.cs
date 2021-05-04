@@ -21,6 +21,12 @@ namespace NiceMeter.Meters
 
         public event PropertyChangedEventHandler PropertyChanged;
 
+        protected AbstractMeter(string name, HardwareType hardwareType)
+        {
+            Name = name;
+            HardwareType = hardwareType;
+        }
+
         /// <summary>
         /// Event implementation
         /// </summary>
@@ -34,8 +40,8 @@ namespace NiceMeter.Meters
             return HardwareType;
         }
 
-        public abstract IMeter ReadSensors(IHardware hardware);
-        public abstract IMeter FormatMeters();
+        public abstract void ReadSensors(IHardware hardware);
+
         public abstract void UpdateMeters(IHardware hardware);
     }
 }

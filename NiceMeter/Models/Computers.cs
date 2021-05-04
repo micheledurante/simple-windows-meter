@@ -11,14 +11,16 @@
         /// <returns></returns>
         public ComputerModel GetAllHardware()
         {
+            var config = HardwareConfig.AllHardwareConfig();
+            
             return new ComputerModel
             {
-                MainboardEnabled = true,
-                CPUEnabled = true,
-                RAMEnabled = true,
-                GPUEnabled = true,
-                FanControllerEnabled = true,
-                HDDEnabled = true
+                MainboardEnabled = config.MainboardEnabled,
+                CPUEnabled = config.CPUEnabled,
+                RAMEnabled = config.RAMEnabled,
+                GPUEnabled = config.GPUEnabled,
+                FanControllerEnabled = config.FanControllerEnabled,
+                HDDEnabled = config.HDDEnabled
             };
         }
 
@@ -28,14 +30,16 @@
         /// <returns></returns>
         public ComputerModel GetTestingHardware()
         {
+            var config = HardwareConfig.TestingHardwareConfig();
+
             return new ComputerModel
             {
-                MainboardEnabled = true,
-                CPUEnabled = false,
-                RAMEnabled = false,
-                GPUEnabled = true,
-                FanControllerEnabled = false,
-                HDDEnabled = false
+                MainboardEnabled = config.MainboardEnabled,
+                CPUEnabled = config.CPUEnabled,
+                RAMEnabled = config.RAMEnabled,
+                GPUEnabled = config.GPUEnabled,
+                FanControllerEnabled = config.FanControllerEnabled,
+                HDDEnabled = config.HDDEnabled
             };
         }
     }

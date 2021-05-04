@@ -11,14 +11,15 @@ namespace NiceMeterTests.Models
         {
             var computers = new Computers();
             var computer = computers.GetTestingHardware();
+            var hardwareConfig = HardwareConfig.TestingHardwareConfig();
 
             Assert.IsInstanceOfType(computer, typeof(IComputerModel));
-            Assert.IsTrue(computer.MainboardEnabled);
-            Assert.IsFalse(computer.CPUEnabled);
-            Assert.IsFalse(computer.RAMEnabled);
-            Assert.IsTrue(computer.GPUEnabled);
-            Assert.IsFalse(computer.FanControllerEnabled);
-            Assert.IsFalse(computer.HDDEnabled);
+            Assert.AreEqual(hardwareConfig.MainboardEnabled, computer.MainboardEnabled);
+            Assert.AreEqual(hardwareConfig.CPUEnabled, computer.CPUEnabled);
+            Assert.AreEqual(hardwareConfig.RAMEnabled, computer.RAMEnabled);
+            Assert.AreEqual(hardwareConfig.GPUEnabled, computer.GPUEnabled);
+            Assert.AreEqual(hardwareConfig.FanControllerEnabled, computer.FanControllerEnabled);
+            Assert.AreEqual(hardwareConfig.HDDEnabled, computer.HDDEnabled);
         }
 
         [TestMethod]
@@ -26,14 +27,15 @@ namespace NiceMeterTests.Models
         {
             var computers = new Computers();
             var computer = computers.GetAllHardware();
+            var hardwareConfig = HardwareConfig.AllHardwareConfig();
 
             Assert.IsInstanceOfType(computer, typeof(IComputerModel));
-            Assert.IsTrue(computer.MainboardEnabled);
-            Assert.IsTrue(computer.CPUEnabled);
-            Assert.IsTrue(computer.RAMEnabled);
-            Assert.IsTrue(computer.GPUEnabled);
-            Assert.IsTrue(computer.FanControllerEnabled);
-            Assert.IsTrue(computer.HDDEnabled);
+            Assert.AreEqual(hardwareConfig.MainboardEnabled, computer.MainboardEnabled);
+            Assert.AreEqual(hardwareConfig.CPUEnabled, computer.CPUEnabled);
+            Assert.AreEqual(hardwareConfig.RAMEnabled, computer.RAMEnabled);
+            Assert.AreEqual(hardwareConfig.GPUEnabled, computer.GPUEnabled);
+            Assert.AreEqual(hardwareConfig.FanControllerEnabled, computer.FanControllerEnabled);
+            Assert.AreEqual(hardwareConfig.HDDEnabled, computer.HDDEnabled);
         }
     }
 }

@@ -81,14 +81,18 @@
     </ApplicationDefinition>
     <Compile Include="EventHandlers\ComputerUpdate.cs" />
     <Compile Include="EventHandlers\IComputerUpdate.cs" />
-    <Compile Include="Meters\Converters\BaseConverter.cs" />
     <Compile Include="Meters\Converters\IUnitConverter.cs" />
-    <Compile Include="Meters\Converters\SimpleUnitConverter.cs" />
+    <Compile Include="Meters\Converters\TextBlockConverter.cs" />
+    <Compile Include="Meters\Cpu\CpuConfig.cs" />
     <Compile Include="Meters\IMeter.cs" />
+    <Compile Include="Meters\Mainboard\MainboardConfig.cs" />
     <Compile Include="Meters\Units\RpmUnit.cs" />
     <Compile Include="Meters\Units\TempUnit.cs" />
+    <Compile Include="Meters\Units\PercentUnit.cs" />
+    <Compile Include="Meters\Units\WattUnit.cs" />
     <Compile Include="Meters\Units\VoltUnit.cs" />
     <Compile Include="Models\ComputerModel.cs" />
+    <Compile Include="Models\HardwareConfig.cs" />
     <Compile Include="Models\IComputerModel.cs" />
     <Compile Include="Meters\IObservableMeters.cs" />
     <Compile Include="Visitors\IHardwareVisitor.cs" />
@@ -96,8 +100,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Meters\Units\IUnit.cs" />
     <Compile Include="Meters\Units\Unit.cs" />
-    <Compile Include="Meters\Cpu\CoreMeter.cs" />
-    <Compile Include="Meters\Cpu\CpuMeter.cs" />
+    <Compile Include="Meters\Cpu\CpuMeters.cs" />
     <Compile Include="Meters\Mainboard\MainboardMeters.cs" />
     <Compile Include="Meters\AbstractMeter.cs" />
     <Compile Include="Meters\ObservableMeters.cs" />

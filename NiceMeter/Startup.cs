@@ -30,34 +30,21 @@ namespace NiceMeter
         /// Visit the required devices and create the set of meters to observe
         /// </summary>
         /// <param name="computer"></param>
-        /// <param name="IHardwareVisitor"></param>
+        /// <param name="hardwareVisitor"></param>
         /// <returns></returns>
-        public IObservableMeters CreateObservableMeters(IComputerModel computer, IHardwareVisitor IHardwareVisitor)
+        public IObservableMeters CreateObservableMeters(IComputerModel computer, IHardwareVisitor hardwareVisitor)
         {
-            IObservableMeters observableMeters = null;
-
             try
             {
                 computer.Open();
-                computer.Traverse(IHardwareVisitor);
+                computer.Traverse(hardwareVisitor);
+                return new ObservableMeters(HardwareConfig.AllHardwareConfig(), hardwareVisitor.GetMeters());
             }
             catch (Exception e)
             {
                 logger.Error(e.Message);
-                //Environment.Exit(909);
+                throw e;
             }
-
-            try
-            {
-                observableMeters = new ObservableMeters(IHardwareVisitor.ConvertMeters());
-            }
-            catch (Exception e)
-            {
-                logger.Error(e.Message);
-                //Environment.Exit(909);
-            }
-
-            return observableMeters;
         }
 
         /// <summary>

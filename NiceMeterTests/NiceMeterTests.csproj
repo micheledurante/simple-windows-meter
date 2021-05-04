@@ -58,14 +58,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventHandlers\ComputerUpdateTest.cs" />
+    <Compile Include="Models\HardwareConfigTest.cs" />
     <Compile Include="Models\ComputerTest .cs" />
     <Compile Include="Models\ComputersTest.cs" />
     <Compile Include="NiceMeterWindowTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StartupTest.cs" />
-    <Compile Include="Meters\Converters\BaseConverterMock.cs" />
-    <Compile Include="Meters\Converters\SimpleUnitConverterTest.cs" />
-    <Compile Include="Meters\Converters\BaseConverterTest.cs" />
+    <Compile Include="Meters\Converters\TextBlockConverterTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

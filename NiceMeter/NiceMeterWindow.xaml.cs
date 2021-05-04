@@ -1,5 +1,6 @@
 ﻿using log4net;
 using NiceMeter.Meters;
+using NiceMeter.Meters.Cpu;
 using NiceMeter.Meters.Mainboard;
 using System;
 using System.Windows;
@@ -55,21 +56,13 @@ namespace NiceMeter
         }
 
         /// <summary>
-        /// Create the UI view for the current collection of meters
+        /// Create the UI elements and bindings for the Mainboard meters
         /// </summary>
-        public void CreateView()
+        public void CreateMainboardPanel()
         {
-            if (observableMeters == null)
-            {
-                logger.Error("No observable meters provided. Cannot Create the view");
-                Environment.Exit(901);
-            }
+            mainboardPanel.DataContext = (MainboardMeters)observableMeters.GetMeters()[0];
 
-            // Mainboard panel
-
-            mainboardPanel.DataContext = observableMeters.GetMeters()[0];
-
-            cpuPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
+            mainboardPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
 
             var mainboardNameTextBlock = new TextBlock();
             mainboardNameTextBlock.Foreground = Brushes.White;
@@ -84,30 +77,17 @@ namespace NiceMeter
             mainboardNameBinding.Mode = BindingMode.Default;
             mainboardNameTextBlock.SetBinding(TextBlock.TextProperty, mainboardNameBinding);
 
-            cpuPanel.Children.Add(mainboardNameTextBlock); // Mainboard name
+            mainboardPanel.Children.Add(mainboardNameTextBlock); // Mainboard name
+        }
 
-            cpuPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
+        /// <summary>
+        /// Create the UI elements and bindings for the CPU meters
+        /// </summary>
+        public void CreateCpuPanel()
+        {
+            var cpuMeters = (CpuMeters)observableMeters.GetMeters()[1];
 
-            var mainboardTextTextBlock = new TextBlock();
-            mainboardTextTextBlock.Foreground = Brushes.White;
-            mainboardTextTextBlock.LineHeight = 10;
-            mainboardTextTextBlock.FontSize = 10;
-            mainboardTextTextBlock.FontWeight = FontWeights.Light;
-
-            Binding mainboardTextBinding = new Binding("Text")
-            {
-                Source = mainboardPanel.DataContext
-            };
-            mainboardTextBinding.Mode = BindingMode.OneWay;
-            mainboardTextBinding.NotifyOnSourceUpdated = true;
-            mainboardTextBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-            mainboardTextTextBlock.SetBinding(TextBlock.TextProperty, mainboardTextBinding);
-
-            cpuPanel.Children.Add(mainboardTextTextBlock); // Mainboard Text
-
-            // CPU panel
-
-            cpuPanel.DataContext = observableMeters.GetMeters()[1];
+            cpuPanel.DataContext = cpuMeters;
 
             var dividerTextBlock = new TextBlock();
             dividerTextBlock.Foreground = Brushes.White;
@@ -131,29 +111,48 @@ namespace NiceMeter
             cpuNameBinding.Mode = BindingMode.Default;
             cpuNameTextBlock.SetBinding(TextBlock.TextProperty, cpuNameBinding);
 
-            cpuPanel.Children.Add(cpuNameTextBlock); // CPU name
-
+            cpuPanel.Children.Add(cpuNameTextBlock); // CPU text
 
             cpuPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
 
-            var cpuTextTextBlock = new TextBlock();
-            cpuTextTextBlock.Foreground = Brushes.White;
-            cpuTextTextBlock.LineHeight = 10;
-            cpuTextTextBlock.FontSize = 10;
-            cpuTextTextBlock.FontWeight = FontWeights.Light;
+            var cpuTotalBlock = new TextBlock();
+            cpuTotalBlock.Foreground = Brushes.White;
+            cpuTotalBlock.LineHeight = 10;
+            cpuTotalBlock.FontSize = 10;
+            cpuTotalBlock.FontWeight = FontWeights.Light;
 
-            Binding cpuTextBinding = new Binding("Text")
+            Binding cpuTotalBinding = new Binding("Text")
             {
                 Source = cpuPanel.DataContext
             };
-            cpuTextBinding.Mode = BindingMode.OneWay;
-            cpuTextBinding.NotifyOnSourceUpdated = true;
-            cpuTextBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-            cpuTextTextBlock.SetBinding(TextBlock.TextProperty, cpuTextBinding);
+            cpuTotalBinding.Mode = BindingMode.OneWay;
+            cpuTotalBinding.NotifyOnSourceUpdated = true;
+            cpuTotalBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            cpuTotalBlock.SetBinding(TextBlock.TextProperty, cpuTotalBinding);
 
-            cpuPanel.Children.Add(cpuTextTextBlock); // CPU Text
+            cpuPanel.Children.Add(cpuTotalBlock);
+        }
 
-            // end CPU panel
+        /// <summary>
+        /// Create the UI view for the current collection of meters
+        /// </summary>
+        public void CreateView()
+        {
+            if (observableMeters == null)
+            {
+                logger.Error("No observable meters provided. Cannot Create the view");
+                Environment.Exit(901);
+            }
+
+            if (observableMeters.GetHardwareConfig().MainboardEnabled)
+            {
+                CreateMainboardPanel();
+            }
+
+            if (observableMeters.GetHardwareConfig().CPUEnabled)
+            {
+                CreateCpuPanel();
+            }
         }
     }
 }
