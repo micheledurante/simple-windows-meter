@@ -5,7 +5,10 @@
     /// </summary>
     public class PercentUnit : Unit
     {
-        public PercentUnit(string Label, float? Value) : base(Label, Value, "%", "{0:N1}")
+        public const string DefaultMeasurementUnit = "%";
+        public const string DefaultFormat = "{0:N1}";
+
+        public PercentUnit(string Label, float? Value) : base(Label, Value, DefaultMeasurementUnit, DefaultFormat)
         {
         }
     }

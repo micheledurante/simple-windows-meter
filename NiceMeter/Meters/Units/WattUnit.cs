@@ -5,7 +5,10 @@
     /// </summary>
     public class WattUnit : Unit
     {
-        public WattUnit(string Label, float? Value) : base(Label, Value, "W", "{0:N0}")
+        public const string DefaultMeasurementUnit = "W";
+        public const string DefaultFormat = "{0:N0}";
+
+        public WattUnit(string Label, float? Value) : base(Label, Value, DefaultMeasurementUnit, DefaultFormat)
         {
         }
     }

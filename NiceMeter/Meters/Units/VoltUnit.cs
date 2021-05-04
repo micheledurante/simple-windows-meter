@@ -5,7 +5,9 @@
     /// </summary>
     public class VoltUnit : Unit
     {
-        public VoltUnit(string Label, float? Value) : base(Label, Value, "V", "{0:N3}")
+        public const string DefaultMeasurementUnit = "V";
+        public const string DefaultFormat = "{0:N3}";
+        public VoltUnit(string Label, float? Value) : base(Label, Value, DefaultMeasurementUnit, DefaultFormat)
         {
         }
     }

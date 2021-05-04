@@ -81,8 +81,6 @@
     </ApplicationDefinition>
     <Compile Include="EventHandlers\ComputerUpdate.cs" />
     <Compile Include="EventHandlers\IComputerUpdate.cs" />
-    <Compile Include="Meters\Converters\IUnitConverter.cs" />
-    <Compile Include="Meters\Converters\TextBlockConverter.cs" />
     <Compile Include="Meters\Cpu\CpuConfig.cs" />
     <Compile Include="Meters\IMeter.cs" />
     <Compile Include="Meters\Mainboard\MainboardConfig.cs" />
@@ -132,7 +130,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <None Include="Meters\Converters\README.md" />
     <None Include="Meters\Cpu\README.md" />
     <None Include="Meters\Mainboard\README.md" />
     <None Include="Meters\README.md" />

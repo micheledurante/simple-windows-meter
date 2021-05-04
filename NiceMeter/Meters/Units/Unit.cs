@@ -16,8 +16,8 @@ namespace NiceMeter.Meters.Units
         /// What this value should be called
         /// </summary>
         public readonly string Label;
-        protected readonly string measurementUnit;
-        protected readonly string numberFormat;
+        public readonly string measurementUnit;
+        public readonly string numberFormat;
 
         public Unit(string Label, float? Value, string measurementUnit, string numberFormat)
         {
@@ -38,7 +38,6 @@ namespace NiceMeter.Meters.Units
         {
             return string.Format(culture ?? Thread.CurrentThread.CurrentCulture, numberFormat, value);
         }
-
 
         public override string ToString()
         {

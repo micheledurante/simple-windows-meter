@@ -5,7 +5,9 @@
     /// </summary>
     public class RpmUnit : Unit
     {
-        public RpmUnit(string Label, float? Value) : base(Label, Value, "RPM", "{0:N0}")
+        public const string DefaultMeasurementUnit = "RPM";
+        public const string DefaultFormat = "{0:N0}";
+        public RpmUnit(string Label, float? Value) : base(Label, Value, DefaultMeasurementUnit, DefaultFormat)
         {
         }
     }

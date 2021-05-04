@@ -5,7 +5,10 @@
     /// </summary>
     public class TempUnit : Unit
     {
-        public TempUnit(string Label, float? Value) : base(Label, Value, "°C", "{0:N0}")
+        public const string DefaultMeasurementUnit = "°C";
+        public const string DefaultFormat = "{0:N0}";
+
+        public TempUnit(string Label, float? Value) : base(Label, Value, DefaultMeasurementUnit, DefaultFormat)
         {
         }
     }
