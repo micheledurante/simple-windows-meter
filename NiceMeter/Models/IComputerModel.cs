@@ -23,6 +23,11 @@ namespace NiceMeter.Models
         void Close();
 
         /// <summary>
+        /// Update the enabled hardware in order to start all sensors
+        /// </summary>
+        void Update();
+
+        /// <summary>
         /// Return the cached hardware for the given hardware type
         /// </summary>
         /// <param name="hardwareType"></param>
@@ -30,10 +35,23 @@ namespace NiceMeter.Models
         IHardware FindHardware(HardwareType hardwareType);
 
         /// <summary>
+        /// Return the cached sub hardware for the given hardware type
+        /// </summary>
+        /// <param name="hardwareType"></param>
+        /// <returns></returns>
+        IHardware FindSubHardware(HardwareType hardwareType);
+
+        /// <summary>
         /// Return the current computer's Mainboard hardware
         /// </summary>
         /// <returns></returns>
-        OpenHardwareMonitor.Hardware.IHardware GetMainboardHardware();
+        IHardware GetMainboardHardware();
+
+        /// <summary>
+        /// Return the current computer's Mainboard Sub hardware
+        /// </summary>
+        /// <returns></returns>
+        IHardware GetMainboardSubHardware();
 
         /// <summary>
         /// Return the current computer's CPU hardware

@@ -11,9 +11,9 @@ namespace NiceMeter
 {
     public partial class Startup : Application
     {
-        public const int TimerHours = 0;
-        public const int TimerMinutes = 0;
-        public const int TimerSeconds = 1; // Update meters every 2 seconds
+        public const int TimerHours = 0; // Update meters every x hours
+        public const int TimerMinutes = 0; // Update meters every x minutes
+        public const int TimerSeconds = 1; // Update meters every x seconds
         private static readonly ILog logger = LogManager.GetLogger(typeof(Startup));
         private IComputerModel computer;
 
@@ -37,6 +37,7 @@ namespace NiceMeter
             try
             {
                 computer.Open();
+                computer.Update();
                 computer.Traverse(hardwareVisitor);
                 return new ObservableMeters(HardwareConfig.AllHardwareConfig(), hardwareVisitor.GetMeters());
             }
@@ -93,6 +94,7 @@ namespace NiceMeter
             catch (Exception e)
             {
                 logger.Error(e.Message);
+                throw e;
             }
 
             // NiceMeter window

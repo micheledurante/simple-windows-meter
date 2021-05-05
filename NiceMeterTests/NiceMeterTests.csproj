@@ -61,7 +61,7 @@
     <Compile Include="Meters\Units\RpmUnitTest.cs" />
     <Compile Include="Meters\Units\PercentUnitTest.cs" />
     <Compile Include="Models\HardwareConfigTest.cs" />
-    <Compile Include="Models\ComputerTest .cs" />
+    <Compile Include="Models\ComputerModelTest .cs" />
     <Compile Include="Models\ComputersTest.cs" />
     <Compile Include="NiceMeterWindowTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

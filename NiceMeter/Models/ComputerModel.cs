@@ -11,6 +11,11 @@ namespace NiceMeter.Models
     {
         public List<IHardware> HardwareListCache { get; set; } = new List<IHardware>();
 
+        /// <summary>
+        /// Re-implement the open flag as it is private in the base class
+        /// </summary>
+        public bool IsOpen { get; set; } = false;
+
         /// <inheritdoc/>
         public IHardware FindHardware(HardwareType hardwareType)
         {
@@ -23,11 +28,45 @@ namespace NiceMeter.Models
         }
 
         /// <inheritdoc/>
+        public IHardware FindSubHardware(HardwareType hardwareType)
+        {
+            if (HardwareListCache
+                .Where(x => x.HardwareType == hardwareType && x.SubHardware.Count() != 0)
+                .Count() != 0)
+            {
+                if (HardwareListCache
+                    .Where(x => x.HardwareType == hardwareType)
+                    .First().SubHardware
+                    .Where(s => s.HardwareType == HardwareType.SuperIO).Count() != 0)
+                {
+                    return HardwareListCache
+                        .Where(x => x.HardwareType == hardwareType)
+                        .First().SubHardware
+                        .Where(s => s.HardwareType == HardwareType.SuperIO)
+                        .First();
+                }
+            }
+
+            return null;
+        }
+
+        /// <inheritdoc/>
         public IHardware GetMainboardHardware()
         {
             if (MainboardEnabled)
             {
                 return FindHardware(HardwareType.Mainboard);
+            }
+
+            return null;
+        }
+
+        /// <inheritdoc/>
+        public IHardware GetMainboardSubHardware()
+        {
+            if (MainboardEnabled)
+            {
+                return FindSubHardware(HardwareType.Mainboard);
             }
 
             return null;
@@ -87,9 +126,13 @@ namespace NiceMeter.Models
         /// <inheritdoc/>
         public new void Open()
         {
+            IsOpen = true;
             base.Open();
             // Cache to avoid creating multiple new lists for each call to Hardware
-            HardwareListCache = new List<IHardware>(Hardware);
+            if (HardwareListCache.Count == 0)
+            {
+                HardwareListCache = new List<IHardware>(Hardware);
+            }
         }
 
         /// <inheritdoc/>
@@ -102,6 +145,22 @@ namespace NiceMeter.Models
         public new void Close()
         {
             base.Close();
+        }
+
+        /// <inheritdoc/>
+        public void Update()
+        {
+            if (IsOpen == false)
+            {
+                Open();
+            }
+
+            GetMainboardHardware()?.Update();
+            GetMainboardSubHardware()?.Update();
+            GetCpuHardware()?.Update();
+            GetGpuHardware()?.Update();
+            GetHddHardware()?.Update();
+            GetRamHardware()?.Update();
         }
     }
 }
