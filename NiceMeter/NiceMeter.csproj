@@ -80,6 +80,7 @@
     <Compile Include="Meters\Cpu\CpuConfig.cs" />
     <Compile Include="Meters\IMeter.cs" />
     <Compile Include="Meters\Mainboard\MainboardConfig.cs" />
+    <Compile Include="Meters\Mainboard\MainboardSubHardwareMeters.cs" />
     <Compile Include="Meters\Units\RpmUnit.cs" />
     <Compile Include="Meters\Units\TempUnit.cs" />
     <Compile Include="Meters\Units\PercentUnit.cs" />

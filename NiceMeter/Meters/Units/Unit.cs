@@ -13,14 +13,20 @@ namespace NiceMeter.Meters.Units
         /// </summary>
         public float? Value { get; set; }
         /// <summary>
-        /// What this value should be called
+        /// What this value should be called in our UI
         /// </summary>
         public readonly string Label;
+
+        /// <summary>
+        /// OpenHardwareMonitor's name for the sensor
+        /// </summary>
+        public string OHName { get; set; }
         public readonly string measurementUnit;
         public readonly string numberFormat;
 
-        public Unit(string Label, float? Value, string measurementUnit, string numberFormat)
+        public Unit(string OHName, string Label, float? Value, string measurementUnit, string numberFormat)
         {
+            this.OHName = OHName;
             this.Label = Label;
             this.Value = Value;
             this.measurementUnit = measurementUnit;

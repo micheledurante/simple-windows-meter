@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace NiceMeter.Meters
 {
-    internal abstract class AbstractMeter : INotifyPropertyChanged, IMeter
+    public abstract class AbstractMeter : INotifyPropertyChanged, IMeter
     {
         public string Name { get; set; }
         public HardwareType HardwareType { get; set; }

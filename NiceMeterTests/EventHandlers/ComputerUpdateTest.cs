@@ -15,6 +15,8 @@ namespace NiceMeterTests.EventHandlers
         {
             var mainboardHardwareMock = new Mock<IHardware>();
             mainboardHardwareMock.Setup(x => x.Update());
+            var mainboardSubHardwareMock = new Mock<IHardware>();
+            mainboardSubHardwareMock.Setup(x => x.Update());
             var cpuHardwareMock = new Mock<IHardware>();
             cpuHardwareMock.Setup(x => x.Update());
             var gpuHardwareMock = new Mock<IHardware>();
@@ -26,6 +28,7 @@ namespace NiceMeterTests.EventHandlers
 
             var computer = new Mock<IComputerModel>();
             computer.Setup(x => x.GetMainboardHardware()).Returns(mainboardHardwareMock.Object);
+            computer.Setup(x => x.GetMainboardSubHardware()).Returns(mainboardSubHardwareMock.Object);
             computer.Setup(x => x.GetCpuHardware()).Returns(cpuHardwareMock.Object);
             computer.Setup(x => x.GetGpuHardware()).Returns(gpuHardwareMock.Object);
             computer.Setup(x => x.GetHddHardware()).Returns(hddHardwareMock.Object);
@@ -35,11 +38,13 @@ namespace NiceMeterTests.EventHandlers
             computerUpdate.UpdateComputerHardware(computer.Object);
 
             computer.Verify(x => x.GetMainboardHardware(), Times.Once);
+            computer.Verify(x => x.GetMainboardSubHardware(), Times.Once);
             computer.Verify(x => x.GetCpuHardware(), Times.Once);
             computer.Verify(x => x.GetGpuHardware(), Times.Once);
             computer.Verify(x => x.GetHddHardware(), Times.Once);
             computer.Verify(x => x.GetRamHardware(), Times.Once);
             mainboardHardwareMock.Verify(x => x.Update(), Times.Once);
+            mainboardSubHardwareMock.Verify(x => x.Update(), Times.Once);
             cpuHardwareMock.Verify(x => x.Update(), Times.Once);
             gpuHardwareMock.Verify(x => x.Update(), Times.Once);
             hddHardwareMock.Verify(x => x.Update(), Times.Once);
@@ -51,6 +56,7 @@ namespace NiceMeterTests.EventHandlers
         {
             var computer = new Mock<IComputerModel>();
             computer.Setup(x => x.GetMainboardHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetMainboardSubHardware()).Returns((IHardware)null);
             computer.Setup(x => x.GetCpuHardware()).Returns((IHardware)null);
             computer.Setup(x => x.GetGpuHardware()).Returns((IHardware)null);
             computer.Setup(x => x.GetHddHardware()).Returns((IHardware)null);
@@ -60,6 +66,7 @@ namespace NiceMeterTests.EventHandlers
             computerUpdate.UpdateComputerHardware(computer.Object);
 
             computer.Verify(x => x.GetMainboardHardware(), Times.Once);
+            computer.Verify(x => x.GetMainboardSubHardware(), Times.Once);
             computer.Verify(x => x.GetCpuHardware(), Times.Once);
             computer.Verify(x => x.GetGpuHardware(), Times.Once);
             computer.Verify(x => x.GetHddHardware(), Times.Once);
@@ -92,6 +99,7 @@ namespace NiceMeterTests.EventHandlers
             computer.Verify(x => x.GetHddHardware(), Times.Once);
             computer.Verify(x => x.GetRamHardware(), Times.Once);
 
+            // It is the mainboard's responsability to update its sub hardware
             hardwareVisitor.Verify(x => x.UpdateMainboard(null), Times.Once);
             hardwareVisitor.Verify(x => x.UpdateCpu(null), Times.Once);
             hardwareVisitor.Verify(x => x.UpdateGpu(null), Times.Once);
@@ -136,6 +144,7 @@ namespace NiceMeterTests.EventHandlers
             computer.Verify(x => x.GetHddHardware(), Times.Once);
             computer.Verify(x => x.GetRamHardware(), Times.Once);
 
+            // It is the mainboard's responsability to update its sub hardware
             hardwareVisitor.Verify(x => x.UpdateMainboard(mainboardHardwareMock.Object), Times.Once);
             hardwareVisitor.Verify(x => x.UpdateCpu(cpuHardwareMock.Object), Times.Once);
             hardwareVisitor.Verify(x => x.UpdateGpu(gpuHardwareMock.Object), Times.Once);

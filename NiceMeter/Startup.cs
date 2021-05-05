@@ -13,7 +13,7 @@ namespace NiceMeter
     {
         public const int TimerHours = 0; // Update meters every x hours
         public const int TimerMinutes = 0; // Update meters every x minutes
-        public const int TimerSeconds = 1; // Update meters every x seconds
+        public const int TimerSeconds = 2; // Update meters every x seconds
         private static readonly ILog logger = LogManager.GetLogger(typeof(Startup));
         private IComputerModel computer;
 
@@ -39,6 +39,7 @@ namespace NiceMeter
                 computer.Open();
                 computer.Update();
                 computer.Traverse(hardwareVisitor);
+                //logger.Debug(computer.GetReport());
                 return new ObservableMeters(HardwareConfig.AllHardwareConfig(), hardwareVisitor.GetMeters());
             }
             catch (Exception e)

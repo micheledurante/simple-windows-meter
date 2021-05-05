@@ -9,7 +9,7 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void Ctor_Default_ShouldCreateBaseWithExpectedProperties()
         {
-            var percentUnit = new TempUnit("zxcv", 233532);
+            var percentUnit = new TempUnit("qwe", "zxcv", 233532);
 
             Assert.AreEqual(TempUnit.DefaultMeasurementUnit, percentUnit.measurementUnit);
             Assert.AreEqual(TempUnit.DefaultFormat, percentUnit.numberFormat);

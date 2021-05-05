@@ -1,7 +1,6 @@
 ﻿using log4net;
 using NiceMeter.Meters;
 using NiceMeter.Meters.Cpu;
-using NiceMeter.Meters.Mainboard;
 using System;
 using System.Windows;
 using System.Windows.Controls;
@@ -60,7 +59,7 @@ namespace NiceMeter
         /// </summary>
         public void CreateMainboardPanel()
         {
-            mainboardPanel.DataContext = (MainboardMeters)observableMeters.GetMeters()[0];
+            mainboardPanel.DataContext = observableMeters.GetMainboardMeters();
 
             mainboardPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
 
@@ -78,6 +77,25 @@ namespace NiceMeter
             mainboardNameTextBlock.SetBinding(TextBlock.TextProperty, mainboardNameBinding);
 
             mainboardPanel.Children.Add(mainboardNameTextBlock); // Mainboard name
+
+            mainboardPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
+
+            var mainboardTextTextBlock = new TextBlock();
+            mainboardTextTextBlock.Foreground = Brushes.White;
+            mainboardTextTextBlock.LineHeight = 10;
+            mainboardTextTextBlock.FontSize = 10;
+            mainboardTextTextBlock.FontWeight = FontWeights.Light;
+
+            Binding mainboardTextBinding = new Binding("Text")
+            {
+                Source = mainboardPanel.DataContext
+            };
+            mainboardTextBinding.Mode = BindingMode.OneWay;
+            mainboardTextBinding.NotifyOnSourceUpdated = true;
+            mainboardTextBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            mainboardTextTextBlock.SetBinding(TextBlock.TextProperty, mainboardTextBinding);
+
+            mainboardPanel.Children.Add(mainboardTextTextBlock); // Mainboard text
         }
 
         /// <summary>
@@ -85,9 +103,7 @@ namespace NiceMeter
         /// </summary>
         public void CreateCpuPanel()
         {
-            var cpuMeters = (CpuMeters)observableMeters.GetMeters()[1];
-
-            cpuPanel.DataContext = cpuMeters;
+            cpuPanel.DataContext = observableMeters.GetCpuMeters();
 
             var dividerTextBlock = new TextBlock();
             dividerTextBlock.Foreground = Brushes.White;
@@ -111,26 +127,26 @@ namespace NiceMeter
             cpuNameBinding.Mode = BindingMode.Default;
             cpuNameTextBlock.SetBinding(TextBlock.TextProperty, cpuNameBinding);
 
-            cpuPanel.Children.Add(cpuNameTextBlock); // CPU text
+            cpuPanel.Children.Add(cpuNameTextBlock); // CPU name
 
             cpuPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
 
-            var cpuTotalBlock = new TextBlock();
-            cpuTotalBlock.Foreground = Brushes.White;
-            cpuTotalBlock.LineHeight = 10;
-            cpuTotalBlock.FontSize = 10;
-            cpuTotalBlock.FontWeight = FontWeights.Light;
+            var cpuTextTextBlock = new TextBlock();
+            cpuTextTextBlock.Foreground = Brushes.White;
+            cpuTextTextBlock.LineHeight = 10;
+            cpuTextTextBlock.FontSize = 10;
+            cpuTextTextBlock.FontWeight = FontWeights.Light;
 
-            Binding cpuTotalBinding = new Binding("Text")
+            Binding cpuTextBinding = new Binding("Text")
             {
                 Source = cpuPanel.DataContext
             };
-            cpuTotalBinding.Mode = BindingMode.OneWay;
-            cpuTotalBinding.NotifyOnSourceUpdated = true;
-            cpuTotalBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-            cpuTotalBlock.SetBinding(TextBlock.TextProperty, cpuTotalBinding);
+            cpuTextBinding.Mode = BindingMode.OneWay;
+            cpuTextBinding.NotifyOnSourceUpdated = true;
+            cpuTextBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            cpuTextTextBlock.SetBinding(TextBlock.TextProperty, cpuTextBinding);
 
-            cpuPanel.Children.Add(cpuTotalBlock);
+            cpuPanel.Children.Add(cpuTextTextBlock); // CPU text
         }
 
         /// <summary>

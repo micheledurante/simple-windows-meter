@@ -9,7 +9,7 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void Ctor_Default_ShouldCreateBaseWithExpectedProperties()
         {
-            var percentUnit = new VoltUnit("asdf", 89768678);
+            var percentUnit = new VoltUnit("fdsa", "asdf", 89768678);
 
             Assert.AreEqual(VoltUnit.DefaultMeasurementUnit, percentUnit.measurementUnit);
             Assert.AreEqual(VoltUnit.DefaultFormat, percentUnit.numberFormat);

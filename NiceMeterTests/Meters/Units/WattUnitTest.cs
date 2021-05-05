@@ -9,7 +9,7 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void Ctor_Default_ShouldCreateBaseWithExpectedProperties()
         {
-            var percentUnit = new WattUnit("ytrewq", 3443);
+            var percentUnit = new WattUnit("asdf", "ytrewq", 3443);
 
             Assert.AreEqual(WattUnit.DefaultMeasurementUnit, percentUnit.measurementUnit);
             Assert.AreEqual(WattUnit.DefaultFormat, percentUnit.numberFormat);

@@ -1,4 +1,6 @@
-﻿using NiceMeter.Models;
+﻿using NiceMeter.Meters.Cpu;
+using NiceMeter.Meters.Mainboard;
+using NiceMeter.Models;
 using System.Collections.ObjectModel;
 
 namespace NiceMeter.Meters
@@ -16,5 +18,17 @@ namespace NiceMeter.Meters
         /// </summary>
         /// <returns></returns>
         HardwareConfig GetHardwareConfig();
+
+        /// <summary>
+        /// Return the observed Mainboard meters if enabled
+        /// </summary>
+        /// <returns></returns>
+        MainboardMeters GetMainboardMeters();
+
+        /// <summary>
+        /// Return the observed CPU meters if enabled
+        /// </summary>
+        /// <returns></returns>
+        CpuMeters GetCpuMeters();
     }
 }

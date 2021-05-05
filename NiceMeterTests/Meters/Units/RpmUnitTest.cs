@@ -9,7 +9,7 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void Ctor_Default_ShouldCreateBaseWithExpectedProperties()
         {
-            var percentUnit = new RpmUnit("qwerty", 432534543);
+            var percentUnit = new RpmUnit("vcxz", "qwerty", 432534543);
 
             Assert.AreEqual(RpmUnit.DefaultMeasurementUnit, percentUnit.measurementUnit);
             Assert.AreEqual(RpmUnit.DefaultFormat, percentUnit.numberFormat);

@@ -32,7 +32,7 @@ namespace NiceMeter.Visitors
             switch (hardware.HardwareType)
             {
                 case HardwareType.Mainboard:
-                    var mainboardMeters = new MainboardMeters(hardware.Name, MainboardConfig.GetTestingMainboard());
+                    var mainboardMeters = new MainboardMeters(hardware.Name, MainboardConfig.GetCrosshair8Mainboard());
                     mainboardMeters.ReadSensors(hardware);
                     Meters.Add(mainboardMeters);
                     break;

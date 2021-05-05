@@ -8,7 +8,7 @@
         public const string DefaultMeasurementUnit = "W";
         public const string DefaultFormat = "{0:N0}";
 
-        public WattUnit(string Label, float? Value) : base(Label, Value, DefaultMeasurementUnit, DefaultFormat)
+        public WattUnit(string OHName, string Label, float? Value) : base(OHName, Label, Value, DefaultMeasurementUnit, DefaultFormat)
         {
         }
     }

@@ -10,7 +10,7 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void FormatFloatValue_NullCulture_ShouldFormatWithCurrentCulture()
         {
-            var unit = new Unit("asd", 1234123, "", "");
+            var unit = new Unit("qwe", "asd", 1234123, "", "");
             float value = 1.234F;
             string numberFormat = "{0:N3}";
 
@@ -24,7 +24,7 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void FormatFloatValue_GivenCulture_ShouldFormatWithCulture()
         {
-            var unit = new Unit("asd", 1234123, "", "");
+            var unit = new Unit("zxcv", "asd", 1234123, "", "");
             float value = 1.234F;
             string numberFormat = "{0:N3}";
 
@@ -36,7 +36,7 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void ToString_GivenCulture_ShouldFormatWithThreadsCulture()
         {
-            var unit = new Unit("asd", 1.234F, "V", "{0:N3}");
+            var unit = new Unit("sda", "asd", 1.234F, "V", "{0:N3}");
 
             var culture = new CultureInfo("de-DE");
             CultureInfo.DefaultThreadCurrentCulture = culture;

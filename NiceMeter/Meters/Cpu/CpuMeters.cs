@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace NiceMeter.Meters.Cpu
 {
-    class CpuMeters : AbstractMeter
+    public class CpuMeters : AbstractMeter
     {
-        public PercentUnit CpuTotal { get; set; } = new PercentUnit("Load", 0);
-        public WattUnit CpuPackage { get; set; } = new WattUnit("Power", 0);
+        public PercentUnit CpuTotal { get; set; } = new PercentUnit("CPU Total", "Load", 0);
+        public WattUnit CpuPackage { get; set; } = new WattUnit("CPU Package", "Power", 0);
 
         public IDictionary<string, IUnit> Units { get; set; } = new Dictionary<string, IUnit>();
 
@@ -16,25 +16,25 @@ namespace NiceMeter.Meters.Cpu
         {
             if (config.CpuTotal)
             {
-                Units.Add("CpuTotal", CpuTotal);
+                Units.Add(CpuTotal.Label, CpuTotal);
             }
 
             if (config.CpuPackage)
             {
-                Units.Add("CpuPackage", CpuPackage);
+                Units.Add(CpuPackage.Label, CpuPackage);
             }
         }
 
         public override void ReadSensors(IHardware hardware)
         {
-            if (Units.ContainsKey("CpuTotal"))
+            if (Units.ContainsKey(CpuTotal.Label))
             {
-                CpuTotal.Value = hardware.Sensors.Where(x => x.Name.Contains("CPU Total")).First().Value;
+                CpuTotal.Value = hardware.Sensors.Where(x => x.Name == CpuTotal.OHName).First().Value;
             }
 
-            if (Units.ContainsKey("CpuPackage"))
+            if (Units.ContainsKey(CpuPackage.Label))
             {
-                CpuPackage.Value = hardware.Sensors.Where(x => x.Name.Contains("CPU Package")).First().Value;
+                CpuPackage.Value = hardware.Sensors.Where(x => x.Name == CpuPackage.OHName).First().Value;
             }
         }
 
@@ -42,7 +42,11 @@ namespace NiceMeter.Meters.Cpu
         {
             ReadSensors(hardware);
 
-            Text = string.Format("{0} {1}", CpuTotal.ToString(), CpuPackage.ToString());
+            Text = string.Format(
+                "{0} {1}",
+                CpuTotal.ToString(), 
+                CpuPackage.ToString()
+            );
         }
     }
 }

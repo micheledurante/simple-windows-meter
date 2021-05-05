@@ -9,7 +9,7 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void Ctor_Default_ShouldCreateBaseWithExpectedProperties()
         {
-            var percentUnit = new PercentUnit("asd", 999);
+            var percentUnit = new PercentUnit("sda", "asd", 999);
 
             Assert.AreEqual(PercentUnit.DefaultMeasurementUnit, percentUnit.measurementUnit);
             Assert.AreEqual(PercentUnit.DefaultFormat, percentUnit.numberFormat);

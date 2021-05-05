@@ -12,6 +12,7 @@ namespace NiceMeter.EventHandlers
         public void UpdateComputerHardware(IComputerModel computer)
         {
             computer.GetMainboardHardware()?.Update();
+            computer.GetMainboardSubHardware()?.Update();
             computer.GetCpuHardware()?.Update();
             computer.GetGpuHardware()?.Update();
             computer.GetHddHardware()?.Update();
