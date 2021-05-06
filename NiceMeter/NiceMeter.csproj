@@ -84,12 +84,14 @@
     <Compile Include="Meters\Units\RpmUnit.cs" />
     <Compile Include="Meters\Units\TempUnit.cs" />
     <Compile Include="Meters\Units\PercentUnit.cs" />
+    <Compile Include="Meters\Units\FreqUnit.cs" />
     <Compile Include="Meters\Units\WattUnit.cs" />
     <Compile Include="Meters\Units\VoltUnit.cs" />
     <Compile Include="Models\ComputerModel.cs" />
     <Compile Include="Models\HardwareConfig.cs" />
     <Compile Include="Models\IComputerModel.cs" />
     <Compile Include="Meters\IObservableMeters.cs" />
+    <Compile Include="Models\IHardwareConfig.cs" />
     <Compile Include="Visitors\IHardwareVisitor.cs" />
     <Compile Include="Visitors\HardwareVisitor.cs" />
     <Compile Include="Startup.cs" />

@@ -11,7 +11,7 @@ namespace NiceMeterTests.Models
         {
             var computers = new Computers();
             var computer = computers.GetTestingHardware();
-            var hardwareConfig = HardwareConfig.TestingHardwareConfig();
+            var hardwareConfig = new HardwareConfig().TestingHardwareConfig();
 
             Assert.IsInstanceOfType(computer, typeof(IComputerModel));
             Assert.AreEqual(hardwareConfig.MainboardEnabled, computer.MainboardEnabled);
@@ -27,7 +27,7 @@ namespace NiceMeterTests.Models
         {
             var computers = new Computers();
             var computer = computers.GetAllHardware();
-            var hardwareConfig = HardwareConfig.AllHardwareConfig();
+            var hardwareConfig = new HardwareConfig().AllHardwareConfig();
 
             Assert.IsInstanceOfType(computer, typeof(IComputerModel));
             Assert.AreEqual(hardwareConfig.MainboardEnabled, computer.MainboardEnabled);

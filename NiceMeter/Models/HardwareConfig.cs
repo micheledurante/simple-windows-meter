@@ -1,6 +1,6 @@
 ﻿namespace NiceMeter.Models
 {
-    public class HardwareConfig
+    public class HardwareConfig : IHardwareConfig
     {
         public bool MainboardEnabled { get; set; } = false;
         public bool CPUEnabled { get; set; } = false;
@@ -9,7 +9,7 @@
         public bool FanControllerEnabled { get; set; } = false;
         public bool HDDEnabled { get; set; } = false;
 
-        public static HardwareConfig AllHardwareConfig()
+        public HardwareConfig AllHardwareConfig()
         {
             return new HardwareConfig
             {
@@ -22,7 +22,7 @@
             };
         }
 
-        public static HardwareConfig TestingHardwareConfig()
+        public HardwareConfig TestingHardwareConfig()
         {
             return new HardwareConfig
             {

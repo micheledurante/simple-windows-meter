@@ -11,7 +11,7 @@
         /// <returns></returns>
         public ComputerModel GetAllHardware()
         {
-            var config = HardwareConfig.AllHardwareConfig();
+            var config = new HardwareConfig().AllHardwareConfig();
             
             return new ComputerModel
             {
@@ -30,7 +30,7 @@
         /// <returns></returns>
         public ComputerModel GetTestingHardware()
         {
-            var config = HardwareConfig.TestingHardwareConfig();
+            var config = new HardwareConfig().TestingHardwareConfig();
 
             return new ComputerModel
             {

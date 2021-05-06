@@ -15,7 +15,7 @@ namespace NiceMeter.Visitors
     public class HardwareVisitor : IHardwareVisitor
     {
         public readonly HardwareConfig hardwareConfig;
-        private ObservableCollection<IMeter> Meters { get; set; } = new ObservableCollection<IMeter>();
+        public ObservableCollection<IMeter> Meters { get; set; } = new ObservableCollection<IMeter>();
 
         public HardwareVisitor(HardwareConfig hardwareConfig)
         {
@@ -38,7 +38,7 @@ namespace NiceMeter.Visitors
                     break;
 
                 case HardwareType.CPU:
-                    var cpuMeters = new CpuMeters(hardware.Name, CpuConfig.GetTestingCpu());
+                    var cpuMeters = new CpuMeters(hardware.Name, CpuConfig.GetRyzen3Cpu());
                     cpuMeters.ReadSensors(hardware);
                     Meters.Add(cpuMeters);
                     break;

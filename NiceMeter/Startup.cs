@@ -40,11 +40,12 @@ namespace NiceMeter
                 computer.Update();
                 computer.Traverse(hardwareVisitor);
                 //logger.Debug(computer.GetReport());
-                return new ObservableMeters(HardwareConfig.AllHardwareConfig(), hardwareVisitor.GetMeters());
+                return new ObservableMeters(new HardwareConfig().AllHardwareConfig(), hardwareVisitor.GetMeters());
             }
             catch (Exception e)
             {
                 logger.Error(e.Message);
+                logger.Error(e.StackTrace);
                 throw e;
             }
         }
@@ -85,7 +86,7 @@ namespace NiceMeter
 
             // Init the computer and its devices
             computer = GetComputer(new Computers());
-            var hardwareVisitor = new HardwareVisitor(HardwareConfig.AllHardwareConfig());
+            var hardwareVisitor = new HardwareVisitor(new HardwareConfig().AllHardwareConfig());
 
             try
             {

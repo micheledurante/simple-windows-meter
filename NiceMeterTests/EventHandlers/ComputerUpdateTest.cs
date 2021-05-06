@@ -151,5 +151,39 @@ namespace NiceMeterTests.EventHandlers
             hardwareVisitor.Verify(x => x.UpdateHdd(hddHardwareMock.Object), Times.Once);
             hardwareVisitor.Verify(x => x.UpdateRam(ramHardwareMock.Object), Times.Once);
         }
+
+        [TestMethod]
+        public void Update_AnyHardware_ShouldCallBothUpdateFunctions()
+        {
+            var computer = new Mock<IComputerModel>();
+            computer.Setup(x => x.GetMainboardHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetCpuHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetGpuHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetHddHardware()).Returns((IHardware)null);
+            computer.Setup(x => x.GetRamHardware()).Returns((IHardware)null);
+
+            var hardwareVisitor = new Mock<IHardwareVisitor>();
+            hardwareVisitor.Setup(x => x.UpdateMainboard(null));
+            hardwareVisitor.Setup(x => x.UpdateCpu(null));
+            hardwareVisitor.Setup(x => x.UpdateGpu(null));
+            hardwareVisitor.Setup(x => x.UpdateHdd(null));
+            hardwareVisitor.Setup(x => x.UpdateRam(null));
+
+            var computerUpdate = new ComputerUpdate();
+            computerUpdate.Update(computer.Object, hardwareVisitor.Object);
+
+            computer.Verify(x => x.GetMainboardHardware(), Times.Exactly(2));
+            computer.Verify(x => x.GetCpuHardware(), Times.Exactly(2));
+            computer.Verify(x => x.GetGpuHardware(), Times.Exactly(2));
+            computer.Verify(x => x.GetHddHardware(), Times.Exactly(2));
+            computer.Verify(x => x.GetRamHardware(), Times.Exactly(2));
+
+            // It is the mainboard's responsability to update its sub hardware
+            hardwareVisitor.Verify(x => x.UpdateMainboard(null), Times.Once);
+            hardwareVisitor.Verify(x => x.UpdateCpu(null), Times.Once);
+            hardwareVisitor.Verify(x => x.UpdateGpu(null), Times.Once);
+            hardwareVisitor.Verify(x => x.UpdateHdd(null), Times.Once);
+            hardwareVisitor.Verify(x => x.UpdateRam(null), Times.Once);
+        }
     }
 }

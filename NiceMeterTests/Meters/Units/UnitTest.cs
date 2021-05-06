@@ -8,6 +8,18 @@ namespace NiceMeterTests.Meters.Units
     public class UnitTest
     {
         [TestMethod]
+        public void Ctor_ValidParameters_PropertiesAreSetAsExpected()
+        {
+            var unit = new Unit("asd", "qwerty", 12312334.343F, "XX", "{}");
+
+            Assert.AreEqual("asd", unit.OHName);
+            Assert.AreEqual("qwerty", unit.Label);
+            Assert.AreEqual(12312334.343F, unit.Value);
+            Assert.AreEqual("XX", unit.measurementUnit);
+            Assert.AreEqual("{}", unit.numberFormat);
+        }
+
+        [TestMethod]
         public void FormatFloatValue_NullCulture_ShouldFormatWithCurrentCulture()
         {
             var unit = new Unit("qwe", "asd", 1234123, "", "");

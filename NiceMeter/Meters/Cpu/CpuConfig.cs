@@ -7,13 +7,17 @@
     {
         public bool CpuTotal { get; set; }
         public bool CpuPackage { get; set; }
+        public bool CpuClock { get; set; }
+        public bool CpuTemp { get; set; }
 
-        public static CpuConfig GetTestingCpu()
+        public static CpuConfig GetRyzen3Cpu()
         {
             return new CpuConfig
             {
                 CpuTotal = true,
-                CpuPackage = true
+                CpuPackage = true,
+                CpuClock = true,
+                CpuTemp = true
             };
         }
     }
