@@ -8,7 +8,7 @@ namespace NiceMeter.Meters.Mainboard
     /// <summary>
     /// Represent the collection of information for the Mainboard Sub Hardware
     /// </summary>
-    public class MainboardSubHardwareMeters : AbstractMeter
+    public class MainboardSubHardwareMeter : AbstractMeter
     {
         public VoltUnit CpuVCore { get; set; } = new VoltUnit("CPU VCore", "Core", 0);
         public VoltUnit CpuSoc { get; set; } = new VoltUnit("Voltage #7", "SOC", 0);
@@ -17,9 +17,9 @@ namespace NiceMeter.Meters.Mainboard
         public TempUnit TSensor { get; set; } = new TempUnit("Temperature #6", "T H2O", 0);
         public RpmUnit CpuFan { get; set; } = new RpmUnit("Fan #2", "CPU Fan", 0);
         public RpmUnit WPump { get; set; } = new RpmUnit("Fan #6", "PUMP", 0);
-        public IDictionary<string, IUnit> Units { get; set; } = new Dictionary<string, IUnit>();
+        public IDictionary<string, Unit> Units { get; set; } = new Dictionary<string, Unit>();
 
-        public MainboardSubHardwareMeters(string name, MainboardConfig config) : base(name, HardwareType.SuperIO)
+        public MainboardSubHardwareMeter(string name, MainboardConfig config) : base(name, HardwareType.SuperIO)
         {
             if (config.CpuVCore)
             {
@@ -57,42 +57,14 @@ namespace NiceMeter.Meters.Mainboard
             }
         }
 
-        public override void ReadSensors(IHardware hardware)
+        public override IMeter ReadSensors(IHardware hardware)
         {
-            if (Units.ContainsKey(CpuVCore.Label))
+            foreach (var unit in Units)
             {
-                CpuVCore.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == CpuVCore.OHName).FirstOrDefault()?.Value;
+                unit.Value.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == unit.Value.OHName).FirstOrDefault()?.Value;
             }
 
-            if (Units.ContainsKey(CpuSoc.Label))
-            {
-                CpuSoc.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == CpuSoc.OHName).FirstOrDefault()?.Value;
-            }
-
-            if (Units.ContainsKey(DRam.Label))
-            {
-                DRam.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == DRam.OHName).FirstOrDefault()?.Value;
-            }
-
-            if (Units.ContainsKey(Vrm.Label))
-            {
-                Vrm.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == Vrm.OHName).FirstOrDefault()?.Value;
-            }
-
-            if (Units.ContainsKey(TSensor.Label))
-            {
-                TSensor.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == TSensor.OHName).FirstOrDefault()?.Value;
-            }
-
-            if (Units.ContainsKey(CpuFan.Label))
-            {
-                CpuFan.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == CpuFan.OHName).FirstOrDefault()?.Value;
-            }
-
-            if (Units.ContainsKey(WPump.Label))
-            {
-                WPump.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == WPump.OHName).FirstOrDefault()?.Value;
-            }
+            return this;
         }
 
         public override void UpdateMeters(IHardware hardware)

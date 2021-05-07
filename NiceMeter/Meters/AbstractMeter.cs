@@ -40,7 +40,7 @@ namespace NiceMeter.Meters
             return HardwareType;
         }
 
-        public abstract void ReadSensors(IHardware hardware);
+        public abstract IMeter ReadSensors(IHardware hardware);
 
         public abstract void UpdateMeters(IHardware hardware);
     }

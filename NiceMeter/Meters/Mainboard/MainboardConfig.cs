@@ -26,19 +26,5 @@
                 WPump = true
             };
         }
-
-        public static MainboardConfig GetTestingMainboard()
-        {
-            return new MainboardConfig
-            { 
-                CpuVCore = false,
-                CpuSoc = false,
-                DRam = false,
-                Vrm = false,
-                TSensor = false,
-                CpuFan = false,
-                WPump = false
-            };
-        }
     }
 }

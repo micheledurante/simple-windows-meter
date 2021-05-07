@@ -37,21 +37,21 @@ namespace NiceMeter.Meters
             return meters;
         }
 
-        public MainboardMeters GetMainboardMeters()
+        public MainboardMeter GetMainboardMeters()
         {
             if (hardwareConfig.MainboardEnabled)
             {
-                return meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).OfType<MainboardMeters>().First();
+                return meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).OfType<MainboardMeter>().First();
             }
 
             return null;
         }
 
-        public CpuMeters GetCpuMeters()
+        public CpuMeter GetCpuMeters()
         {
             if (hardwareConfig.CPUEnabled)
             {
-                return meters.Where(x => x.GetHardwareType() == HardwareType.CPU).OfType<CpuMeters>().First();
+                return meters.Where(x => x.GetHardwareType() == HardwareType.CPU).OfType<CpuMeter>().First();
             }
 
             return null;

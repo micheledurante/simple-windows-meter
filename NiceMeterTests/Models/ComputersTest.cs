@@ -7,35 +7,12 @@ namespace NiceMeterTests.Models
     public class ComputersTest
     {
         [TestMethod]
-        public void GetTestingHardware_Default_ShouldEnableTestingHardware()
+        public void GetHardware_Default_ShouldReturnAComputer()
         {
             var computers = new Computers();
-            var computer = computers.GetTestingHardware();
-            var hardwareConfig = new HardwareConfig().TestingHardwareConfig();
+            var computer = computers.GetHardware();
 
             Assert.IsInstanceOfType(computer, typeof(IComputerModel));
-            Assert.AreEqual(hardwareConfig.MainboardEnabled, computer.MainboardEnabled);
-            Assert.AreEqual(hardwareConfig.CPUEnabled, computer.CPUEnabled);
-            Assert.AreEqual(hardwareConfig.RAMEnabled, computer.RAMEnabled);
-            Assert.AreEqual(hardwareConfig.GPUEnabled, computer.GPUEnabled);
-            Assert.AreEqual(hardwareConfig.FanControllerEnabled, computer.FanControllerEnabled);
-            Assert.AreEqual(hardwareConfig.HDDEnabled, computer.HDDEnabled);
-        }
-
-        [TestMethod]
-        public void GetAllHardware_Default_ShouldEnableAllHardware()
-        {
-            var computers = new Computers();
-            var computer = computers.GetAllHardware();
-            var hardwareConfig = new HardwareConfig().AllHardwareConfig();
-
-            Assert.IsInstanceOfType(computer, typeof(IComputerModel));
-            Assert.AreEqual(hardwareConfig.MainboardEnabled, computer.MainboardEnabled);
-            Assert.AreEqual(hardwareConfig.CPUEnabled, computer.CPUEnabled);
-            Assert.AreEqual(hardwareConfig.RAMEnabled, computer.RAMEnabled);
-            Assert.AreEqual(hardwareConfig.GPUEnabled, computer.GPUEnabled);
-            Assert.AreEqual(hardwareConfig.FanControllerEnabled, computer.FanControllerEnabled);
-            Assert.AreEqual(hardwareConfig.HDDEnabled, computer.HDDEnabled);
         }
     }
 }

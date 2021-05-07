@@ -78,9 +78,11 @@
     <Compile Include="EventHandlers\ComputerUpdate.cs" />
     <Compile Include="EventHandlers\IComputerUpdate.cs" />
     <Compile Include="Meters\Cpu\CpuConfig.cs" />
+    <Compile Include="Meters\Factories\IMeterFactory.cs" />
+    <Compile Include="Meters\Factories\MeterFactory.cs" />
     <Compile Include="Meters\IMeter.cs" />
     <Compile Include="Meters\Mainboard\MainboardConfig.cs" />
-    <Compile Include="Meters\Mainboard\MainboardSubHardwareMeters.cs" />
+    <Compile Include="Meters\Mainboard\MainboardSubHardwareMeter.cs" />
     <Compile Include="Meters\Units\RpmUnit.cs" />
     <Compile Include="Meters\Units\TempUnit.cs" />
     <Compile Include="Meters\Units\PercentUnit.cs" />
@@ -91,14 +93,14 @@
     <Compile Include="Models\HardwareConfig.cs" />
     <Compile Include="Models\IComputerModel.cs" />
     <Compile Include="Meters\IObservableMeters.cs" />
-    <Compile Include="Models\IHardwareConfig.cs" />
+    <Compile Include="Properties\NiceMeter.cs" />
     <Compile Include="Visitors\IHardwareVisitor.cs" />
     <Compile Include="Visitors\HardwareVisitor.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="Meters\Units\IUnit.cs" />
     <Compile Include="Meters\Units\Unit.cs" />
-    <Compile Include="Meters\Cpu\CpuMeters.cs" />
-    <Compile Include="Meters\Mainboard\MainboardMeters.cs" />
+    <Compile Include="Meters\Cpu\CpuMeter.cs" />
+    <Compile Include="Meters\Mainboard\MainboardMeter.cs" />
     <Compile Include="Meters\AbstractMeter.cs" />
     <Compile Include="Meters\ObservableMeters.cs" />
     <Page Include="NiceMeterWindow.xaml">
@@ -120,10 +122,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="Properties\Settings.Designer.cs">
+    <Compile Include="Properties\NiceMeter.Designer.cs">
       <AutoGen>True</AutoGen>
-      <DependentUpon>Settings.settings</DependentUpon>
+      <DependentUpon>NiceMeter.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -146,10 +149,11 @@
     <None Include="NiceMeter.manifest">
       <SubType>Designer</SubType>
     </None>
-    <None Include="Properties\Settings.settings">
+    <Resource Include="Properties\NiceMeter.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
-      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
-    </None>
+      <LastGenOutput>NiceMeter.Designer.cs</LastGenOutput>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <None Include="NiceMeter.config" />

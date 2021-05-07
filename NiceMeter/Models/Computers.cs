@@ -6,32 +6,13 @@
     public class Computers
     {
         /// <summary>
-        /// Default computer, all hardware is enabled
+        /// Teh computer as defined in the settings file
         /// </summary>
         /// <returns></returns>
-        public ComputerModel GetAllHardware()
+        public ComputerModel GetHardware()
         {
-            var config = new HardwareConfig().AllHardwareConfig();
+            var config = new HardwareConfig();
             
-            return new ComputerModel
-            {
-                MainboardEnabled = config.MainboardEnabled,
-                CPUEnabled = config.CPUEnabled,
-                RAMEnabled = config.RAMEnabled,
-                GPUEnabled = config.GPUEnabled,
-                FanControllerEnabled = config.FanControllerEnabled,
-                HDDEnabled = config.HDDEnabled
-            };
-        }
-
-        /// <summary>
-        /// Simple hardware only for testing
-        /// </summary>
-        /// <returns></returns>
-        public ComputerModel GetTestingHardware()
-        {
-            var config = new HardwareConfig().TestingHardwareConfig();
-
             return new ComputerModel
             {
                 MainboardEnabled = config.MainboardEnabled,

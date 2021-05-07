@@ -8,7 +8,8 @@ namespace NiceMeter.Meters
         /// Read the sensor values, Implement logic for specific sub-types (mainboard, cpus, etc...)
         /// </summary>
         /// <param name="hardware"></param>
-        void ReadSensors(IHardware hardware);
+        /// <returns></returns>
+        IMeter ReadSensors(IHardware hardware);
 
         HardwareType GetHardwareType();
 

@@ -1,6 +1,5 @@
 ﻿using NiceMeter.Meters;
-using NiceMeter.Meters.Cpu;
-using NiceMeter.Meters.Mainboard;
+using NiceMeter.Meters.Factories;
 using NiceMeter.Models;
 using OpenHardwareMonitor.Hardware;
 using System;
@@ -15,11 +14,13 @@ namespace NiceMeter.Visitors
     public class HardwareVisitor : IHardwareVisitor
     {
         public readonly HardwareConfig hardwareConfig;
+        public readonly IMeterFactory meterFactory;
         public ObservableCollection<IMeter> Meters { get; set; } = new ObservableCollection<IMeter>();
 
-        public HardwareVisitor(HardwareConfig hardwareConfig)
+        public HardwareVisitor(HardwareConfig hardwareConfig, IMeterFactory meterFactory)
         {
             this.hardwareConfig = hardwareConfig;
+            this.meterFactory = meterFactory;
         }
 
         public void VisitComputer(IComputer computer)
@@ -29,20 +30,7 @@ namespace NiceMeter.Visitors
 
         public void VisitHardware(IHardware hardware)
         {
-            switch (hardware.HardwareType)
-            {
-                case HardwareType.Mainboard:
-                    var mainboardMeters = new MainboardMeters(hardware.Name, MainboardConfig.GetCrosshair8Mainboard());
-                    mainboardMeters.ReadSensors(hardware);
-                    Meters.Add(mainboardMeters);
-                    break;
-
-                case HardwareType.CPU:
-                    var cpuMeters = new CpuMeters(hardware.Name, CpuConfig.GetRyzen3Cpu());
-                    cpuMeters.ReadSensors(hardware);
-                    Meters.Add(cpuMeters);
-                    break;
-            }
+            Meters.Add(meterFactory.Create(hardware).ReadSensors(hardware));
         }
 
         public void VisitParameter(IParameter parameter)

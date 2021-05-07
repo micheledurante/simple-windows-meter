@@ -54,6 +54,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventHandlers\ComputerUpdateTest.cs" />
+    <Compile Include="Meters\Factories\MeterFactoryTest.cs" />
     <Compile Include="Meters\Units\UnitTest.cs" />
     <Compile Include="Meters\Units\FreqUnitTest.cs" />
     <Compile Include="Meters\Units\WattUnitTest.cs" />

@@ -6,6 +6,7 @@ using NiceMeter.Visitors;
 using NiceMeter.EventHandlers;
 using log4net;
 using NiceMeter.Meters;
+using NiceMeter.Meters.Factories;
 
 namespace NiceMeter
 {
@@ -23,7 +24,7 @@ namespace NiceMeter
         /// <returns></returns>
         public ComputerModel GetComputer(Computers computers)
         {
-            return computers.GetAllHardware();
+            return computers.GetHardware();
         }
 
         /// <summary>
@@ -40,7 +41,7 @@ namespace NiceMeter
                 computer.Update();
                 computer.Traverse(hardwareVisitor);
                 //logger.Debug(computer.GetReport());
-                return new ObservableMeters(new HardwareConfig().AllHardwareConfig(), hardwareVisitor.GetMeters());
+                return new ObservableMeters(new HardwareConfig(), hardwareVisitor.GetMeters());
             }
             catch (Exception e)
             {
@@ -86,7 +87,7 @@ namespace NiceMeter
 
             // Init the computer and its devices
             computer = GetComputer(new Computers());
-            var hardwareVisitor = new HardwareVisitor(new HardwareConfig().AllHardwareConfig());
+            var hardwareVisitor = new HardwareVisitor(new HardwareConfig(), new MeterFactory());
 
             try
             {
@@ -106,7 +107,7 @@ namespace NiceMeter
         }
 
         /// <summary>
-        /// Ensure that a shutdown of thew application correctly frees the computer resource
+        /// Ensure that a shutdown of thew application correctly frees up the computer resource
         /// </summary>
         /// <param name="exitCode"></param>
         public new void Shutdown(int exitCode)
