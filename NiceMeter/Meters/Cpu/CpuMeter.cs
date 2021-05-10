@@ -47,7 +47,6 @@ namespace NiceMeter.Meters.Cpu
                         .Where(x => x.Name.Contains(CpuClock.OHName) && x.SensorType == SensorType.Clock)
                         .Select(x => x.Value)
                         .Average() / 1000;
-                    break;
                 }
                 else if (unit.Label == CpuTemp.Label)
                 {
@@ -55,7 +54,6 @@ namespace NiceMeter.Meters.Cpu
                         .Where(x => x.Name.Contains(CpuTemp.OHName) && x.SensorType == SensorType.Temperature)
                         .Select(x => x.Value)
                         .Average();
-                    break;
                 }
                 else
                 {

@@ -82,7 +82,7 @@ namespace NiceMeter
         private void Application_Startup(object sender, StartupEventArgs ev)
         {
             // Init logger
-            log4net.Config.XmlConfigurator.Configure();
+            log4net.Config.XmlConfigurator.Configure(new System.IO.FileInfo(System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location)));
             logger.Info("NiceMeter application started");
 
             // Init the computer and its devices
@@ -93,17 +93,16 @@ namespace NiceMeter
             {
                 // Init timer and events
                 CreateTimer(computer, hardwareVisitor, new DispatcherTimer()).Start();
+                // NiceMeter window
+                var niceMeterWindow = new NiceMeterWindow(CreateObservableMeters(computer, hardwareVisitor), SystemParameters.WorkArea.Right);
+                niceMeterWindow.CreateView();
+                niceMeterWindow.Show();
             }
             catch (Exception e)
             {
                 logger.Error(e.Message);
                 throw e;
             }
-
-            // NiceMeter window
-            var niceMeterWindow = new NiceMeterWindow(CreateObservableMeters(computer, hardwareVisitor), SystemParameters.WorkArea.Right);
-            niceMeterWindow.CreateView();
-            niceMeterWindow.Show();
         }
 
         /// <summary>
