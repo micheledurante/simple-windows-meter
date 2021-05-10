@@ -156,7 +156,7 @@
       <SubType>Designer</SubType>
     </None>
     <Resource Include="Properties\NiceMeter.settings">
-      <Generator>SettingsSingleFileGenerator</Generator>
+      <Generator>PublicSettingsSingleFileGenerator</Generator>
       <LastGenOutput>NiceMeter.Designer.cs</LastGenOutput>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Resource>

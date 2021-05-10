@@ -2,6 +2,7 @@
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Models;
 using OpenHardwareMonitor.Hardware;
+using System;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Linq;
@@ -9,7 +10,7 @@ using System.Linq;
 namespace NiceMeter.Meters
 {
     /// <summary>
-    /// Represent the collection of meters observed for changes every tick cycle.
+    /// Represent the collection of meters observed for changes on every tick cycle
     /// </summary>
     public class ObservableMeters : IObservableMeters
     {
@@ -29,7 +30,8 @@ namespace NiceMeter.Meters
 
         private void OnCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
-            // Implement here logic for adding/removing tables to the collection.
+            // Implement here logic for adding/removing tables to the collection
+            throw new NotImplementedException();
         }
 
         public ObservableCollection<IMeter> GetMeters()
@@ -37,21 +39,21 @@ namespace NiceMeter.Meters
             return meters;
         }
 
-        public MainboardMeter GetMainboardMeters()
+        public MainboardMeter GetMainboardMeter()
         {
             if (hardwareConfig.MainboardEnabled)
             {
-                return meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).OfType<MainboardMeter>().First();
+                return meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).OfType<MainboardMeter>().FirstOrDefault();
             }
 
             return null;
         }
 
-        public CpuMeter GetCpuMeters()
+        public CpuMeter GetCpuMeter()
         {
             if (hardwareConfig.CPUEnabled)
             {
-                return meters.Where(x => x.GetHardwareType() == HardwareType.CPU).OfType<CpuMeter>().First();
+                return meters.Where(x => x.GetHardwareType() == HardwareType.CPU).OfType<CpuMeter>().FirstOrDefault();
             }
 
             return null;

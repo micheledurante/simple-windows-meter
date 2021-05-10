@@ -21,37 +21,37 @@ namespace NiceMeter.Meters.Mainboard
 
         public MainboardSubHardwareMeter(string name, MainboardConfig config) : base(name, HardwareType.SuperIO)
         {
-            if (config.CpuVCore)
+            if (config.MainboardCpuVCore)
             {
                 Units.Add(CpuVCore.Label, CpuVCore);
             }
 
-            if (config.CpuSoc)
+            if (config.MainboardCpuSoc)
             {
                 Units.Add(CpuSoc.Label, CpuSoc);
             }
 
-            if (config.DRam)
+            if (config.MainboardDRam)
             {
                 Units.Add(DRam.Label, DRam);
             }
 
-            if (config.Vrm)
+            if (config.MainboardVrm)
             {
                 Units.Add(Vrm.Label, Vrm);
             }
 
-            if (config.TSensor)
+            if (config.MainboardTSensor)
             {
                 Units.Add(TSensor.Label, TSensor);
             }
 
-            if (config.CpuFan)
+            if (config.MainboardCpuFan)
             {
                 Units.Add(CpuFan.Label, CpuFan);
             }
 
-            if (config.WPump)
+            if (config.MainboardWPump)
             {
                 Units.Add(WPump.Label, WPump);
             }

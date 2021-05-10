@@ -22,9 +22,11 @@ namespace NiceMeterTests
             Assert.AreEqual(workAreaRight, window.Width);
             Assert.AreEqual(NiceMeterWindow.title, window.Title);
             Assert.AreEqual(NiceMeterWindow.allowsTransparency, window.AllowsTransparency);
+            Assert.AreEqual(NiceMeterWindow.topmost, window.Topmost);
             Assert.AreEqual(NiceMeterWindow.windowStyle, window.WindowStyle);
             Assert.AreEqual(NiceMeterWindow.resizeMode, window.ResizeMode);
             Assert.AreEqual(NiceMeterWindow.windowStartupLocation, window.WindowStartupLocation);
+            Assert.AreEqual(window.background, window.Background);
         }
     }
 }

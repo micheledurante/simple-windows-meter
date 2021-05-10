@@ -94,5 +94,137 @@ namespace NiceMeter.Properties {
                 this["FanControllerEnabled"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CpuTotal {
+            get {
+                return ((bool)(this["CpuTotal"]));
+            }
+            set {
+                this["CpuTotal"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CpuPackage {
+            get {
+                return ((bool)(this["CpuPackage"]));
+            }
+            set {
+                this["CpuPackage"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CpuClock {
+            get {
+                return ((bool)(this["CpuClock"]));
+            }
+            set {
+                this["CpuClock"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool CpuTemp {
+            get {
+                return ((bool)(this["CpuTemp"]));
+            }
+            set {
+                this["CpuTemp"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainboardCpuVCore {
+            get {
+                return ((bool)(this["MainboardCpuVCore"]));
+            }
+            set {
+                this["MainboardCpuVCore"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainboardCpuSoc {
+            get {
+                return ((bool)(this["MainboardCpuSoc"]));
+            }
+            set {
+                this["MainboardCpuSoc"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainboardDRam {
+            get {
+                return ((bool)(this["MainboardDRam"]));
+            }
+            set {
+                this["MainboardDRam"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainboardVrm {
+            get {
+                return ((bool)(this["MainboardVrm"]));
+            }
+            set {
+                this["MainboardVrm"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainboardTSensor {
+            get {
+                return ((bool)(this["MainboardTSensor"]));
+            }
+            set {
+                this["MainboardTSensor"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainboardCpuFan {
+            get {
+                return ((bool)(this["MainboardCpuFan"]));
+            }
+            set {
+                this["MainboardCpuFan"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool MainboardWPump {
+            get {
+                return ((bool)(this["MainboardWPump"]));
+            }
+            set {
+                this["MainboardWPump"] = value;
+            }
+        }
     }
 }

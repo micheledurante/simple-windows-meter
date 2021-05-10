@@ -12,9 +12,9 @@ namespace NiceMeter.Meters.Factories
             switch (hardware.HardwareType)
             {
                 case HardwareType.Mainboard:
-                    return new MainboardMeter(hardware.Name, MainboardConfig.GetCrosshair8Mainboard());
+                    return new MainboardMeter(hardware.Name, new MainboardConfig());
                 case HardwareType.CPU:
-                    return new CpuMeter(hardware.Name, CpuConfig.GetRyzen3Cpu());
+                    return new CpuMeter(hardware.Name, new CpuConfig());
                 default:
                     throw new Exception(string.Format("Hardware type \"{0}\" not understood", hardware.HardwareType));
             }

@@ -19,10 +19,12 @@ namespace NiceMeter
         public const int left = 0;
         public const int top = 0;
         public const string title = "NiceMeter";
-        public const bool allowsTransparency = true;
+        public const bool allowsTransparency = false;
+        public const bool topmost = true;
         public const WindowStyle windowStyle = WindowStyle.None;
         public const ResizeMode resizeMode = ResizeMode.NoResize;
         public const WindowStartupLocation windowStartupLocation = WindowStartupLocation.Manual;
+        public Brush background = Brushes.Black;
 
         private readonly IObservableMeters observableMeters;
         private static readonly ILog logger = LogManager.GetLogger(typeof(NiceMeterWindow));
@@ -51,7 +53,8 @@ namespace NiceMeter
             ResizeMode = resizeMode;
             WindowStartupLocation = windowStartupLocation;
             AllowsTransparency = allowsTransparency;
-            Topmost = true;
+            Topmost = topmost;
+            Background = background;
         }
 
         /// <summary>
@@ -59,14 +62,14 @@ namespace NiceMeter
         /// </summary>
         public void CreateMainboardPanel()
         {
-            mainboardPanel.DataContext = observableMeters.GetMainboardMeters();
+            mainboardPanel.DataContext = observableMeters.GetMainboardMeter();
 
             mainboardPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
 
             var mainboardNameTextBlock = new TextBlock();
             mainboardNameTextBlock.Foreground = Brushes.White;
-            mainboardNameTextBlock.LineHeight = 10;
-            mainboardNameTextBlock.FontSize = 10;
+            mainboardNameTextBlock.LineHeight = NiceMeterWindow.height;
+            mainboardNameTextBlock.FontSize = 9;
             mainboardNameTextBlock.FontWeight = FontWeights.Light;
 
             Binding mainboardNameBinding = new Binding("Name")
@@ -82,8 +85,8 @@ namespace NiceMeter
 
             var mainboardTextTextBlock = new TextBlock();
             mainboardTextTextBlock.Foreground = Brushes.White;
-            mainboardTextTextBlock.LineHeight = 10;
-            mainboardTextTextBlock.FontSize = 10;
+            mainboardTextTextBlock.LineHeight = NiceMeterWindow.height;
+            mainboardTextTextBlock.FontSize = 9;
             mainboardTextTextBlock.FontWeight = FontWeights.Light;
 
             Binding mainboardTextBinding = new Binding("Text")
@@ -103,12 +106,12 @@ namespace NiceMeter
         /// </summary>
         public void CreateCpuPanel()
         {
-            cpuPanel.DataContext = observableMeters.GetCpuMeters();
+            cpuPanel.DataContext = observableMeters.GetCpuMeter();
 
             var dividerTextBlock = new TextBlock();
             dividerTextBlock.Foreground = Brushes.White;
-            dividerTextBlock.LineHeight = 10;
-            dividerTextBlock.FontSize = 10;
+            dividerTextBlock.LineHeight = NiceMeterWindow.height;
+            dividerTextBlock.FontSize = 9;
             dividerTextBlock.FontWeight = FontWeights.Light;
             dividerTextBlock.Text = "  |  ";
 
@@ -116,8 +119,8 @@ namespace NiceMeter
 
             var cpuNameTextBlock = new TextBlock();
             cpuNameTextBlock.Foreground = Brushes.White;
-            cpuNameTextBlock.LineHeight = 10;
-            cpuNameTextBlock.FontSize = 10;
+            cpuNameTextBlock.LineHeight = NiceMeterWindow.height;
+            cpuNameTextBlock.FontSize = 9;
             cpuNameTextBlock.FontWeight = FontWeights.Light;
 
             Binding cpuNameBinding = new Binding("Name")
@@ -133,8 +136,8 @@ namespace NiceMeter
 
             var cpuTextTextBlock = new TextBlock();
             cpuTextTextBlock.Foreground = Brushes.White;
-            cpuTextTextBlock.LineHeight = 10;
-            cpuTextTextBlock.FontSize = 10;
+            cpuTextTextBlock.LineHeight = NiceMeterWindow.height;
+            cpuTextTextBlock.FontSize = 9;
             cpuTextTextBlock.FontWeight = FontWeights.Light;
 
             Binding cpuTextBinding = new Binding("Text")

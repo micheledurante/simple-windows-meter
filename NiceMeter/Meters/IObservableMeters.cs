@@ -23,12 +23,12 @@ namespace NiceMeter.Meters
         /// Return the observed Mainboard meters if enabled
         /// </summary>
         /// <returns></returns>
-        MainboardMeter GetMainboardMeters();
+        MainboardMeter GetMainboardMeter();
 
         /// <summary>
         /// Return the observed CPU meters if enabled
         /// </summary>
         /// <returns></returns>
-        CpuMeter GetCpuMeters();
+        CpuMeter GetCpuMeter();
     }
 }
