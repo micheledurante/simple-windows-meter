@@ -1,7 +1,7 @@
 ﻿namespace NiceMeter.Meters.Cpu
 {
     /// <summary>
-    /// Sensors for the CPU. This will map to OpenHardwareMonitor's internal sensor naming scheme
+    /// Sensors for the CPU. This will be mapped to OpenHardwareMonitor's internal sensor naming scheme
     /// </summary>
     public class CpuConfig
     {

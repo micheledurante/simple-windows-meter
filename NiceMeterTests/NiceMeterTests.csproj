@@ -59,7 +59,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="EventHandlers\ComputerUpdateTest.cs" />
+    <Compile Include="Meters\Cpu\CpuMeterTest.cs" />
+    <Compile Include="Meters\Cpu\CpuConfigTest.cs" />
     <Compile Include="Meters\Factories\MeterFactoryTest.cs" />
+    <Compile Include="Meters\Mainboard\MainboardMeterTest .cs" />
+    <Compile Include="Meters\Mainboard\MainboardSubHardwareMeterTest.cs" />
+    <Compile Include="Meters\Mainboard\MainboardConfigTest.cs" />
     <Compile Include="Meters\ObservableMetersTest.cs" />
     <Compile Include="Meters\Units\UnitTest.cs" />
     <Compile Include="Meters\Units\FreqUnitTest.cs" />

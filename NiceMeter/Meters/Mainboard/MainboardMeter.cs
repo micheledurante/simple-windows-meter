@@ -26,6 +26,12 @@ namespace NiceMeter.Meters.Mainboard
 
         public override void UpdateMeters(IHardware hardware)
         {
+            if (SubHardware.Units.Count == 0)
+            {
+                Text = null;
+                return;
+            }
+
             SubHardware.UpdateMeters(hardware);
 
             Text = string.Format(

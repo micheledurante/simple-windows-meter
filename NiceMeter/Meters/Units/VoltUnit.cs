@@ -7,7 +7,7 @@
     {
         public const string DefaultMeasurementUnit = "V";
         public const string DefaultFormat = "{0:N3}";
-        public VoltUnit(string OHName, string Label, float? Value) : base(OHName, Label, Value, DefaultMeasurementUnit, DefaultFormat)
+        public VoltUnit(string OHName, string Label, float? Value = null) : base(OHName, Label, Value, DefaultMeasurementUnit, DefaultFormat)
         {
         }
     }

@@ -7,6 +7,17 @@ namespace NiceMeterTests.Meters.Units
     public class VoltUnitTest
     {
         [TestMethod]
+        public void Ctor_EmptyValue_ShouldDefaultToNull()
+        {
+            var voltUnit = new VoltUnit("qwe", "qwe");
+
+            Assert.AreEqual(VoltUnit.DefaultMeasurementUnit, voltUnit.measurementUnit);
+            Assert.AreEqual(VoltUnit.DefaultFormat, voltUnit.numberFormat);
+            Assert.AreEqual("qwe", voltUnit.Label);
+            Assert.IsNull(voltUnit.Value);
+        }
+
+        [TestMethod]
         public void Ctor_Default_ShouldCreateBaseWithExpectedProperties()
         {
             var percentUnit = new VoltUnit("fdsa", "asdf", 89768678);

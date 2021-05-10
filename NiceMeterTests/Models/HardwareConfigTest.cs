@@ -7,7 +7,7 @@ namespace NiceMeterTests.Models
     public class HardwareConfigTest
     {
         [TestMethod]
-        public void HardwareConfig_Default_AllHardwareShouldMatchSettingsFile()
+        public void Ctor_Default_AllHardwareShouldMatchSettingsFile()
         {
             var hardwareConfig = new HardwareConfig();
 

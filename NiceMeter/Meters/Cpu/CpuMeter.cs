@@ -7,10 +7,10 @@ namespace NiceMeter.Meters.Cpu
 {
     public class CpuMeter : AbstractMeter
     {
-        public PercentUnit CpuTotal { get; set; } = new PercentUnit("CPU Total", "Load", 0);
-        public WattUnit CpuPackage { get; set; } = new WattUnit("CPU Package", "Power", 0);
-        public TempUnit CpuTemp { get; set; } = new TempUnit("CPU", "T", 0);
-        public FreqUnit CpuClock { get; set; } = new FreqUnit("CPU", "Clock", 0); // Will be an average of each core's frequency
+        public PercentUnit CpuTotal { get; set; } = new PercentUnit("CPU Total", "Load", null);
+        public WattUnit CpuPackage { get; set; } = new WattUnit("CPU Package", "Power", null);
+        public TempUnit CpuTemp { get; set; } = new TempUnit("CPU", "T", null);
+        public FreqUnit CpuClock { get; set; } = new FreqUnit("CPU", "Clock", null); // Will be an average of each core's frequency
 
         public IList<Unit> Units { get; set; } = new List<Unit>();
 
@@ -26,15 +26,15 @@ namespace NiceMeter.Meters.Cpu
                 Units.Add(CpuPackage);
             }
 
-            if (config.CpuClock)
-            {
-                Units.Add(CpuClock);
-            }
-
             if (config.CpuTemp)
             {
                 Units.Add(CpuTemp);
             }
+
+            if (config.CpuClock)
+            {
+                Units.Add(CpuClock);
+            }  
         }
 
         public override IMeter ReadSensors(IHardware hardware)
@@ -66,6 +66,12 @@ namespace NiceMeter.Meters.Cpu
 
         public override void UpdateMeters(IHardware hardware)
         {
+            if (Units.Count == 0)
+            {
+                Text = null;
+                return;
+            }
+
             ReadSensors(hardware);
 
             Text = string.Format(

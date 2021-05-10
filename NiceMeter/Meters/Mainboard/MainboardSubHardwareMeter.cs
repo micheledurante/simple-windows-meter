@@ -10,50 +10,50 @@ namespace NiceMeter.Meters.Mainboard
     /// </summary>
     public class MainboardSubHardwareMeter : AbstractMeter
     {
-        public VoltUnit CpuVCore { get; set; } = new VoltUnit("CPU VCore", "Core", 0);
-        public VoltUnit CpuSoc { get; set; } = new VoltUnit("Voltage #7", "SOC", 0);
-        public VoltUnit DRam { get; set; } = new VoltUnit("Voltage #14", "DRAM", 0);
-        public TempUnit Vrm { get; set; } = new TempUnit("Temperature #2", "T VRM", 0);
-        public TempUnit TSensor { get; set; } = new TempUnit("Temperature #6", "T H2O", 0);
-        public RpmUnit CpuFan { get; set; } = new RpmUnit("Fan #2", "CPU Fan", 0);
-        public RpmUnit WPump { get; set; } = new RpmUnit("Fan #6", "PUMP", 0);
-        public IDictionary<string, Unit> Units { get; set; } = new Dictionary<string, Unit>();
+        public VoltUnit CpuVCore { get; set; } = new VoltUnit("CPU VCore", "Core", null);
+        public VoltUnit CpuSoc { get; set; } = new VoltUnit("Voltage #7", "SOC", null);
+        public VoltUnit DRam { get; set; } = new VoltUnit("Voltage #14", "DRAM", null);
+        public TempUnit Vrm { get; set; } = new TempUnit("Temperature #2", "T VRM", null);
+        public TempUnit TSensor { get; set; } = new TempUnit("Temperature #6", "T H2O", null);
+        public RpmUnit CpuFan { get; set; } = new RpmUnit("Fan #2", "CPU Fan", null);
+        public RpmUnit WPump { get; set; } = new RpmUnit("Fan #6", "Pump", null);
+        public IList<Unit> Units { get; set; } = new List<Unit>();
 
         public MainboardSubHardwareMeter(string name, MainboardConfig config) : base(name, HardwareType.SuperIO)
         {
             if (config.MainboardCpuVCore)
             {
-                Units.Add(CpuVCore.Label, CpuVCore);
+                Units.Add(CpuVCore);
             }
 
             if (config.MainboardCpuSoc)
             {
-                Units.Add(CpuSoc.Label, CpuSoc);
+                Units.Add(CpuSoc);
             }
 
             if (config.MainboardDRam)
             {
-                Units.Add(DRam.Label, DRam);
+                Units.Add(DRam);
             }
 
             if (config.MainboardVrm)
             {
-                Units.Add(Vrm.Label, Vrm);
+                Units.Add(Vrm);
             }
 
             if (config.MainboardTSensor)
             {
-                Units.Add(TSensor.Label, TSensor);
+                Units.Add(TSensor);
             }
 
             if (config.MainboardCpuFan)
             {
-                Units.Add(CpuFan.Label, CpuFan);
+                Units.Add(CpuFan);
             }
 
             if (config.MainboardWPump)
             {
-                Units.Add(WPump.Label, WPump);
+                Units.Add(WPump);
             }
         }
 
@@ -61,7 +61,7 @@ namespace NiceMeter.Meters.Mainboard
         {
             foreach (var unit in Units)
             {
-                unit.Value.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == unit.Value.OHName).FirstOrDefault()?.Value;
+                unit.Value = hardware.SubHardware[0].Sensors.Where(x => x.Name == unit.OHName).FirstOrDefault()?.Value;
             }
 
             return this;

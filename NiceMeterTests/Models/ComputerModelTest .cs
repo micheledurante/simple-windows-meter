@@ -11,9 +11,10 @@ namespace NiceMeterTests.Models
     public class ComputerTest
     {
         [TestMethod]
-        public void Computer_Constructor_TestComputerInheritanceAndProperties()
+        public void Ctor_Default_TestComputerInheritanceAndProperties()
         {
             var computer = new ComputerModel();
+
             Assert.IsInstanceOfType(computer, typeof(Computer));
             Assert.IsInstanceOfType(computer, typeof(IComputerModel));
             Assert.AreEqual(0, computer.HardwareListCache.Count);

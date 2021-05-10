@@ -8,7 +8,7 @@
         public const string DefaultMeasurementUnit = "GHz";
         public const string DefaultFormat = "{0:N2}";
 
-        public FreqUnit(string OHName, string Label, float? Value) : base(OHName, Label, Value, DefaultMeasurementUnit, DefaultFormat)
+        public FreqUnit(string OHName, string Label, float? Value = null) : base(OHName, Label, Value, DefaultMeasurementUnit, DefaultFormat)
         {
         }
     }
