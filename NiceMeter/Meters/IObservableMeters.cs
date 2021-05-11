@@ -1,4 +1,5 @@
 ﻿using NiceMeter.Meters.Cpu;
+using NiceMeter.Meters.Hdd;
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Meters.Ram;
 using NiceMeter.Models;
@@ -37,5 +38,11 @@ namespace NiceMeter.Meters
         /// </summary>
         /// <returns></returns>
         RamMeter GetRamMeter();
+
+        /// <summary>
+        /// Return the observed HDD meters, if enabled
+        /// </summary>
+        /// <returns></returns>
+        HddMeter GetHddMeter();
     }
 }

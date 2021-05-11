@@ -2,6 +2,7 @@
 using Moq;
 using NiceMeter.Meters.Cpu;
 using NiceMeter.Meters.Factories;
+using NiceMeter.Meters.Hdd;
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Meters.Ram;
 using OpenHardwareMonitor.Hardware;
@@ -61,6 +62,18 @@ namespace NiceMeterTests.Meters.Factories
             var meter = meterFactory.Create(hardwareMock.Object);
             hardwareMock.Verify(x => x.HardwareType, Times.Once);
             Assert.IsInstanceOfType(meter, typeof(RamMeter));
+        }
+
+        [TestMethod]
+        public void Create_HddHardwareType_ShouldCreateTheHddMeter()
+        {
+            var hardwareMock = new Mock<IHardware>();
+            hardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.HDD);
+            var meterFactory = new MeterFactory();
+
+            var meter = meterFactory.Create(hardwareMock.Object);
+            hardwareMock.Verify(x => x.HardwareType, Times.Once);
+            Assert.IsInstanceOfType(meter, typeof(HddMeter));
         }
     }
 }

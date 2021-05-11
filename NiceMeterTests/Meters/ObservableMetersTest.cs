@@ -2,6 +2,7 @@
 using Moq;
 using NiceMeter.Meters;
 using NiceMeter.Meters.Cpu;
+using NiceMeter.Meters.Hdd;
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Meters.Ram;
 using NiceMeter.Models;
@@ -158,7 +159,7 @@ namespace NiceMeterTests.Meters
             meters.Add(meterMock.Object);
 
             var observableMeters = new ObservableMeters(hardwareConfig, meters);
-            var meter = observableMeters.GetCpuMeter();
+            var meter = observableMeters.GetRamMeter();
 
             Assert.IsNull(meter);
         }
@@ -189,6 +190,52 @@ namespace NiceMeterTests.Meters
 
             var observableMeters = new ObservableMeters(hardwareConfig, meters);
             var meter = observableMeters.GetRamMeter();
+
+            Assert.AreEqual(ramMeter, meter);
+        }
+
+        // HDD meters
+
+        [TestMethod]
+        public void GetHddMeter_HddNotEnabled_ShouldReturnNull()
+        {
+            var meterMock = new Mock<IMeter>();
+            var hardwareConfig = new HardwareConfig { HDDEnabled = false };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(meterMock.Object);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetHddMeter();
+
+            Assert.IsNull(meter);
+        }
+
+        [TestMethod]
+        public void GetHddMeter_HddEnabledHddMeterNotFound_ShouldReturnNull()
+        {
+            var meterMock = new Mock<IMeter>();
+            meterMock.Setup(x => x.GetHardwareType()).Returns(HardwareType.Mainboard);
+            var hardwareConfig = new HardwareConfig { HDDEnabled = true };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(meterMock.Object);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetHddMeter();
+
+            Assert.IsNull(meter);
+            meterMock.Verify(x => x.GetHardwareType(), Times.Once);
+        }
+
+        [TestMethod]
+        public void GetHddMeter_HddEnabledHddMeterFound_ShouldReturnTheHddMeter()
+        {
+            var ramMeter = new HddMeter(); // Can only work with concrete types due to linq OfType()
+            var hardwareConfig = new HardwareConfig { HDDEnabled = true };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(ramMeter);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetHddMeter();
 
             Assert.AreEqual(ramMeter, meter);
         }

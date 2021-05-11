@@ -101,7 +101,7 @@ namespace NiceMeter
         }
 
         /// <summary>
-        /// Create the UI elements and bindings for the Mainboard meters
+        /// Create the UI elements and bindings for the RAM meters
         /// </summary>
         public void CreateRamPanel()
         {
@@ -149,6 +149,57 @@ namespace NiceMeter
             ramTextTextBlock.SetBinding(TextBlock.TextProperty, mainboardTextBinding);
 
             ramPanel.Children.Add(ramTextTextBlock); // RAM text
+        }
+
+        /// <summary>
+        /// Create the UI elements and bindings for the HDD meters
+        /// </summary>
+        public void CreateHddPanel()
+        {
+            hddPanel.DataContext = observableMeters.GetHddMeter();
+
+            var dividerTextBlock = new TextBlock();
+            dividerTextBlock.Foreground = Brushes.White;
+            dividerTextBlock.LineHeight = NiceMeterWindow.height;
+            dividerTextBlock.FontSize = 9;
+            dividerTextBlock.FontWeight = FontWeights.Light;
+            dividerTextBlock.Text = "  |  ";
+
+            hddPanel.Children.Add(dividerTextBlock); // divider
+
+            var ramNameTextBlock = new TextBlock();
+            ramNameTextBlock.Foreground = Brushes.White;
+            ramNameTextBlock.LineHeight = NiceMeterWindow.height;
+            ramNameTextBlock.FontSize = 9;
+            ramNameTextBlock.FontWeight = FontWeights.Light;
+
+            Binding mainboardNameBinding = new Binding("Name")
+            {
+                Source = hddPanel.DataContext
+            };
+            mainboardNameBinding.Mode = BindingMode.Default;
+            ramNameTextBlock.SetBinding(TextBlock.TextProperty, mainboardNameBinding);
+
+            hddPanel.Children.Add(ramNameTextBlock); // HDD name
+
+            hddPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
+
+            var ramTextTextBlock = new TextBlock();
+            ramTextTextBlock.Foreground = Brushes.White;
+            ramTextTextBlock.LineHeight = NiceMeterWindow.height;
+            ramTextTextBlock.FontSize = 9;
+            ramTextTextBlock.FontWeight = FontWeights.Light;
+
+            Binding mainboardTextBinding = new Binding("Text")
+            {
+                Source = hddPanel.DataContext
+            };
+            mainboardTextBinding.Mode = BindingMode.OneWay;
+            mainboardTextBinding.NotifyOnSourceUpdated = true;
+            mainboardTextBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            ramTextTextBlock.SetBinding(TextBlock.TextProperty, mainboardTextBinding);
+
+            hddPanel.Children.Add(ramTextTextBlock); // HDD text
         }
 
         /// <summary>
@@ -221,6 +272,11 @@ namespace NiceMeter
             if (observableMeters.GetHardwareConfig().RAMEnabled)
             {
                 CreateRamPanel();
+            }
+
+            if (observableMeters.GetHardwareConfig().HDDEnabled)
+            {
+                CreateHddPanel();
             }
 
             if (observableMeters.GetHardwareConfig().CPUEnabled)

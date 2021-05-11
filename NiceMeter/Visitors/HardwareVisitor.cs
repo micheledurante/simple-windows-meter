@@ -88,7 +88,7 @@ namespace NiceMeter.Visitors
         {
             if (hardware != null && hardwareConfig.HDDEnabled)
             {
-                //Meters.Where(x => x.GetHardwareType() == HardwareType.HDD).First().UpdateMeters(hardware);
+                Meters.Where(x => x.GetHardwareType() == HardwareType.HDD).First().UpdateMeters(hardware);
             }
         }
 

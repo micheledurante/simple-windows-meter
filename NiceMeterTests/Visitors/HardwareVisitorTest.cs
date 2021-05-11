@@ -184,5 +184,40 @@ namespace NiceMeterTests.Visitors
             meterMock.Verify(x => x.UpdateMeters(hardwareMock.Object), Times.Once);
             meterMock.Verify(x => x.GetHardwareType(), Times.Once);
         }
+
+        // Update HDD
+
+        [TestMethod]
+        public void UpdateHdd_HddDisabled_ShouldNotUpdateTheHdd()
+        {
+            var hardwareConfig = new HardwareConfig { HDDEnabled = false };
+            var hardwareMock = new Mock<IHardware>();
+            var meterMock = new Mock<IMeter>();
+            meterMock.Setup(x => x.UpdateMeters(hardwareMock.Object));
+            meterMock.Setup(x => x.GetHardwareType()).Returns(HardwareType.HDD);
+            var hardwareVisitor = new HardwareVisitor(hardwareConfig, new Mock<IMeterFactory>().Object);
+
+            hardwareVisitor.Meters.Add(meterMock.Object);
+            hardwareVisitor.UpdateHdd(hardwareMock.Object);
+
+            meterMock.Verify(x => x.UpdateMeters(hardwareMock.Object), Times.Never);
+        }
+
+        [TestMethod]
+        public void UpdateHdd_HddEnabled_ShouldUpdateTheHdd()
+        {
+            var hardwareConfig = new HardwareConfig { HDDEnabled = true };
+            var hardwareMock = new Mock<IHardware>();
+            var meterMock = new Mock<IMeter>();
+            meterMock.Setup(x => x.UpdateMeters(hardwareMock.Object));
+            meterMock.Setup(x => x.GetHardwareType()).Returns(HardwareType.HDD);
+            var hardwareVisitor = new HardwareVisitor(hardwareConfig, new Mock<IMeterFactory>().Object);
+
+            hardwareVisitor.Meters.Add(meterMock.Object);
+            hardwareVisitor.UpdateHdd(hardwareMock.Object);
+
+            meterMock.Verify(x => x.UpdateMeters(hardwareMock.Object), Times.Once);
+            meterMock.Verify(x => x.GetHardwareType(), Times.Once);
+        }
     }
 }

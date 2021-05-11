@@ -1,4 +1,5 @@
 ﻿using NiceMeter.Meters.Cpu;
+using NiceMeter.Meters.Hdd;
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Meters.Ram;
 using OpenHardwareMonitor.Hardware;
@@ -18,6 +19,8 @@ namespace NiceMeter.Meters.Factories
                     return new RamMeter();
                 case HardwareType.CPU:
                     return new CpuMeter(hardware.Name, new CpuConfig());
+                case HardwareType.HDD:
+                    return new HddMeter();
                 default:
                     throw new Exception(string.Format("Hardware type \"{0}\" not understood", hardware.HardwareType));
             }
