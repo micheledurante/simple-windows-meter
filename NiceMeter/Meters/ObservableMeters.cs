@@ -1,5 +1,6 @@
 ﻿using NiceMeter.Meters.Cpu;
 using NiceMeter.Meters.Mainboard;
+using NiceMeter.Meters.Ram;
 using NiceMeter.Models;
 using OpenHardwareMonitor.Hardware;
 using System;
@@ -54,6 +55,16 @@ namespace NiceMeter.Meters
             if (hardwareConfig.CPUEnabled)
             {
                 return meters.Where(x => x.GetHardwareType() == HardwareType.CPU).OfType<CpuMeter>().FirstOrDefault();
+            }
+
+            return null;
+        }
+
+        public RamMeter GetRamMeter()
+        {
+            if (hardwareConfig.RAMEnabled)
+            {
+                return meters.Where(x => x.GetHardwareType() == HardwareType.RAM).OfType<RamMeter>().FirstOrDefault();
             }
 
             return null;

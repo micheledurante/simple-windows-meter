@@ -66,6 +66,10 @@
     <Compile Include="Meters\Mainboard\MainboardSubHardwareMeterTest.cs" />
     <Compile Include="Meters\Mainboard\MainboardConfigTest.cs" />
     <Compile Include="Meters\ObservableMetersTest.cs" />
+    <Compile Include="Meters\Ram\RamPercentUnitTest.cs" />
+    <Compile Include="Meters\Ram\RamGbUnitTest.cs" />
+    <Compile Include="Meters\Ram\RamMeterTest.cs" />
+    <Compile Include="Meters\Units\GbUnitTest.cs" />
     <Compile Include="Meters\Units\UnitTest.cs" />
     <Compile Include="Meters\Units\FreqUnitTest.cs" />
     <Compile Include="Meters\Units\WattUnitTest.cs" />

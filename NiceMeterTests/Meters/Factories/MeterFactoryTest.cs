@@ -3,6 +3,7 @@ using Moq;
 using NiceMeter.Meters.Cpu;
 using NiceMeter.Meters.Factories;
 using NiceMeter.Meters.Mainboard;
+using NiceMeter.Meters.Ram;
 using OpenHardwareMonitor.Hardware;
 using System;
 
@@ -48,6 +49,18 @@ namespace NiceMeterTests.Meters.Factories
             hardwareMock.Verify(x => x.HardwareType, Times.Once);
             hardwareMock.VerifyGet(x => x.Name, Times.Once);
             Assert.IsInstanceOfType(meter, typeof(CpuMeter));
+        }
+
+        [TestMethod]
+        public void Create_RamHardwareType_ShouldCreateTheRamMeter()
+        {
+            var hardwareMock = new Mock<IHardware>();
+            hardwareMock.Setup(x => x.HardwareType).Returns(HardwareType.RAM);
+            var meterFactory = new MeterFactory();
+
+            var meter = meterFactory.Create(hardwareMock.Object);
+            hardwareMock.Verify(x => x.HardwareType, Times.Once);
+            Assert.IsInstanceOfType(meter, typeof(RamMeter));
         }
     }
 }

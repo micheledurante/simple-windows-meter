@@ -6,7 +6,7 @@
     public class Computers
     {
         /// <summary>
-        /// Teh computer as defined in the settings file
+        /// The computer as defined in the settings file
         /// </summary>
         /// <returns></returns>
         public ComputerModel GetHardware()

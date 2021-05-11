@@ -3,6 +3,7 @@ using Moq;
 using NiceMeter.Meters;
 using NiceMeter.Meters.Cpu;
 using NiceMeter.Meters.Mainboard;
+using NiceMeter.Meters.Ram;
 using NiceMeter.Models;
 using OpenHardwareMonitor.Hardware;
 using System.Collections.ObjectModel;
@@ -144,6 +145,52 @@ namespace NiceMeterTests.Meters
             var meter = observableMeters.GetCpuMeter();
 
             Assert.AreEqual(cpuMeter, meter);
+        }
+
+        // RAM meters
+
+        [TestMethod]
+        public void GetRamMeter_RamNotEnabled_ShouldReturnNull()
+        {
+            var meterMock = new Mock<IMeter>();
+            var hardwareConfig = new HardwareConfig { RAMEnabled = false };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(meterMock.Object);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetCpuMeter();
+
+            Assert.IsNull(meter);
+        }
+
+        [TestMethod]
+        public void GetRamMeter_RamEnabledRamMeterNotFound_ShouldReturnNull()
+        {
+            var meterMock = new Mock<IMeter>();
+            meterMock.Setup(x => x.GetHardwareType()).Returns(HardwareType.HDD);
+            var hardwareConfig = new HardwareConfig { RAMEnabled = true };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(meterMock.Object);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetRamMeter();
+
+            Assert.IsNull(meter);
+            meterMock.Verify(x => x.GetHardwareType(), Times.Once);
+        }
+
+        [TestMethod]
+        public void GetRamMeter_RamEnabledRamMeterFound_ShouldReturnTheRamMeter()
+        {
+            var ramMeter = new RamMeter(); // Can only work with concrete types due to linq OfType()
+            var hardwareConfig = new HardwareConfig { RAMEnabled = true };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(ramMeter);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetRamMeter();
+
+            Assert.AreEqual(ramMeter, meter);
         }
     }
 }

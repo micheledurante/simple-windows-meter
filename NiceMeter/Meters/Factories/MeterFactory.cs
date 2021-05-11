@@ -1,5 +1,6 @@
 ﻿using NiceMeter.Meters.Cpu;
 using NiceMeter.Meters.Mainboard;
+using NiceMeter.Meters.Ram;
 using OpenHardwareMonitor.Hardware;
 using System;
 
@@ -13,6 +14,8 @@ namespace NiceMeter.Meters.Factories
             {
                 case HardwareType.Mainboard:
                     return new MainboardMeter(hardware.Name, new MainboardConfig());
+                case HardwareType.RAM:
+                    return new RamMeter();
                 case HardwareType.CPU:
                     return new CpuMeter(hardware.Name, new CpuConfig());
                 default:

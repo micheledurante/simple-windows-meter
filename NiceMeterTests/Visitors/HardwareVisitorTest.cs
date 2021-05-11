@@ -149,5 +149,40 @@ namespace NiceMeterTests.Visitors
             meterMock.Verify(x => x.UpdateMeters(hardwareMock.Object), Times.Once);
             meterMock.Verify(x => x.GetHardwareType(), Times.Once);
         }
+
+        // Update RAM
+
+        [TestMethod]
+        public void UpdateRam_RamDisabled_ShouldNotUpdateTheRam()
+        {
+            var hardwareConfig = new HardwareConfig { RAMEnabled = false };
+            var hardwareMock = new Mock<IHardware>();
+            var meterMock = new Mock<IMeter>();
+            meterMock.Setup(x => x.UpdateMeters(hardwareMock.Object));
+            meterMock.Setup(x => x.GetHardwareType()).Returns(HardwareType.RAM);
+            var hardwareVisitor = new HardwareVisitor(hardwareConfig, new Mock<IMeterFactory>().Object);
+
+            hardwareVisitor.Meters.Add(meterMock.Object);
+            hardwareVisitor.UpdateRam(hardwareMock.Object);
+
+            meterMock.Verify(x => x.UpdateMeters(hardwareMock.Object), Times.Never);
+        }
+
+        [TestMethod]
+        public void UpdateRam_RamEnabled_ShouldUpdateTheRam()
+        {
+            var hardwareConfig = new HardwareConfig { RAMEnabled = true };
+            var hardwareMock = new Mock<IHardware>();
+            var meterMock = new Mock<IMeter>();
+            meterMock.Setup(x => x.UpdateMeters(hardwareMock.Object));
+            meterMock.Setup(x => x.GetHardwareType()).Returns(HardwareType.RAM);
+            var hardwareVisitor = new HardwareVisitor(hardwareConfig, new Mock<IMeterFactory>().Object);
+
+            hardwareVisitor.Meters.Add(meterMock.Object);
+            hardwareVisitor.UpdateRam(hardwareMock.Object);
+
+            meterMock.Verify(x => x.UpdateMeters(hardwareMock.Object), Times.Once);
+            meterMock.Verify(x => x.GetHardwareType(), Times.Once);
+        }
     }
 }

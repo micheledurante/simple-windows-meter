@@ -54,7 +54,7 @@ namespace NiceMeter.Visitors
         {
             if (hardware != null && hardwareConfig.MainboardEnabled)
             {
-                Meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).First().UpdateMeters(hardware);
+                Meters.Where(x => x.GetHardwareType() == HardwareType.Mainboard).FirstOrDefault()?.UpdateMeters(hardware);
             }
         }
 
@@ -63,7 +63,7 @@ namespace NiceMeter.Visitors
         {
             if (hardware != null && hardwareConfig.CPUEnabled)
             {
-                Meters.Where(x => x.GetHardwareType() == HardwareType.CPU).First().UpdateMeters(hardware);
+                Meters.Where(x => x.GetHardwareType() == HardwareType.CPU).FirstOrDefault()?.UpdateMeters(hardware);
             }
         }
 
@@ -97,7 +97,7 @@ namespace NiceMeter.Visitors
         {
             if (hardware != null && hardwareConfig.RAMEnabled)
             {
-                //Meters.Where(x => x.GetHardwareType() == HardwareType.RAM).First().UpdateMeters(hardware);
+                Meters.Where(x => x.GetHardwareType() == HardwareType.RAM).FirstOrDefault()?.UpdateMeters(hardware);
             }
         }
     }

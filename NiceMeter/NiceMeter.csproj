@@ -87,7 +87,11 @@
     <Compile Include="Meters\IMeter.cs" />
     <Compile Include="Meters\Mainboard\MainboardConfig.cs" />
     <Compile Include="Meters\Mainboard\MainboardSubHardwareMeter.cs" />
+    <Compile Include="Meters\Ram\RamPercentUnit.cs" />
+    <Compile Include="Meters\Ram\RamGbUnit.cs" />
+    <Compile Include="Meters\Ram\RamMeter.cs" />
     <Compile Include="Meters\Units\RpmUnit.cs" />
+    <Compile Include="Meters\Units\GbUnit.cs" />
     <Compile Include="Meters\Units\TempUnit.cs" />
     <Compile Include="Meters\Units\PercentUnit.cs" />
     <Compile Include="Meters\Units\FreqUnit.cs" />
