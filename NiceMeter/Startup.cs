@@ -40,7 +40,6 @@ namespace NiceMeter
                 computer.Open();
                 computer.Update();
                 computer.Traverse(hardwareVisitor);
-                //logger.Debug(computer.GetReport());
                 return new ObservableMeters(new HardwareConfig(), hardwareVisitor.GetMeters());
             }
             catch (Exception e)

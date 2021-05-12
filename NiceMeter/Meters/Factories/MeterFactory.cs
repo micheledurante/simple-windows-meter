@@ -1,4 +1,5 @@
 ﻿using NiceMeter.Meters.Cpu;
+using NiceMeter.Meters.Gpu;
 using NiceMeter.Meters.Hdd;
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Meters.Ram;
@@ -17,10 +18,13 @@ namespace NiceMeter.Meters.Factories
                     return new MainboardMeter(hardware.Name, new MainboardConfig());
                 case HardwareType.RAM:
                     return new RamMeter();
-                case HardwareType.CPU:
-                    return new CpuMeter(hardware.Name, new CpuConfig());
                 case HardwareType.HDD:
                     return new HddMeter();
+                case HardwareType.CPU:
+                    return new CpuMeter(hardware.Name, new CpuConfig());
+                case HardwareType.GpuAti:
+                case HardwareType.GpuNvidia:
+                    return new GpuMeter(hardware.Name, hardware.HardwareType, new GpuConfig());
                 default:
                     throw new Exception(string.Format("Hardware type \"{0}\" not understood", hardware.HardwareType));
             }

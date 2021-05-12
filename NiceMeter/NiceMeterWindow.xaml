@@ -8,6 +8,7 @@
         <StackPanel x:Name="mainboardPanel" Orientation="Horizontal"></StackPanel>
         <StackPanel x:Name="ramPanel" Orientation="Horizontal"></StackPanel>
         <StackPanel x:Name="hddPanel" Orientation="Horizontal"></StackPanel>
+        <StackPanel x:Name="gpuPanel" Orientation="Horizontal"></StackPanel>
         <StackPanel x:Name="cpuPanel" Orientation="Horizontal"></StackPanel>
     </StackPanel>
 </Window>

@@ -84,6 +84,8 @@
     <Compile Include="Meters\Cpu\CpuConfig.cs" />
     <Compile Include="Meters\Factories\IMeterFactory.cs" />
     <Compile Include="Meters\Factories\MeterFactory.cs" />
+    <Compile Include="Meters\Gpu\GpuConfig.cs" />
+    <Compile Include="Meters\Gpu\GpuMeter.cs" />
     <Compile Include="Meters\Hdd\HddMeter.cs" />
     <Compile Include="Meters\IMeter.cs" />
     <Compile Include="Meters\Mainboard\MainboardConfig.cs" />
@@ -142,7 +144,11 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Meters\Cpu\README.md" />
+    <None Include="Meters\Factories\README.md" />
+    <None Include="Meters\Gpu\README.md" />
+    <None Include="Meters\Hdd\README.md" />
     <None Include="Meters\Mainboard\README.md" />
+    <None Include="Meters\Ram\README.md" />
     <None Include="Meters\README.md" />
     <Resource Include="ico30597.ico" />
     <Resource Include="ico13.ico" />

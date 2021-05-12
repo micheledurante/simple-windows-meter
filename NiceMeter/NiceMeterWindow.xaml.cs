@@ -167,39 +167,90 @@ namespace NiceMeter
 
             hddPanel.Children.Add(dividerTextBlock); // divider
 
-            var ramNameTextBlock = new TextBlock();
-            ramNameTextBlock.Foreground = Brushes.White;
-            ramNameTextBlock.LineHeight = NiceMeterWindow.height;
-            ramNameTextBlock.FontSize = 9;
-            ramNameTextBlock.FontWeight = FontWeights.Light;
+            var hddNameTextBlock = new TextBlock();
+            hddNameTextBlock.Foreground = Brushes.White;
+            hddNameTextBlock.LineHeight = NiceMeterWindow.height;
+            hddNameTextBlock.FontSize = 9;
+            hddNameTextBlock.FontWeight = FontWeights.Light;
 
-            Binding mainboardNameBinding = new Binding("Name")
+            Binding hddNameBinding = new Binding("Name")
             {
                 Source = hddPanel.DataContext
             };
-            mainboardNameBinding.Mode = BindingMode.Default;
-            ramNameTextBlock.SetBinding(TextBlock.TextProperty, mainboardNameBinding);
+            hddNameBinding.Mode = BindingMode.Default;
+            hddNameTextBlock.SetBinding(TextBlock.TextProperty, hddNameBinding);
 
-            hddPanel.Children.Add(ramNameTextBlock); // HDD name
+            hddPanel.Children.Add(hddNameTextBlock); // HDD name
 
             hddPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
 
-            var ramTextTextBlock = new TextBlock();
-            ramTextTextBlock.Foreground = Brushes.White;
-            ramTextTextBlock.LineHeight = NiceMeterWindow.height;
-            ramTextTextBlock.FontSize = 9;
-            ramTextTextBlock.FontWeight = FontWeights.Light;
+            var hddTextTextBlock = new TextBlock();
+            hddTextTextBlock.Foreground = Brushes.White;
+            hddTextTextBlock.LineHeight = NiceMeterWindow.height;
+            hddTextTextBlock.FontSize = 9;
+            hddTextTextBlock.FontWeight = FontWeights.Light;
 
-            Binding mainboardTextBinding = new Binding("Text")
+            Binding hddTextBinding = new Binding("Text")
             {
                 Source = hddPanel.DataContext
             };
-            mainboardTextBinding.Mode = BindingMode.OneWay;
-            mainboardTextBinding.NotifyOnSourceUpdated = true;
-            mainboardTextBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
-            ramTextTextBlock.SetBinding(TextBlock.TextProperty, mainboardTextBinding);
+            hddTextBinding.Mode = BindingMode.OneWay;
+            hddTextBinding.NotifyOnSourceUpdated = true;
+            hddTextBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            hddTextTextBlock.SetBinding(TextBlock.TextProperty, hddTextBinding);
 
-            hddPanel.Children.Add(ramTextTextBlock); // HDD text
+            hddPanel.Children.Add(hddTextTextBlock); // HDD text
+        }
+
+        /// <summary>
+        /// Create the UI elements and bindings for the GPU meters
+        /// </summary>
+        public void CreateGpuPanel()
+        {
+            gpuPanel.DataContext = observableMeters.GetGpuMeter();
+
+            var dividerTextBlock = new TextBlock();
+            dividerTextBlock.Foreground = Brushes.White;
+            dividerTextBlock.LineHeight = NiceMeterWindow.height;
+            dividerTextBlock.FontSize = 9;
+            dividerTextBlock.FontWeight = FontWeights.Light;
+            dividerTextBlock.Text = "  |  ";
+
+            gpuPanel.Children.Add(dividerTextBlock); // divider
+
+            var gpuNameTextBlock = new TextBlock();
+            gpuNameTextBlock.Foreground = Brushes.White;
+            gpuNameTextBlock.LineHeight = NiceMeterWindow.height;
+            gpuNameTextBlock.FontSize = 9;
+            gpuNameTextBlock.FontWeight = FontWeights.Light;
+
+            Binding gpuNameBinding = new Binding("Name")
+            {
+                Source = gpuPanel.DataContext
+            };
+            gpuNameBinding.Mode = BindingMode.Default;
+            gpuNameTextBlock.SetBinding(TextBlock.TextProperty, gpuNameBinding);
+
+            gpuPanel.Children.Add(gpuNameTextBlock); // GPU name
+
+            gpuPanel.Children.Add(new TextBlock(new Run("  "))); // spacer
+
+            var gpuTextTextBlock = new TextBlock();
+            gpuTextTextBlock.Foreground = Brushes.White;
+            gpuTextTextBlock.LineHeight = NiceMeterWindow.height;
+            gpuTextTextBlock.FontSize = 9;
+            gpuTextTextBlock.FontWeight = FontWeights.Light;
+
+            Binding gpuTextBinding = new Binding("Text")
+            {
+                Source = gpuPanel.DataContext
+            };
+            gpuTextBinding.Mode = BindingMode.OneWay;
+            gpuTextBinding.NotifyOnSourceUpdated = true;
+            gpuTextBinding.UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged;
+            gpuTextTextBlock.SetBinding(TextBlock.TextProperty, gpuTextBinding);
+
+            gpuPanel.Children.Add(gpuTextTextBlock); // GPU text
         }
 
         /// <summary>
@@ -277,6 +328,11 @@ namespace NiceMeter
             if (observableMeters.GetHardwareConfig().HDDEnabled)
             {
                 CreateHddPanel();
+            }
+
+            if (observableMeters.GetHardwareConfig().GPUEnabled)
+            {
+                CreateGpuPanel();
             }
 
             if (observableMeters.GetHardwareConfig().CPUEnabled)

@@ -62,6 +62,8 @@
     <Compile Include="Meters\Cpu\CpuMeterTest.cs" />
     <Compile Include="Meters\Cpu\CpuConfigTest.cs" />
     <Compile Include="Meters\Factories\MeterFactoryTest.cs" />
+    <Compile Include="Meters\Gpu\GpuMeterTest.cs" />
+    <Compile Include="Meters\Gpu\GpuConfigTest.cs" />
     <Compile Include="Meters\Hdd\HddMeterTest.cs" />
     <Compile Include="Meters\Mainboard\MainboardMeterTest .cs" />
     <Compile Include="Meters\Mainboard\MainboardSubHardwareMeterTest.cs" />

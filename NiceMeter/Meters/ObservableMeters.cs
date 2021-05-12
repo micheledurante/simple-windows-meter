@@ -1,4 +1,5 @@
 ﻿using NiceMeter.Meters.Cpu;
+using NiceMeter.Meters.Gpu;
 using NiceMeter.Meters.Hdd;
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Meters.Ram;
@@ -76,6 +77,23 @@ namespace NiceMeter.Meters
             if (hardwareConfig.RAMEnabled)
             {
                 return meters.Where(x => x.GetHardwareType() == HardwareType.HDD).OfType<HddMeter>().FirstOrDefault();
+            }
+
+            return null;
+        }
+
+        public GpuMeter GetGpuMeter()
+        {
+            if (hardwareConfig.GPUEnabled)
+            {
+                if (meters.Where(x => x.GetHardwareType() == HardwareType.GpuAti).Count() != 0)
+                {
+                    return meters.Where(x => x.GetHardwareType() == HardwareType.GpuAti).OfType<GpuMeter>().FirstOrDefault();
+                }
+                else
+                {
+                    return meters.Where(x => x.GetHardwareType() == HardwareType.GpuNvidia).OfType<GpuMeter>().FirstOrDefault();
+                }
             }
 
             return null;

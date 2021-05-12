@@ -72,14 +72,14 @@ namespace NiceMeter.Visitors
         {
             if (hardware != null && hardwareConfig.GPUEnabled)
             {
-                //if (Meters.Where(x => x.GetHardwareType() == HardwareType.GpuAti).Count() != 0)
-                //{
-                //    Meters.Where(x => x.GetHardwareType() == HardwareType.GpuAti).First().UpdateMeters(hardware);
-                //}
-                //else
-                //{
-                //    Meters.Where(x => x.GetHardwareType() == HardwareType.GpuNvidia).First().UpdateMeters(hardware);
-                //}
+                if (Meters.Where(x => x.GetHardwareType() == HardwareType.GpuAti).Count() != 0)
+                {
+                    Meters.Where(x => x.GetHardwareType() == HardwareType.GpuAti).FirstOrDefault()?.UpdateMeters(hardware);
+                }
+                else
+                {
+                    Meters.Where(x => x.GetHardwareType() == HardwareType.GpuNvidia).FirstOrDefault()?.UpdateMeters(hardware);
+                }
             }
         }
 

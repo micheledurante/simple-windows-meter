@@ -2,6 +2,7 @@
 using Moq;
 using NiceMeter.Meters;
 using NiceMeter.Meters.Cpu;
+using NiceMeter.Meters.Gpu;
 using NiceMeter.Meters.Hdd;
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Meters.Ram;
@@ -238,6 +239,66 @@ namespace NiceMeterTests.Meters
             var meter = observableMeters.GetHddMeter();
 
             Assert.AreEqual(ramMeter, meter);
+        }
+
+        // GPU meters
+
+        [TestMethod]
+        public void GetGpuMeter_GpuNotEnabled_ShouldReturnNull()
+        {
+            var meterMock = new Mock<IMeter>();
+            var hardwareConfig = new HardwareConfig { GPUEnabled = false };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(meterMock.Object);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetGpuMeter();
+
+            Assert.IsNull(meter);
+        }
+
+        [TestMethod]
+        public void GetGpuMeter_GpuEnabledGpuMeterNotFound_ShouldReturnNull()
+        {
+            var meterMock = new Mock<IMeter>();
+            meterMock.Setup(x => x.GetHardwareType()).Returns(HardwareType.HDD);
+            var hardwareConfig = new HardwareConfig { GPUEnabled = true };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(meterMock.Object);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetGpuMeter();
+
+            Assert.IsNull(meter);
+            meterMock.Verify(x => x.GetHardwareType(), Times.Exactly(2));
+        }
+
+        [TestMethod]
+        public void GetGpuMeter_GpuEnabledAtiGpuMeterFound_ShouldReturnTheGpuMeter()
+        {
+            var atiGpuMeter = new GpuMeter("asdf", HardwareType.GpuAti, new GpuConfig()); // Can only work with concrete types due to linq OfType()
+            var hardwareConfig = new HardwareConfig { GPUEnabled = true };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(atiGpuMeter);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetGpuMeter();
+
+            Assert.AreEqual(atiGpuMeter, meter);
+        }
+
+        [TestMethod]
+        public void GetGpuMeter_GpuEnabledNvidiaGpuMeterFound_ShouldReturnTheGpuMeter()
+        {
+            var nvidiaGpuMeter = new GpuMeter("asdf", HardwareType.GpuNvidia, new GpuConfig()); // Can only work with concrete types due to linq OfType()
+            var hardwareConfig = new HardwareConfig { GPUEnabled = true };
+            var meters = new ObservableCollection<IMeter>();
+            meters.Add(nvidiaGpuMeter);
+
+            var observableMeters = new ObservableMeters(hardwareConfig, meters);
+            var meter = observableMeters.GetGpuMeter();
+
+            Assert.AreEqual(nvidiaGpuMeter, meter);
         }
     }
 }

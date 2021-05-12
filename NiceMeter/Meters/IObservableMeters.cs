@@ -1,4 +1,5 @@
 ﻿using NiceMeter.Meters.Cpu;
+using NiceMeter.Meters.Gpu;
 using NiceMeter.Meters.Hdd;
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Meters.Ram;
@@ -44,5 +45,11 @@ namespace NiceMeter.Meters
         /// </summary>
         /// <returns></returns>
         HddMeter GetHddMeter();
+
+        /// <summary>
+        /// Return the observed GPU meters, if enabled
+        /// </summary>
+        /// <returns></returns>
+        GpuMeter GetGpuMeter();
     }
 }
