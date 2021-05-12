@@ -1,5 +1,5 @@
 # `NiceMeter.Meters.Mainboard`
-Map Mainboard hardware and its chip sensors to the internal objects used to display our meters.
+Map RAM and its values to the internal objects used to display our meters.
 
 Sesors for the mainboard are provided by the sub hardware chip.
 
