@@ -1,9 +1,8 @@
 # The Nice (Windows) Meter
 
-An unintrusive UI monitor based on [OpenHardwareMonitor](https://openhardwaremonitor.org/)
+An unintrusive hardware meter monitor UI, based on [OpenHardwareMonitor](https://openhardwaremonitor.org/)
 
 ## Setup
-
 1. Install [Paket](https://fsprojects.github.io/Paket/get-started.html#NET-Core-preferred)
 1. `dotnet tool restore`
 1. `dotnet paket restore`
