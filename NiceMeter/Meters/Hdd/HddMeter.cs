@@ -7,11 +7,13 @@ namespace NiceMeter.Meters.Hdd
 {
     public class HddMeter : AbstractMeter
     {
-        public const string DefaultMeterName = "Disk";
-        public IUnit UsedSpace { get; set; } = new PercentUnit("Used Space", "Used", null);
+        public const string DEFAULT_METER_NAME = "Disk";
+        public const string USED_SPACE_OHNAME = "Used Space";
+
+        public IUnit UsedSpace { get; set; } = new PercentUnit(USED_SPACE_OHNAME, "Used", null);
         public IList<IUnit> Units { get; set; } = new List<IUnit>();
 
-        public HddMeter() : base(DefaultMeterName, HardwareType.HDD)
+        public HddMeter() : base(DEFAULT_METER_NAME, HardwareType.HDD)
         {
             // No on/off is needed as RAM is not optional in a computer! If enabled, these values are to be expected
             Units.Add(UsedSpace);

@@ -13,19 +13,9 @@ namespace NiceMeterTests.Meters.Mainboard
         [TestMethod]
         public void Ctor_ProvidedBaseCtorParameters_ShoulSetBaseCtorParameters()
         {
-            var mainboardConfig = new MainboardConfig
-            {
-                MainboardCpuVCore = false,
-                MainboardCpuSoc = false,
-                MainboardDRam = false,
-                MainboardVrm = false,
-                MainboardTSensor = false,
-                MainboardCpuFan = false,
-                MainboardWPump = false
-            };
             var name = new Faker().Random.Word();
 
-            var mainboardMeter = new MainboardMeter(name, mainboardConfig);
+            var mainboardMeter = new MainboardMeter(name, new Mock<MainboardConfig>().Object);
 
             Assert.AreEqual(name, mainboardMeter.Name);
             Assert.AreEqual(HardwareType.Mainboard, mainboardMeter.HardwareType);

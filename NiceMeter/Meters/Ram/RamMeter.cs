@@ -7,13 +7,17 @@ namespace NiceMeter.Meters.Ram
 {
     public class RamMeter : AbstractMeter
     {
-        public const string DefaultMeterName = "RAM";
-        public IUnit AvailableMemory { get; set; } = new RamGbUnit("Available Memory", "Available", null);
-        public IUnit UsedMemory { get; set; } = new RamGbUnit("Used Memory", "Used", null);
-        public IUnit Memory { get; set; } = new RamPercentUnit("Memory", "Memory", null);
+        public const string DEFAULT_METER_NAME = "RAM";
+        public const string AVAILABLE_MEMORY_OHNAME = "Available Memory";
+        public const string USED_MEMORY_OHNAME = "Used Memory";
+        public const string MEMORY_OHNAME = "Memory";
+
+        public IUnit AvailableMemory { get; set; } = new RamGbUnit(AVAILABLE_MEMORY_OHNAME, "Available", null);
+        public IUnit UsedMemory { get; set; } = new RamGbUnit(USED_MEMORY_OHNAME, "Used", null);
+        public IUnit Memory { get; set; } = new RamPercentUnit(MEMORY_OHNAME, "Memory", null);
         public IList<IUnit> Units { get; set; } = new List<IUnit>();
 
-        public RamMeter() : base(DefaultMeterName, HardwareType.RAM)
+        public RamMeter() : base(DEFAULT_METER_NAME, HardwareType.RAM)
         {
             // No on/off is needed as RAM is not optional in a computer! If enabled, these values are to be expected
             Units.Add(AvailableMemory);

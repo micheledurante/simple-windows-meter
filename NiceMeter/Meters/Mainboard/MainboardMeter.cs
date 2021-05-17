@@ -1,4 +1,5 @@
 ﻿using OpenHardwareMonitor.Hardware;
+using System.Linq;
 
 namespace NiceMeter.Meters.Mainboard
 {
@@ -31,9 +32,12 @@ namespace NiceMeter.Meters.Mainboard
                 return;
             }
 
-            SubHardware.UpdateMeters(hardware);
+            if (hardware.SubHardware.Any()) // The Mainboard might not have a supported chip
+            {
+                SubHardware.UpdateMeters(hardware.SubHardware[0]);
 
-            Text = FormatUnits(SubHardware.Units);
+                Text = FormatUnits(SubHardware.Units);
+            }
         }
     }
 }

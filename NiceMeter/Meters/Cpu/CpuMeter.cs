@@ -7,10 +7,15 @@ namespace NiceMeter.Meters.Cpu
 {
     public class CpuMeter : AbstractMeter
     {
-        public IUnit CpuTotal { get; set; } = new PercentUnit("CPU Total", "Load", null);
-        public IUnit CpuPackage { get; set; } = new WattUnit("CPU Package", "Power", null);
-        public IUnit CpuTemp { get; set; } = new TempUnit("CPU CCD Average", "T", null);
-        public IUnit CpuClock { get; set; } = new FreqUnit("CPU", "Clock", null); // Will be an average of each core's frequency
+        public const string CPU_TOTAL_OHNAME = "CPU Total";
+        public const string CPU_PACKAGE_OHNAME = "CPU Package";
+        public const string CPU_TEMP_OHNAME = "CPU CCD Average";
+        public const string CPU_CLOCK_OHNAME = "CPU";
+
+        public IUnit CpuTotal { get; set; } = new PercentUnit(CPU_TOTAL_OHNAME, "Load", null);
+        public IUnit CpuPackage { get; set; } = new WattUnit(CPU_PACKAGE_OHNAME, "Power", null);
+        public IUnit CpuTemp { get; set; } = new TempUnit(CPU_TEMP_OHNAME, "T", null);
+        public IUnit CpuClock { get; set; } = new FreqUnit(CPU_CLOCK_OHNAME, "Clock", null); // Will be an average of each core's frequency
 
         public IList<IUnit> Units { get; set; } = new List<IUnit>();
 
