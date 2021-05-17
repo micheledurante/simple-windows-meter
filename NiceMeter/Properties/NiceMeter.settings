@@ -36,13 +36,13 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="MainboardCpuSoc" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MainboardDRam" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MainboardVrm" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="MainboardTSensor" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>
@@ -69,13 +69,13 @@
       <Value Profile="(Default)">True</Value>
     </Setting>
     <Setting Name="GpuMemoryTotal" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="GpuMemoryUsed" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="GpuMemoryFree" Type="System.Boolean" Scope="Application">
-      <Value Profile="(Default)">True</Value>
+      <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="GpuMemoryLoad" Type="System.Boolean" Scope="Application">
       <Value Profile="(Default)">True</Value>

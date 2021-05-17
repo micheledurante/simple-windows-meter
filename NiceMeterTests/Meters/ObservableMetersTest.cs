@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bogus;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter.Meters;
 using NiceMeter.Meters.Cpu;
@@ -92,7 +93,7 @@ namespace NiceMeterTests.Meters
         [TestMethod]
         public void GetMainboardMeter_MainboardEnabledMainboardMeterFound_ShouldReturnTheMainboardMeter()
         {
-            var mainboardMeter = new MainboardMeter("asd", new MainboardConfig()); // Can only work with concrete types due to linq OfType()
+            var mainboardMeter = new MainboardMeter(new Faker().Random.Word(), new Mock<MainboardConfig>().Object); // Can only work with concrete types due to linq OfType()
             var hardwareConfig = new HardwareConfig { MainboardEnabled = true };
             var meters = new ObservableCollection<IMeter>();
             meters.Add(mainboardMeter);
@@ -138,7 +139,7 @@ namespace NiceMeterTests.Meters
         [TestMethod]
         public void GetCpuMeter_CpuEnabledCpuMeterFound_ShouldReturnTheCpuMeter()
         {
-            var cpuMeter = new CpuMeter("qwerty", new CpuConfig()); // Can only work with concrete types due to linq OfType()
+            var cpuMeter = new CpuMeter(new Faker().Random.Word(), new Mock<CpuConfig>().Object); // Can only work with concrete types due to linq OfType()
             var hardwareConfig = new HardwareConfig { CPUEnabled = true };
             var meters = new ObservableCollection<IMeter>();
             meters.Add(cpuMeter);
@@ -276,7 +277,7 @@ namespace NiceMeterTests.Meters
         [TestMethod]
         public void GetGpuMeter_GpuEnabledAtiGpuMeterFound_ShouldReturnTheGpuMeter()
         {
-            var atiGpuMeter = new GpuMeter("asdf", HardwareType.GpuAti, new GpuConfig()); // Can only work with concrete types due to linq OfType()
+            var atiGpuMeter = new GpuMeter(new Faker().Random.Word(), HardwareType.GpuAti, new Mock<GpuConfig>().Object); // Can only work with concrete types due to linq OfType()
             var hardwareConfig = new HardwareConfig { GPUEnabled = true };
             var meters = new ObservableCollection<IMeter>();
             meters.Add(atiGpuMeter);
@@ -290,7 +291,7 @@ namespace NiceMeterTests.Meters
         [TestMethod]
         public void GetGpuMeter_GpuEnabledNvidiaGpuMeterFound_ShouldReturnTheGpuMeter()
         {
-            var nvidiaGpuMeter = new GpuMeter("asdf", HardwareType.GpuNvidia, new GpuConfig()); // Can only work with concrete types due to linq OfType()
+            var nvidiaGpuMeter = new GpuMeter(new Faker().Random.Word(), HardwareType.GpuNvidia, new Mock<GpuConfig>().Object); // Can only work with concrete types due to linq OfType()
             var hardwareConfig = new HardwareConfig { GPUEnabled = true };
             var meters = new ObservableCollection<IMeter>();
             meters.Add(nvidiaGpuMeter);

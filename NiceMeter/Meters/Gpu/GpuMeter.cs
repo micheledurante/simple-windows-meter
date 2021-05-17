@@ -7,17 +7,17 @@ namespace NiceMeter.Meters.Gpu
 {
     public class GpuMeter : AbstractMeter
     {
-        public FreqUnit GpuCore { get; set; } = new FreqUnit("GPU Core", "Core", null);
-        public FreqUnit GpuMemory { get; set; } = new FreqUnit("GPU Memory", "Memory", null);
-        public FreqUnit GpuShader { get; set; } = new FreqUnit("GPU Shader", "Shader", null);
-        public PercentUnit GpuCoreLoad { get; set; } = new PercentUnit("GPU Core", "Load", null);
-        public TempUnit GpuTemp { get; set; } = new TempUnit("GPU Core", "Temp", null);
-        public PercentUnit GpuMemoryLoad { get; set; } = new PercentUnit("GPU Memory", "VRAM", null);
-        public GbUnit GpuMemoryTotal { get; set; } = new GbUnit("GPU Memory Total", "VRAM Total", null);
-        public GbUnit GpuMemoryUsed { get; set; } = new GbUnit("GPU Memory Used", "VRAM Used", null);
-        public GbUnit GpuMemoryFree { get; set; } = new GbUnit("GPU Memory Free", "VRAM Free", null);
+        public IUnit GpuCore { get; set; } = new FreqUnit("GPU Core", "Core", null);
+        public IUnit GpuMemory { get; set; } = new FreqUnit("GPU Memory", "Memory", null);
+        public IUnit GpuShader { get; set; } = new FreqUnit("GPU Shader", "Shader", null);
+        public IUnit GpuCoreLoad { get; set; } = new PercentUnit("GPU Core", "Load", null);
+        public IUnit GpuTemp { get; set; } = new TempUnit("GPU Core", "Temp", null);
+        public IUnit GpuMemoryLoad { get; set; } = new PercentUnit("GPU Memory", "VRAM", null);
+        public IUnit GpuMemoryTotal { get; set; } = new GbUnit("GPU Memory Total", "VRAM Total", null);
+        public IUnit GpuMemoryUsed { get; set; } = new GbUnit("GPU Memory Used", "VRAM Used", null);
+        public IUnit GpuMemoryFree { get; set; } = new GbUnit("GPU Memory Free", "VRAM Free", null);
 
-        public IList<Unit> Units { get; set; } = new List<Unit>();
+        public IList<IUnit> Units { get; set; } = new List<IUnit>();
 
         public GpuMeter(string name, HardwareType hardwareType, GpuConfig config) : base(name, hardwareType)
         {
@@ -116,19 +116,12 @@ namespace NiceMeter.Meters.Gpu
         {
             if (Units.Count == 0)
             {
-                Text = null;
                 return;
             }
 
             ReadSensors(hardware);
 
-            Text = string.Format(
-                "{0} {1} {2} {3}",
-                GpuCore.ToString(),
-                GpuCoreLoad.ToString(),
-                GpuTemp.ToString(),
-                GpuMemoryLoad.ToString()
-            );
+            Text = FormatUnits(Units);
         }
     }
 }

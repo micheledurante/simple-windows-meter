@@ -8,8 +8,8 @@ namespace NiceMeter.Meters.Hdd
     public class HddMeter : AbstractMeter
     {
         public const string DefaultMeterName = "Disk";
-        public PercentUnit UsedSpace { get; set; } = new PercentUnit("Used Space", "Used", null);
-        public IList<Unit> Units { get; set; } = new List<Unit>();
+        public IUnit UsedSpace { get; set; } = new PercentUnit("Used Space", "Used", null);
+        public IList<IUnit> Units { get; set; } = new List<IUnit>();
 
         public HddMeter() : base(DefaultMeterName, HardwareType.HDD)
         {
@@ -31,7 +31,7 @@ namespace NiceMeter.Meters.Hdd
         {
             ReadSensors(hardware);
 
-            Text = string.Format("{0}", UsedSpace.ToString());
+            Text = FormatUnits(Units);
         }
     }
 }

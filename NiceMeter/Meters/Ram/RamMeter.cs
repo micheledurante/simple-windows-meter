@@ -8,10 +8,10 @@ namespace NiceMeter.Meters.Ram
     public class RamMeter : AbstractMeter
     {
         public const string DefaultMeterName = "RAM";
-        public RamGbUnit AvailableMemory { get; set; } = new RamGbUnit("Available Memory", "Available", null);
-        public RamGbUnit UsedMemory { get; set; } = new RamGbUnit("Used Memory", "Used", null);
-        public RamPercentUnit Memory { get; set; } = new RamPercentUnit("Memory", "Memory", null);
-        public IList<Unit> Units { get; set; } = new List<Unit>();
+        public IUnit AvailableMemory { get; set; } = new RamGbUnit("Available Memory", "Available", null);
+        public IUnit UsedMemory { get; set; } = new RamGbUnit("Used Memory", "Used", null);
+        public IUnit Memory { get; set; } = new RamPercentUnit("Memory", "Memory", null);
+        public IList<IUnit> Units { get; set; } = new List<IUnit>();
 
         public RamMeter() : base(DefaultMeterName, HardwareType.RAM)
         {
@@ -35,11 +35,7 @@ namespace NiceMeter.Meters.Ram
         {
             ReadSensors(hardware);
 
-            Text = string.Format(
-                "{0} ({1})",
-                UsedMemory.ToString(),
-                Memory.ToString()
-            );
+            Text = FormatUnits(Units);
         }
     }
 }

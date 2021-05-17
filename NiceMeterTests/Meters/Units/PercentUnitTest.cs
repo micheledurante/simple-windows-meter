@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bogus;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NiceMeter.Meters.Units;
 
 namespace NiceMeterTests.Meters.Units
@@ -9,23 +10,32 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void Ctor_EmptyValue_ShouldDefaultToNull()
         {
-            var percentUnit = new PercentUnit("wqeqw", "zzz");
+            var ohName = new Faker().Random.Word();
+            var label = new Faker().Random.Word();
+
+            var percentUnit = new PercentUnit(ohName, label);
 
             Assert.AreEqual(PercentUnit.DefaultMeasurementUnit, percentUnit.measurementUnit);
             Assert.AreEqual(PercentUnit.DefaultFormat, percentUnit.numberFormat);
-            Assert.AreEqual("zzz", percentUnit.Label);
+            Assert.AreEqual(ohName, percentUnit.OHName);
+            Assert.AreEqual(label, percentUnit.Label);
             Assert.IsNull(percentUnit.Value);
         }
 
         [TestMethod]
         public void Ctor_Default_ShouldCreateBaseWithExpectedProperties()
         {
-            var percentUnit = new PercentUnit("sda", "asd", 999);
+            var ohName = new Faker().Random.Word();
+            var label = new Faker().Random.Word();
+            var value = new Faker().Random.Number();
+
+            var percentUnit = new PercentUnit(ohName, label, value);
 
             Assert.AreEqual(PercentUnit.DefaultMeasurementUnit, percentUnit.measurementUnit);
             Assert.AreEqual(PercentUnit.DefaultFormat, percentUnit.numberFormat);
-            Assert.AreEqual("asd", percentUnit.Label);
-            Assert.AreEqual(999, percentUnit.Value);
+            Assert.AreEqual(ohName, percentUnit.OHName);
+            Assert.AreEqual(label, percentUnit.Label);
+            Assert.AreEqual(value, percentUnit.Value);
         }
     }
 }

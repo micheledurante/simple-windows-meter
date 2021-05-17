@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bogus;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter;
 using NiceMeter.Meters;
@@ -12,7 +13,7 @@ namespace NiceMeterTests
         public void SetWindowProperties_DefaultProperties_DefaultPropertiesMatchExpectations()
         {
             var observableMetersMock = new Mock<IObservableMeters>();
-            double workAreaRight = 123;
+            double workAreaRight = new Faker().Random.Number();
 
             var window = new NiceMeterWindow(observableMetersMock.Object, workAreaRight);
 

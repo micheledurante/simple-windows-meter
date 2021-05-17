@@ -18,7 +18,7 @@ namespace NiceMeterTests.Meters.Hdd
         }
 
         [TestMethod]
-        public void Ctor_NoConfgiRequired_AllMetersShouldBeAddedToUnits()
+        public void Ctor_NoConfigRequired_AllMetersShouldBeAddedToUnits()
         {
             var hddMeter = new HddMeter();
 

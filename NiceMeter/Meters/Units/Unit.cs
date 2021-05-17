@@ -15,7 +15,7 @@ namespace NiceMeter.Meters.Units
         /// <summary>
         /// What this value should be called in our UI
         /// </summary>
-        public readonly string Label;
+        public string Label { get; }
 
         /// <summary>
         /// OpenHardwareMonitor's name for the sensor

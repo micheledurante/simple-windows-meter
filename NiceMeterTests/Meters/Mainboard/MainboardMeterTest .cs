@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bogus;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter.Meters.Mainboard;
 using OpenHardwareMonitor.Hardware;
@@ -22,10 +23,11 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardCpuFan = false,
                 MainboardWPump = false
             };
+            var name = new Faker().Random.Word();
 
-            var mainboardMeter = new MainboardMeter("asd", mainboardConfig);
+            var mainboardMeter = new MainboardMeter(name, mainboardConfig);
 
-            Assert.AreEqual("asd", mainboardMeter.Name);
+            Assert.AreEqual(name, mainboardMeter.Name);
             Assert.AreEqual(HardwareType.Mainboard, mainboardMeter.HardwareType);
         }
 
@@ -43,7 +45,7 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardWPump = false
             };
 
-            var mainboardMeter = new MainboardMeter("ytrewq", mainboardConfig);
+            var mainboardMeter = new MainboardMeter(new Faker().Random.Word(), mainboardConfig);
             mainboardMeter.UpdateMeters(new Mock<IHardware>().Object);
 
             Assert.IsNull(mainboardMeter.Text);

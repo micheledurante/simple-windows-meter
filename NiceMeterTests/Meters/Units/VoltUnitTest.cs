@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bogus;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NiceMeter.Meters.Units;
 
 namespace NiceMeterTests.Meters.Units
@@ -9,23 +10,32 @@ namespace NiceMeterTests.Meters.Units
         [TestMethod]
         public void Ctor_EmptyValue_ShouldDefaultToNull()
         {
-            var voltUnit = new VoltUnit("qwe", "qwe");
+            var ohName = new Faker().Random.Word();
+            var label = new Faker().Random.Word();
+
+            var voltUnit = new VoltUnit(ohName, label);
 
             Assert.AreEqual(VoltUnit.DefaultMeasurementUnit, voltUnit.measurementUnit);
             Assert.AreEqual(VoltUnit.DefaultFormat, voltUnit.numberFormat);
-            Assert.AreEqual("qwe", voltUnit.Label);
+            Assert.AreEqual(ohName, voltUnit.OHName);
+            Assert.AreEqual(label, voltUnit.Label);
             Assert.IsNull(voltUnit.Value);
         }
 
         [TestMethod]
         public void Ctor_Default_ShouldCreateBaseWithExpectedProperties()
         {
-            var percentUnit = new VoltUnit("fdsa", "asdf", 89768678);
+            var ohName = new Faker().Random.Word();
+            var label = new Faker().Random.Word();
+            var value = new Faker().Random.Number();
+
+            var percentUnit = new VoltUnit(ohName, label, value);
 
             Assert.AreEqual(VoltUnit.DefaultMeasurementUnit, percentUnit.measurementUnit);
             Assert.AreEqual(VoltUnit.DefaultFormat, percentUnit.numberFormat);
-            Assert.AreEqual("asdf", percentUnit.Label);
-            Assert.AreEqual(89768678, percentUnit.Value);
+            Assert.AreEqual(ohName, percentUnit.OHName);
+            Assert.AreEqual(label, percentUnit.Label);
+            Assert.AreEqual(value, percentUnit.Value);
         }
     }
 }

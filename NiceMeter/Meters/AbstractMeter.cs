@@ -1,10 +1,15 @@
-﻿using OpenHardwareMonitor.Hardware;
+﻿using NiceMeter.Meters.Units;
+using OpenHardwareMonitor.Hardware;
+using System.Collections.Generic;
 using System.ComponentModel;
+using System.Linq;
 
 namespace NiceMeter.Meters
 {
     public abstract class AbstractMeter : INotifyPropertyChanged, IMeter
     {
+        public const string UNITS_SEPARATOR = " ";
+
         public string Name { get; set; }
         public HardwareType HardwareType { get; set; }
         private string text;
@@ -43,5 +48,10 @@ namespace NiceMeter.Meters
         public abstract IMeter ReadSensors(IHardware hardware);
 
         public abstract void UpdateMeters(IHardware hardware);
+
+        public string FormatUnits(IList<IUnit> units)
+        {
+             return string.Join(UNITS_SEPARATOR, units.Select(x => x.ToString()));
+        }
     }
 }

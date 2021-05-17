@@ -124,7 +124,7 @@ namespace NiceMeter.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool MainboardCpuSoc {
             get {
                 return ((bool)(this["MainboardCpuSoc"]));
@@ -133,7 +133,7 @@ namespace NiceMeter.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool MainboardDRam {
             get {
                 return ((bool)(this["MainboardDRam"]));
@@ -142,7 +142,7 @@ namespace NiceMeter.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool MainboardVrm {
             get {
                 return ((bool)(this["MainboardVrm"]));
@@ -223,7 +223,7 @@ namespace NiceMeter.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool GpuMemoryTotal {
             get {
                 return ((bool)(this["GpuMemoryTotal"]));
@@ -232,7 +232,7 @@ namespace NiceMeter.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool GpuMemoryUsed {
             get {
                 return ((bool)(this["GpuMemoryUsed"]));
@@ -241,7 +241,7 @@ namespace NiceMeter.Properties {
         
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool GpuMemoryFree {
             get {
                 return ((bool)(this["GpuMemoryFree"]));

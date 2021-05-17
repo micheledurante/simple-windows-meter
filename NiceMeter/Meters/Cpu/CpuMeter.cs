@@ -7,12 +7,12 @@ namespace NiceMeter.Meters.Cpu
 {
     public class CpuMeter : AbstractMeter
     {
-        public PercentUnit CpuTotal { get; set; } = new PercentUnit("CPU Total", "Load", null);
-        public WattUnit CpuPackage { get; set; } = new WattUnit("CPU Package", "Power", null);
-        public TempUnit CpuTemp { get; set; } = new TempUnit("CPU", "T", null);
-        public FreqUnit CpuClock { get; set; } = new FreqUnit("CPU", "Clock", null); // Will be an average of each core's frequency
+        public IUnit CpuTotal { get; set; } = new PercentUnit("CPU Total", "Load", null);
+        public IUnit CpuPackage { get; set; } = new WattUnit("CPU Package", "Power", null);
+        public IUnit CpuTemp { get; set; } = new TempUnit("CPU CCD Average", "T", null);
+        public IUnit CpuClock { get; set; } = new FreqUnit("CPU", "Clock", null); // Will be an average of each core's frequency
 
-        public IList<Unit> Units { get; set; } = new List<Unit>();
+        public IList<IUnit> Units { get; set; } = new List<IUnit>();
 
         public CpuMeter(string name, CpuConfig config) : base(name, HardwareType.CPU)
         {
@@ -48,13 +48,6 @@ namespace NiceMeter.Meters.Cpu
                         .Select(x => x.Value)
                         .Average() / 1000;
                 }
-                else if (unit.Label == CpuTemp.Label)
-                {
-                    unit.Value = hardware.Sensors
-                        .Where(x => x.Name.Contains(CpuTemp.OHName) && x.SensorType == SensorType.Temperature)
-                        .Select(x => x.Value)
-                        .Average();
-                }
                 else
                 {
                     unit.Value = hardware.Sensors.Where(x => x.Name == unit.OHName).FirstOrDefault()?.Value;
@@ -68,19 +61,12 @@ namespace NiceMeter.Meters.Cpu
         {
             if (Units.Count == 0)
             {
-                Text = null;
                 return;
             }
 
             ReadSensors(hardware);
 
-            Text = string.Format(
-                "{0} {1} {2} {3}",
-                CpuClock.ToString(),
-                CpuTemp.ToString(),
-                CpuTotal.ToString(),
-                CpuPackage.ToString()
-            );
+            Text = FormatUnits(Units);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bogus;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter.Meters.Mainboard;
 using NiceMeter.Meters.Units;
@@ -23,10 +24,11 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardCpuFan = false,
                 MainboardWPump = false
             };
+            var name = new Faker().Random.Word();
 
-            var mainboardSubHardwareMeter = new MainboardSubHardwareMeter("qwerty", mainboardConfig);
+            var mainboardSubHardwareMeter = new MainboardSubHardwareMeter(name, mainboardConfig);
 
-            Assert.AreEqual("qwerty", mainboardSubHardwareMeter.Name);
+            Assert.AreEqual(name, mainboardSubHardwareMeter.Name);
             Assert.AreEqual(HardwareType.SuperIO, mainboardSubHardwareMeter.HardwareType);
             Assert.AreEqual(false, mainboardSubHardwareMeter.Units.Any());
         }
@@ -45,7 +47,7 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardWPump = false
             };
 
-            var mainboardMeter = new MainboardSubHardwareMeter("fdsa", mainboardConfig);
+            var mainboardMeter = new MainboardSubHardwareMeter(new Faker().Random.Word(), mainboardConfig);
 
             Assert.AreEqual(1, mainboardMeter.Units.Count);
             Assert.IsInstanceOfType(mainboardMeter.Units.First(), typeof(VoltUnit));
@@ -65,7 +67,7 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardWPump = false
             };
 
-            var mainboardMeter = new MainboardSubHardwareMeter("rty", mainboardConfig);
+            var mainboardMeter = new MainboardSubHardwareMeter(new Faker().Random.Word(), mainboardConfig);
 
             Assert.AreEqual(1, mainboardMeter.Units.Count);
             Assert.IsInstanceOfType(mainboardMeter.Units.First(), typeof(VoltUnit));
@@ -85,7 +87,7 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardWPump = false
             };
 
-            var mainboardMeter = new MainboardSubHardwareMeter("qwe", mainboardConfig);
+            var mainboardMeter = new MainboardSubHardwareMeter(new Faker().Random.Word(), mainboardConfig);
 
             Assert.AreEqual(1, mainboardMeter.Units.Count);
             Assert.IsInstanceOfType(mainboardMeter.Units.First(), typeof(VoltUnit));
@@ -105,7 +107,7 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardWPump = false
             };
 
-            var mainboardMeter = new MainboardSubHardwareMeter("sda", mainboardConfig);
+            var mainboardMeter = new MainboardSubHardwareMeter(new Faker().Random.Word(), mainboardConfig);
 
             Assert.AreEqual(1, mainboardMeter.Units.Count);
             Assert.IsInstanceOfType(mainboardMeter.Units.First(), typeof(TempUnit));
@@ -125,7 +127,7 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardWPump = false
             };
 
-            var mainboardMeter = new MainboardSubHardwareMeter("dsa", mainboardConfig);
+            var mainboardMeter = new MainboardSubHardwareMeter(new Faker().Random.Word(), mainboardConfig);
 
             Assert.AreEqual(1, mainboardMeter.Units.Count);
             Assert.IsInstanceOfType(mainboardMeter.Units.First(), typeof(TempUnit));
@@ -145,7 +147,7 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardWPump = false
             };
 
-            var mainboardMeter = new MainboardSubHardwareMeter("zxcv", mainboardConfig);
+            var mainboardMeter = new MainboardSubHardwareMeter(new Faker().Random.Word(), mainboardConfig);
 
             Assert.AreEqual(1, mainboardMeter.Units.Count);
             Assert.IsInstanceOfType(mainboardMeter.Units.First(), typeof(RpmUnit));
@@ -165,7 +167,7 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardWPump = true
             };
 
-            var mainboardMeter = new MainboardSubHardwareMeter("asdf", mainboardConfig);
+            var mainboardMeter = new MainboardSubHardwareMeter(new Faker().Random.Word(), mainboardConfig);
 
             Assert.AreEqual(1, mainboardMeter.Units.Count);
             Assert.IsInstanceOfType(mainboardMeter.Units.First(), typeof(RpmUnit));
@@ -185,7 +187,7 @@ namespace NiceMeterTests.Meters.Mainboard
                 MainboardWPump = false
             };
 
-            var mainboardSubHardwareMeter = new MainboardSubHardwareMeter("asdf", mainboardConfig);
+            var mainboardSubHardwareMeter = new MainboardSubHardwareMeter(new Faker().Random.Word(), mainboardConfig);
             mainboardSubHardwareMeter.UpdateMeters(new Mock<IHardware>().Object);
 
             Assert.IsNull(mainboardSubHardwareMeter.Text);

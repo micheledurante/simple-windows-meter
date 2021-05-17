@@ -28,22 +28,12 @@ namespace NiceMeter.Meters.Mainboard
         {
             if (SubHardware.Units.Count == 0)
             {
-                Text = null;
                 return;
             }
 
             SubHardware.UpdateMeters(hardware);
 
-            Text = string.Format(
-                "{0} {1} {2} {3} {4} {5} {6}", 
-                SubHardware.CpuVCore.ToString(), 
-                SubHardware.CpuSoc.ToString(),
-                SubHardware.DRam.ToString(),
-                SubHardware.Vrm.ToString(),
-                SubHardware.TSensor.ToString(),
-                SubHardware.CpuFan.ToString(),
-                SubHardware.WPump.ToString()
-            );
+            Text = FormatUnits(SubHardware.Units);
         }
     }
 }

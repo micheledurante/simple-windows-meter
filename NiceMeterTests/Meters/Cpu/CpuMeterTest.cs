@@ -1,4 +1,5 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Bogus;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using NiceMeter.Meters.Cpu;
 using NiceMeter.Meters.Units;
@@ -14,10 +15,11 @@ namespace NiceMeterTests.Meters.Cpu
         public void Ctor_ProvidedBaseCtorParameters_ShoulSetBaseCtorParameters()
         {
             var cpuConfig = new CpuConfig { CpuTotal = false, CpuPackage = false, CpuTemp = false, CpuClock = false };
+            var name = new Faker().Random.Word();
 
-            var cpuMeter = new CpuMeter("asd", cpuConfig);
+            var cpuMeter = new CpuMeter(name, cpuConfig);
 
-            Assert.AreEqual("asd", cpuMeter.Name);
+            Assert.AreEqual(name, cpuMeter.Name);
             Assert.AreEqual(HardwareType.CPU, cpuMeter.HardwareType);
             Assert.AreEqual(false, cpuMeter.Units.Any());
         }
@@ -27,7 +29,7 @@ namespace NiceMeterTests.Meters.Cpu
         {
             var cpuConfig = new CpuConfig { CpuTotal = true, CpuPackage = false, CpuTemp = false, CpuClock = false };
 
-            var cpuMeter = new CpuMeter("asdf", cpuConfig);
+            var cpuMeter = new CpuMeter(new Faker().Random.Word(), cpuConfig);
 
             Assert.AreEqual(1, cpuMeter.Units.Count);
             Assert.IsInstanceOfType(cpuMeter.Units.First(), typeof(PercentUnit));
@@ -38,7 +40,7 @@ namespace NiceMeterTests.Meters.Cpu
         {
             var cpuConfig = new CpuConfig { CpuTotal = false, CpuPackage = true, CpuTemp = false, CpuClock = false };
            
-            var cpuMeter = new CpuMeter("zxcv", cpuConfig);
+            var cpuMeter = new CpuMeter(new Faker().Random.Word(), cpuConfig);
 
             Assert.AreEqual(1, cpuMeter.Units.Count);
             Assert.IsInstanceOfType(cpuMeter.Units.First(), typeof(WattUnit));
@@ -49,7 +51,7 @@ namespace NiceMeterTests.Meters.Cpu
         {
             var cpuConfig = new CpuConfig { CpuTotal = false, CpuPackage = false, CpuTemp = true, CpuClock = false };
            
-            var cpuMeter = new CpuMeter("vcxz", cpuConfig);
+            var cpuMeter = new CpuMeter(new Faker().Random.Word(), cpuConfig);
 
             Assert.AreEqual(1, cpuMeter.Units.Count);
             Assert.IsInstanceOfType(cpuMeter.Units.First(), typeof(TempUnit));
@@ -60,7 +62,7 @@ namespace NiceMeterTests.Meters.Cpu
         {
             var cpuConfig = new CpuConfig { CpuTotal = false, CpuPackage = false, CpuTemp = false, CpuClock = true };
            
-            var cpuMeter = new CpuMeter("qwe", cpuConfig);
+            var cpuMeter = new CpuMeter(new Faker().Random.Word(), cpuConfig);
 
             Assert.AreEqual(1, cpuMeter.Units.Count);
             Assert.IsInstanceOfType(cpuMeter.Units.First(), typeof(FreqUnit));
@@ -71,7 +73,7 @@ namespace NiceMeterTests.Meters.Cpu
         {
             var cpuConfig = new CpuConfig { CpuTotal = false, CpuPackage = false, CpuTemp = false, CpuClock = false };
            
-            var cpuMeter = new CpuMeter("rty", cpuConfig);
+            var cpuMeter = new CpuMeter(new Faker().Random.Word(), cpuConfig);
             cpuMeter.UpdateMeters(new Mock<IHardware>().Object);
 
             Assert.IsNull(cpuMeter.Text);

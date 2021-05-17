@@ -17,7 +17,7 @@ namespace NiceMeterTests.Meters.Ram
         }
 
         [TestMethod]
-        public void Ctor_NoConfgiRequired_AllMetersShouldBeAddedToUnits()
+        public void Ctor_NoConfigRequired_AllMetersShouldBeAddedToUnits()
         {
             var ramMeter = new RamMeter();
 

@@ -1,5 +1,6 @@
 source https://api.nuget.org/v3/index.json
 
+nuget Bogus 33.0.2
 nuget log4net 2.0.8
 nuget Moq 4.16.1
 nuget OpenHardwareMonitor 0.9.6

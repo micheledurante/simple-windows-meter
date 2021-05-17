@@ -10,14 +10,14 @@ namespace NiceMeter.Meters.Mainboard
     /// </summary>
     public class MainboardSubHardwareMeter : AbstractMeter
     {
-        public VoltUnit CpuVCore { get; set; } = new VoltUnit("CPU VCore", "Core", null);
-        public VoltUnit CpuSoc { get; set; } = new VoltUnit("Voltage #7", "SOC", null);
-        public VoltUnit DRam { get; set; } = new VoltUnit("Voltage #14", "DRAM", null);
-        public TempUnit Vrm { get; set; } = new TempUnit("Temperature #2", "T VRM", null);
-        public TempUnit TSensor { get; set; } = new TempUnit("Temperature #6", "T H2O", null);
-        public RpmUnit CpuFan { get; set; } = new RpmUnit("Fan #2", "CPU Fan", null);
-        public RpmUnit WPump { get; set; } = new RpmUnit("Fan #6", "Pump", null);
-        public IList<Unit> Units { get; set; } = new List<Unit>();
+        public IUnit CpuVCore { get; set; } = new VoltUnit("CPU VCore", "CPU Core", null);
+        public IUnit CpuSoc { get; set; } = new VoltUnit("Voltage #7", "SOC", null);
+        public IUnit DRam { get; set; } = new VoltUnit("Voltage #14", "DRAM", null);
+        public IUnit Vrm { get; set; } = new TempUnit("Temperature #2", "T VRM", null);
+        public IUnit TSensor { get; set; } = new TempUnit("Temperature #6", "T H2O", null);
+        public IUnit CpuFan { get; set; } = new RpmUnit("Fan #2", "CPU Fan", null);
+        public IUnit WPump { get; set; } = new RpmUnit("Fan #6", "Pump", null);
+        public IList<IUnit> Units { get; set; } = new List<IUnit>();
 
         public MainboardSubHardwareMeter(string name, MainboardConfig config) : base(name, HardwareType.SuperIO)
         {
