@@ -7,6 +7,12 @@
       "commands": [
         "paket"
       ]
+    },
+    "codecov.tool": {
+      "version": "1.13.0",
+      "commands": [
+        "codecov"
+      ]
     }
   }
 }
