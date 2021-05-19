@@ -9,6 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NiceMeterTests", "..\NiceMe
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B851AA9D-812C-4E06-8E47-2CA879AAE112}"
 	ProjectSection(SolutionItems) = preProject
+		..\azure-pipelines.yml = ..\azure-pipelines.yml
 		..\CHANGELOG.md = ..\CHANGELOG.md
 		..\paket.dependencies = ..\paket.dependencies
 		..\README.md = ..\README.md
