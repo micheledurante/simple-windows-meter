@@ -1,6 +1,7 @@
 # The Simple (Windows) Meter
 
-[![Build status](https://ci.appveyor.com/api/projects/status/6g8u1m4cj3574tnp?svg=true)](https://ci.appveyor.com/project/micheled/simple-windows-meter)
+[![Build status](https://ci.appveyor.com/api/projects/status/6g8u1m4cj3574tnp?svg=true)](https://ci.appveyor.com/project/micheled/simple-windows-meter) 
+[![codecov](https://codecov.io/gh/micheledurante/simple-windows-meter/branch/master/graph/badge.svg?token=7NA2NOSFMW)](https://codecov.io/gh/micheledurante/simple-windows-meter)
 
 An unintrusive hardware meter monitor UI, based on [OpenHardwareMonitor](https://openhardwaremonitor.org/)
 
