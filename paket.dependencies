@@ -5,3 +5,4 @@ nuget log4net 2.0.8
 nuget Moq 4.16.1
 nuget MSTest.TestAdapter 2.2.3
 nuget OpenHardwareMonitor 0.9.6
+nuget VS.QualityTools.UnitTestFramework 15.0.27323.2

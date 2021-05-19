@@ -769,3 +769,4 @@ NUGET
       System.Text.Encoding (>= 4.3) - restriction: && (< monoandroid) (< monotouch) (< net46) (>= netstandard1.3) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
       System.Threading (>= 4.3) - restriction: && (< monoandroid) (< monotouch) (< net46) (>= netstandard1.3) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
       System.Xml.ReaderWriter (>= 4.3) - restriction: && (< monoandroid) (< monotouch) (< net46) (>= netstandard1.3) (< xamarinios) (< xamarinmac) (< xamarintvos) (< xamarinwatchos)
+    VS.QualityTools.UnitTestFramework (15.0.27323.2)
