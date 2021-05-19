@@ -16,3 +16,8 @@ packages/
 #Paket dependency manager
 .paket/
 paket-files/
+
+# coverage
+TestResults/
+*_coverage.xml
+results.xml
