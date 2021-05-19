@@ -1,9 +1,17 @@
 # Changelog
 
-## v1.2.0 [Unreleased]
+## v1.3.0 [Unreleased]
+### Changed
+- Force Windows to reserve space for the top-bar
+- Clean up UI panels code in `NiceMeterWindow.xaml.cs`
+
+## v1.2.0 [2021-05-19]
+### Changed
 - Implement desktop, top-bar layout
-- Add AppVeyor CI, once public (https://ci.appveyor.com/login) with `[![Build status](https://ci.appveyor.com/api/projects/status/2gustf15hmt9tw09/branch/master?svg=true)](https://ci.appveyor.com/project/oriches/simple-wpf-datagrid)`
-- Add coverage with https://codecov.io/gh
+
+### Added
+- Add AppVeyor CI
+- Add coverage resport
 
 ## v1.1.0 [2019-12-09]
 ### Changed
